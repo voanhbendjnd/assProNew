@@ -47,54 +47,41 @@ public class Menu {
         Products.printTable(proList);
     }
 
-    public static void findProducts() {
+    public static void findProductsUl() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("                                                                Select the product you want to search");
-        System.out.println("                                                                -------------------------------------");
-        System.out.println("");
-        System.out.println("                                                                             ---Factory---         ");
-        System.out.println("                                                                1.Iphone   2.Samsung   3.Xiaomi");
-        System.out.println("                                                                4.Asus   5.Oppo   6.Vivo   7.Honor");
-        System.out.println("                                                                8.Nokia   9.Realme");
-        System.out.println("");
-        System.out.println("                                                                              ---Target---          ");
-        System.out.println("                                                                10.Gaming   11.Camera, Video   12.Thin and Light");
-        System.out.println("                                                                13.Battery   14.Work, Study");
-        System.out.println("");
-        System.out.println("                                                                              ---Price---           ");
-        System.out.println("                                                                15.Under 2 milion   16.From 2 to 4 milion");
-        System.out.println("                                                                17.From 4 to 7 milion   18.From 7 to 13 milion");
-        System.out.println("                                                                19.From 13 to 20 milion   20. From 20 milion");
-        System.out.println("");
-        System.out.println("                                                                           ---Sort by Price---      ");
-        System.out.println("                                                                21.Ascending order   22.Descending order");
-        System.out.println("                                                                23.No sort");
+        System.out.println("Select the product you want to search");
+        System.out.println("-------------------------------------");
+        // System.out.println("");
+        System.out.println("            ---Factory---         ");
+        System.out.println("1.Iphone   2.Samsung   3.Xiaomi");
+        System.out.println("4.Asus   5.Oppo   6.Vivo   7.Honor");
+        System.out.println("8.Nokia   9.Realme");
+        // System.out.println("");
+        System.out.println("             ---Target---          ");
+        System.out.println("10.Gaming   11.Camera, Video   12.Thin and Light");
+        System.out.println("13.Battery   14.Work, Study");
+        // System.out.println("");
+        System.out.println("              ---Price---           ");
+        System.out.println("15.Under 2 milion   16.From 2 to 4 milion");
+        System.out.println("17.From 4 to 7 milion   18.From 7 to 13 milion");
+        System.out.println("19.From 13 to 20 milion   20. From 20 milion");
+        // System.out.println("");
+        System.out.println("            ---Sort by Price---      ");
+        System.out.println("21.Ascending order   22.Descending order");
+        System.out.println("23.No sort");
         System.out.print("Enter values here: ");
         String option = sc.nextLine();
+
         boolean checkSort = true;
         boolean checkSortDes = false;
         boolean checkSortAs = false;
         String[] ss = option.split("\\s+");
+
         List<String> op = new ArrayList<>();
         for (String x : ss) {
-            if(x.equalsIgnoreCase("21")){
-                checkSortAs = true;
-                checkSort = false;
-                checkSortDes = false;
-            }
-            if(x.equalsIgnoreCase("22")){
-                checkSortDes = true;
-                checkSortAs = false;
-                checkSort = false;
-            }
-            if(x.equalsIgnoreCase("23")){
-                checkSort = true;
-                checkSortDes = false;
-                checkSortAs = false;
-            }
             switch (x) {
                 case "1":
-                    op.add("iphone");
+                    op.add("apple");
                     break;
                 case "2":
                     op.add("samsung");
@@ -136,66 +123,155 @@ public class Menu {
                     op.add("work, study");
                     break;
                 case "15":
-                    op.add("under 2 milion");
+                    op.add("under 2 million");
                     break;
                 case "16":
-                    op.add("from 2 to 4 milion");
+                    op.add("from 2 to 4 million");
                     break;
                 case "17":
-                    op.add("from 4 to 7 milion");
+                    op.add("from 4 to 7 million");
                     break;
                 case "18":
-                    op.add("from 7 to 13 milion");
+                    op.add("from 7 to 13 million");
                     break;
                 case "19":
-                    op.add("from 13 to 20 milion");
+                    op.add("from 13 to 20 million");
                     break;
                 case "20":
-                    op.add("from 20 milion");
+                    op.add("from 20 million");
+                    break;
+                case "21":
+                    checkSortAs = true;
+                    checkSort = false;
+                    break;
+                case "22":
+                    checkSortDes = true;
+                    checkSort = false;
+                    break;
+                case "23":
+                    checkSort = true;
+                    checkSortDes = false;
+                    checkSortAs = false;
                     break;
                 default:
-                    System.out.println("Code no exists");
+                    System.out.println("Code " + x + " does not exist.");
                     break;
             }
         }
-        
+
         List<Products> proList = new ReadFile().read(filetxt);
+        if (proList == null) {
+            System.out.println("Error: Product list is null.");
+            return;
+        }
+        Long max_value = 200000000L;
+        Long min_value = 1L;
+        boolean checkPrice = false;
+        for (String x : op) {
+            switch (x) {
+                case "under 2 million":
+                    max_value = 2000000L;
+                    min_value = 1L;
+                    checkPrice = true;
+                    break;
+                case "from 4 to 7 million":
+                    max_value = 7000000L;
+                    min_value = 4000000L;
+                    checkPrice = true;
+                    break;
+                case "from 13 to 20 million":
+                    max_value = 13000000L;
+                    min_value = 20000000L;
+                    checkPrice = true;
+                    break;
+                case "from 20 million":
+                    max_value = 200000000L;
+                    min_value = 20000000L;
+                    checkPrice = true;
+                    break;
+            }
+        }
+
         List<Products> proFind = new ArrayList<>();
-        for(Products x : proList){
-            for(String y : op){
-                if(x.getBrand().toLowerCase().equalsIgnoreCase(y.trim()) || x.getTarget().equalsIgnoreCase(y.trim())){
+        boolean checkFactory = op.stream().anyMatch(x -> List
+                .of("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia", "realme").contains(x));
+        boolean checkTarget = op.stream()
+                .anyMatch(x -> List.of("gaming", "camera, video", "thin, light", "battery", "work, study").contains(x));
+
+        if (checkFactory && !checkTarget) {
+            for (Products x : proList) {
+                if (x.getBrand() != null && op.contains(x.getBrand().toLowerCase())) {
                     proFind.add(x);
                 }
-           }
+            }
         }
-        if(checkSortAs){
-             Collections.sort(proFind, new Comparator<Products>(){
-            @Override
-            public int compare(Products x, Products y) {
-                if(x.getPrice() > y.getPrice()){
-                    return 1;
-                }
-                else{
-                    return -1;
+
+        if (checkTarget && !checkFactory) {
+            for (Products x : proList) {
+                if (x.getTarget() != null && op.contains(x.getTarget().toLowerCase())) {
+                    proFind.add(x);
                 }
             }
-            
-        });
         }
-        else if(checkSortAs){
-             Collections.sort(proFind, new Comparator<Products>(){
-            @Override
-            public int compare(Products x, Products y) {
-                if(x.getPrice() < y.getPrice()){
-                    return 1;
-                }
-                else{
-                    return -1;
+
+        if (checkFactory && checkTarget) {
+            for (Products x : proList) {
+                if (x.getBrand() != null && x.getTarget() != null &&
+                        op.contains(x.getBrand().toLowerCase()) &&
+                        op.contains(x.getTarget().toLowerCase())) {
+                    proFind.add(x);
                 }
             }
-            
-        });
         }
+
+        //
+        for (Products x : proList) {
+            boolean matchFactory = checkFactory && x.getBrand() != null && op.contains(x.getBrand().toLowerCase());
+            boolean matchTarget = checkTarget && x.getTarget() != null && op.contains(x.getTarget().toLowerCase());
+            boolean matchPrice = checkPrice && x.getPrice() >= min_value && x.getPrice() <= max_value;
+
+            // Nếu chỉ có giá
+            if (checkPrice && !checkFactory && !checkTarget && matchPrice) {
+                proFind.add(x);
+                continue;
+            }
+
+            // Nếu chỉ có hãng
+            if (checkFactory && !checkTarget && !checkPrice && matchFactory) {
+                proFind.add(x);
+                continue;
+            }
+
+            // Nếu chỉ có mục tiêu sử dụng
+            if (checkTarget && !checkFactory && !checkPrice && matchTarget) {
+                proFind.add(x);
+                continue;
+            }
+
+            // Nếu có hãng và giá nhưng không có mục tiêu
+            if (checkFactory && !checkTarget && checkPrice && matchFactory && matchPrice) {
+                proFind.add(x);
+                continue;
+            }
+
+            // Nếu có mục tiêu và giá nhưng không có hãng
+            if (checkTarget && !checkFactory && checkPrice && matchTarget && matchPrice) {
+                proFind.add(x);
+                continue;
+            }
+
+            // Nếu có cả hãng, mục tiêu, và giá
+            if (checkFactory && checkTarget && checkPrice && matchFactory && matchTarget && matchPrice) {
+                proFind.add(x);
+            }
+        }
+
+        if (checkSortAs) {
+            proFind.sort(Comparator.comparing(Products::getPrice));
+        } else if (checkSortDes) {
+            proFind.sort(Comparator.comparing(Products::getPrice).reversed());
+        }
+
         Products.printTable(proFind);
     }
 
@@ -286,7 +362,8 @@ public class Menu {
                 }
             }
             for (Products x : data) {
-                if (name.equalsIgnoreCase(x.getName()) && brand.equalsIgnoreCase(x.getBrand()) && ds.equalsIgnoreCase(x.getDescription()) && x.getPrice().equals(price)) {
+                if (name.equalsIgnoreCase(x.getName()) && brand.equalsIgnoreCase(x.getBrand())
+                        && ds.equalsIgnoreCase(x.getDescription()) && x.getPrice().equals(price)) {
                     System.out.print("One or Many stock?(1/2): ");
                     int z = sc.nextInt();
                     Long stock = null;
@@ -295,28 +372,30 @@ public class Menu {
                         System.out.print("Please enter stock you want to add: ");
                         Long stockAdd = sc.nextLong();
                         x.setStock(x.getStock() + stockAdd);
-                        Products pro = new Products(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(), x.getDescription(), x.getStock(), x.getDateCreate());
+                        Products pro = new Products(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
+                                x.getDescription(), x.getStock(), x.getDateCreate());
                         reader.deleteProduct(filetxt, name, brand, x.getCode());
                         reader.addProduct(filetxt, pro);
                         proListed.add(x);
                         check = true;
-//                        System.out.println("------Success-------");
+                        // System.out.println("------Success-------");
 
                     } else {
                         System.out.println("Current stock product: " + x.getStock());
                         System.out.print("Please enter qty stock change: ");
                         Long stockChange = sc.nextLong();
                         x.setStock(stockChange);
-                        Products pro = new Products(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(), x.getDescription(), x.getStock(), x.getDateCreate());
+                        Products pro = new Products(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
+                                x.getDescription(), x.getStock(), x.getDateCreate());
                         reader.deleteProduct(filetxt, name, brand, x.getCode());
                         reader.addProduct(filetxt, pro);
                         proListed.add(x);
                         check = true;
-//                        System.out.println("------Success-------");
+                        // System.out.println("------Success-------");
                     }
-//                    System.out.print("Stock: ");
+                    // System.out.print("Stock: ");
 
-//                    x.setStock(x.getStock() + stock);
+                    // x.setStock(x.getStock() + stock);
                 }
             }
             if (!check) {
@@ -325,7 +404,7 @@ public class Menu {
                 sc.nextLine();
                 System.out.print("DateCreate: ");
                 String date = sc.nextLine();
-                Products pro = new Products(maxCode + 1, name, brand,target, price, ds, stock, date);
+                Products pro = new Products(maxCode + 1, name, brand, target, price, ds, stock, date);
                 reader.addProduct(filetxt, pro);
                 proListed.add(pro);
                 System.out.println("------Success-------");
@@ -436,7 +515,8 @@ public class Menu {
             int q = sc.nextInt();
             try {
                 if (q == 1) {
-                    findProducts();
+                    // new FilterProduct().findProducts();
+                    findProductsUl();
                 } else if (q == 2) {
                     findAll();
                 } else if (q == 3) {
@@ -470,7 +550,7 @@ public class Menu {
             int q = sc.nextInt();
             try {
                 if (q == 1) {
-                    findProducts();
+                    new FilterProduct().findProducts();
                 } else if (q == 2) {
                     addProducts();
                 } else if (q == 3) {

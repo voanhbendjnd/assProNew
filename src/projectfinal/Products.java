@@ -11,9 +11,9 @@ package projectfinal;
  * @author Vo Anh Ben - CE190709
  */
 import java.sql.*;
-import javax.swing.*; 
-import javax.swing.table.DefaultTableModel; 
-import java.awt.*; 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.io.PrintStream;
@@ -50,7 +50,8 @@ public class Products {
     public Products() {
     }
 
-    public Products(Long code,String name, String brand, String target,Long price, String description, Long stock, String dateCreate) {
+    public Products(Long code, String name, String brand, String target, Long price, String description, Long stock,
+            String dateCreate) {
         this.name = name;
         this.code = code;
         this.brand = brand;
@@ -68,10 +69,6 @@ public class Products {
     public void setTarget(String target) {
         this.target = target;
     }
-
-    
-   
-  
 
     public String getName() {
         return name;
@@ -137,26 +134,47 @@ public class Products {
         this.dateCreate = dateCreate;
     }
 
-   
+    public String formatPrice() {
+        String s = this.getPrice().toString();
+        StringBuilder sb = new StringBuilder();
+
+        int count = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            sb.append(s.charAt(i));
+            count++;
+            if (count == 3 && i != 0) {
+                sb.append(".");
+                count = 0;
+            }
+        }
+
+        return sb.reverse().toString() + " vnd";
+    }
+
     public String toStringFormatted() {
-        return this.code + "?"+this.name + "?" + this.brand + "?" + this.target + "?" + this.price + "?" + this.description + "?"
+        return this.code + "?" + this.name + "?" + this.brand + "?" + this.target + "?" + this.price + "?"
+                + this.description + "?"
                 + this.stock + "?" + this.dateCreate;
     }
 
     @Override
     public String toString() {
-        return String.format("| %-5d | %-23s | %-16s | %-23s | %-9d | %-50s | %-5d |",
-                this.code, this.name, this.brand,this.target, this.price, this.description, this.stock);
+        return String.format("| %-5d | %-23s | %-16s | %-23s | %-15s | %-50s | %-5d |",
+                this.code, this.name, this.brand, this.target, this.formatPrice(), this.description, this.stock);
     }
 
     public static void printTable(List<Products> productsList) {
         StringBuilder sb = new StringBuilder();
- sb.append("+-------+-------------------------+------------------+-------------------------+-----------+----------------------------------------------------+-------+\n");
- sb.append("| Code  | Name                    | Brand            | Target                  | Price     | Description                                        | Stock |\n");
- sb.append("+-------+-------------------------+------------------+-------------------------+-----------+----------------------------------------------------+-------+\n");
- for (Products product : productsList) {
- sb.append(product.toString()).append("\n");
- sb.append("+-------+-------------------------+------------------+-------------------------+-----------+----------------------------------------------------+-------+\n");
+        sb.append(
+                "+-------+-------------------------+------------------+-------------------------+-----------------+----------------------------------------------------+-------+\n");
+        sb.append(
+                "| Code  | Name                    | Brand            | Target                  | Price           | Description                                        | Stock |\n");
+        sb.append(
+                "+-------+-------------------------+------------------+-------------------------+-----------------+----------------------------------------------------+-------+\n");
+        for (Products product : productsList) {
+            sb.append(product.toString()).append("\n");
+            sb.append(
+                    "+-------+-------------------------+------------------+-------------------------+-----------------+----------------------------------------------------+-------+\n");
         }
         System.out.println(sb.toString());
     }
