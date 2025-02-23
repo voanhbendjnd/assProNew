@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projectfinal;
+package Handle;
 
 /**
  *
@@ -18,7 +18,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class ReadFile {
+import Model.Products;
+
+public class HandleProduct {
     public List<Products> read(String fileProducts) {
         List<Products> productsList = new ArrayList<>();
         try {
@@ -35,11 +37,11 @@ public class ReadFile {
                 String description = products[5];
                 Long stock = Long.parseLong(products[6]);
                 String date = products[7];
-                productsList.add(new Products(codePhone,name, brand, target, price, description, stock, date));
-                
+                productsList.add(new Products(codePhone, name, brand, target, price, description, stock, date));
+
             }
             sc.close();
-          
+
         } catch (Exception ex) {
             System.out.println("Error reading file: " + ex.getMessage());
         }
@@ -57,28 +59,18 @@ public class ReadFile {
         }
     }
 
-    void addProduct(String fileName, Products product) {
+    public void addProduct(String fileName, Products product) {
         List<Products> proList = read("products.txt");
-//        boolean checkExists = false;
-//        for (Products x : proList) {
-//            if (x.getName().equalsIgnoreCase(product.getName()) && x.getBrand().equalsIgnoreCase(product.getBrand())) {
-//                x.setStock(x.getStock() + product.getStock());
-//                checkExists = true;
-//                break;
-//            }
-//        }
-//        if (!checkExists) {
-//            proList.add(product);
-//        }
         proList.add(product);
         writeFile(fileName, proList);
     }
-     public void deleteProduct(String fileName, String productName, String productBrand, Long code) {
+
+    public void deleteProduct(String fileName, Long code) {
         List<Products> proList = read(fileName);
         boolean productFound = false;
         for (Iterator<Products> iterator = proList.iterator(); iterator.hasNext();) {
             Products product = iterator.next();
-            if (product.getCode().equals(code) && product.getName().equalsIgnoreCase(productName) && product.getBrand().equalsIgnoreCase(productBrand)) {
+            if (product.getCode().equals(code)) {
                 iterator.remove();
                 productFound = true;
                 break;
@@ -86,33 +78,9 @@ public class ReadFile {
         }
         if (productFound) {
             writeFile(fileName, proList);
-//            System.out.println("Product deleted successfully.");
         } else {
-//            System.out.println("Product not found.");
+            System.out.println("Product not found.");
         }
     }
-
-//    void updateProduct(String fileName, Products product) {
-//        List<Products> proList = read(fileName);
-//        boolean checkExists = false;
-//        for (Products x : proList) {
-//            if (x.getId().equals(product.getId())) {
-//                x.setName(product.getName());
-//                x.setBrand(product.getBrand());
-//                x.setPrice(product.getPrice());
-//                x.setDescription(product.getDescription());
-//                x.setStock(product.getStock());
-//                x.setDateCreate(product.getDateCreate());
-//                checkExists = true;
-//                break;
-//            }
-//        }
-//        if (checkExists) {
-//            writeFile(fileName, proList);
-//            System.out.println("Update success");
-//        } else {
-//            System.out.println("Product ID = " + product.getId() + "not already exist");
-//        }
-//    }
 
 }

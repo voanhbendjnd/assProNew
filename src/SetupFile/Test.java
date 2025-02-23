@@ -1,4 +1,4 @@
-package projectfinal;
+package SetupFile;
 
 import java.util.Scanner;
 

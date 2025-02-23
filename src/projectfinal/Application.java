@@ -5,13 +5,18 @@
  */
 package projectfinal;
 
+import Utils.Intro;
+import VIew.CreateAccount;
+import VIew.Menu;
+
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
-public class Main {
-    public static void main(String[] args) {
-        CreateAccount app = new CreateAccount();
-        app.mainMethod();
+public class Application {
+    public static void main(String[] args) throws InterruptedException {
+        new Intro().IntroWelCome();
+        new Menu().getMenuNotLogin();
+
     }
 }

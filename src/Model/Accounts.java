@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 
-package projectfinal;
+package Model;
 
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
 import java.sql.*;
-import javax.swing.*; 
-import javax.swing.table.DefaultTableModel; 
-import java.awt.*; 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.io.PrintStream;
@@ -35,16 +35,17 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.List;
-public class Account {
+
+public class Accounts {
     private Long id;
     private String username;
     private String password;
     private String email;
 
-    public Account() {
+    public Accounts() {
     }
 
-    public Account(Long id, String username, String password, String email, Long role) {
+    public Accounts(Long id, String username, String password, String email, Long role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -59,6 +60,7 @@ public class Account {
     public void setId(Long id) {
         this.id = id;
     }
+
     private Long role;
 
     public Long getRole() {
@@ -77,7 +79,7 @@ public class Account {
         this.email = email;
     }
 
-    public Account(String username, String password) {
+    public Accounts(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -97,8 +99,9 @@ public class Account {
     public void setPassword(String password) {
         this.password = password;
     }
-     public String toStringFormatted() {
+
+    public String toStringFormatted() {
         return this.id + "?" + this.username + "?" + this.password + "?" + this.email + "?" + this.role;
     }
-    
+
 }

@@ -1,4 +1,4 @@
-package projectfinal;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,8 +6,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import Handle.HandleProduct;
+import SetupFile.AllFile;
+
 public class FilterProduct {
-    private static String filetxt = "products.txt";
 
     public void findProducts() {
         Scanner sc = new Scanner(System.in);
@@ -15,7 +17,7 @@ public class FilterProduct {
         System.out.println("-------------------------------------");
         // System.out.println("");
         System.out.println("            ---Factory---         ");
-        System.out.println("1.Iphone   2.Samsung   3.Xiaomi");
+        System.out.println("1.Apple   2.Samsung   3.Xiaomi");
         System.out.println("4.Asus   5.Oppo   6.Vivo   7.Honor");
         System.out.println("8.Nokia   9.Realme");
         // System.out.println("");
@@ -33,11 +35,14 @@ public class FilterProduct {
         System.out.println("23.No sort");
         System.out.print("Enter values here: ");
         String option = sc.nextLine();
+
         boolean checkSort = true;
         boolean checkSortDes = false;
         boolean checkSortAs = false;
+        boolean checkPrice = false;
         String[] ss = option.split("\\s+");
-
+        Long max_value = 200000000L;
+        Long min_value = 1L;
         List<String> op = new ArrayList<>();
         for (String x : ss) {
             switch (x) {
@@ -84,22 +89,34 @@ public class FilterProduct {
                     op.add("work, study");
                     break;
                 case "15":
-                    op.add("under 2 milion");
+                    max_value = 2000000L;
+                    min_value = 1L;
+                    checkPrice = true;
                     break;
                 case "16":
-                    op.add("from 2 to 4 milion");
+                    max_value = 4000000L;
+                    min_value = 2000000L;
+                    checkPrice = true;
                     break;
                 case "17":
-                    op.add("from 4 to 7 milion");
+                    max_value = 7000000L;
+                    min_value = 4000000L;
+                    checkPrice = true;
                     break;
                 case "18":
-                    op.add("from 7 to 13 milion");
+                    max_value = 7000000L;
+                    min_value = 13000000L;
+                    checkPrice = true;
                     break;
                 case "19":
-                    op.add("from 13 to 20 milion");
+                    max_value = 20000000L;
+                    min_value = 13000000L;
+                    checkPrice = true;
                     break;
                 case "20":
-                    op.add("from 20 milion");
+                    max_value = 200000000L;
+                    min_value = 20000000L;
+                    checkPrice = true;
                     break;
                 case "21":
                     checkSortAs = true;
@@ -115,96 +132,97 @@ public class FilterProduct {
                     checkSortAs = false;
                     break;
                 default:
-                    System.out.println("Code no exists");
+                    System.out.println("Code " + x + " does not exist.");
                     break;
             }
         }
-        List<Products> proList = new ReadFile().read(filetxt);
+
+        List<Products> proList = new HandleProduct().read(new AllFile().fileProductTxt);
+        if (proList == null) {
+            System.out.println("Error: Product list is null.");
+            return;
+        }
         List<Products> proFind = new ArrayList<>();
-        boolean checkTarget = false;
-        boolean checkFactory = false;
-        boolean checkPrice = false;
-        for (String x : ss) {
-            if (x.equalsIgnoreCase("1") || x.equalsIgnoreCase("2") || x.equalsIgnoreCase("3") ||
-                    x.equalsIgnoreCase("4") || x.equalsIgnoreCase("5") ||
-                    x.equalsIgnoreCase("6") || x.equalsIgnoreCase("7") || x.equalsIgnoreCase("8") ||
-                    x.equalsIgnoreCase("9")) {
-                checkFactory = true;
-                break;
-            }
+        boolean checkFactory = op.stream().anyMatch(x -> List
+                .of("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia", "realme").contains(x));
+        boolean checkTarget = op.stream()
+                .anyMatch(x -> List.of("gaming", "camera, video", "thin, light", "battery", "work, study")
+                        .contains(x));
 
-        }
-
-        for (String x : ss) {
-            if (x.equalsIgnoreCase("10") || x.equalsIgnoreCase("11") || x.equalsIgnoreCase("12") ||
-                    x.equalsIgnoreCase("13") || x.equalsIgnoreCase("14")) {
-                checkTarget = true;
-                break;
-            }
-        }
-        if (checkFactory && !checkTarget) {
-            for (Products x : proList) {
-                for (String y : op) {
-                    if (x.getBrand().equalsIgnoreCase(y)) {
+        if (!checkPrice) {
+            if (checkFactory && !checkTarget) {
+                for (Products x : proList) {
+                    if (op.contains(x.getBrand().toLowerCase())) {
                         proFind.add(x);
                     }
                 }
             }
-        }
-        if (checkTarget && !checkFactory) {
-            for (Products x : proList) {
-                for (String y : op) {
-                    if (x.getTarget().equalsIgnoreCase(y)) {
+
+            if (checkTarget && !checkFactory) {
+                for (Products x : proList) {
+                    if (op.contains(x.getTarget().toLowerCase())) {
                         proFind.add(x);
                     }
                 }
             }
-        }
-        List<String> targetStr = new ArrayList<>();
-        List<String> factoryStr = new ArrayList<>();
-        if (checkFactory && checkTarget) {
-            for (Products x : proList) {
-                for (String y : op) {
-                    if (x.getBrand().equalsIgnoreCase(y)) {
-                        factoryStr.add(y);
-                    }
-                }
-                for (String y : op) {
-                    if (x.getTarget().equalsIgnoreCase(y)) {
-                        targetStr.add(y);
+
+            if (checkFactory && checkTarget) {
+                for (Products x : proList) {
+                    if (op.contains(x.getBrand().toLowerCase()) &&
+                            op.contains(x.getTarget().toLowerCase())) {
+                        proFind.add(x);
                     }
                 }
             }
-        }
-        if (checkFactory && checkTarget) {
-            for (Products x : proList) {
-                for (String y : targetStr) {
-                    if (x.getTarget().equalsIgnoreCase(y)) {
-                        for (String z : factoryStr) {
-                            if (x.getBrand().equalsIgnoreCase(z)) {
-                                if (!proFind.contains(x)) {
-                                    proFind.add(x);
+
+        } else {
+            if (checkFactory && checkTarget) {
+                for (Products x : proList) {
+                    if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
+                        for (String y : op) {
+                            if (x.getTarget().equalsIgnoreCase(y)) {
+                                for (String z : op) {
+                                    if (x.getBrand().equalsIgnoreCase(z)) {
+                                        if (!proFind.contains(x)) {
+                                            proFind.add(x);
+                                        }
+                                    }
                                 }
-
                             }
                         }
                     }
                 }
-            }
-        }
-
-        for (Products x : proList) {
-            for (String y : op) {
-                if (x.getBrand().toLowerCase().equalsIgnoreCase(y.trim()) && x.getTarget().equalsIgnoreCase(y.trim())) {
-                    proFind.add(x);
+            } else if (checkFactory && !checkTarget) {
+                for (Products x : proList) {
+                    if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
+                        if (op.contains(x.getBrand().toLowerCase())) {
+                            proFind.add(x);
+                        }
+                    }
+                }
+            } else if (!checkFactory && checkTarget) {
+                for (Products x : proList) {
+                    if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
+                        if (op.contains(x.getTarget().toLowerCase())) {
+                            proFind.add(x);
+                        }
+                    }
+                }
+            } else {
+                for (Products x : proList) {
+                    if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
+                        proFind.add(x);
+                    }
                 }
             }
+
         }
-        if (checkSortAs && !checkSort) {
+        if (checkSortAs && !checkSortDes && !checkSort) {
             Collections.sort(proFind, new Comparator<Products>() {
+
                 @Override
-                public int compare(Products x, Products y) {
-                    if (x.getPrice() > y.getPrice()) {
+                public int compare(Products o1, Products o2) {
+                    if (o1.getPrice() > o2.getPrice()) {
                         return 1;
                     } else {
                         return -1;
@@ -212,11 +230,13 @@ public class FilterProduct {
                 }
 
             });
-        } else if (checkSortDes && !checkSort) {
+        }
+        if (!checkSortAs && checkSortDes && !checkSort) {
             Collections.sort(proFind, new Comparator<Products>() {
+
                 @Override
-                public int compare(Products x, Products y) {
-                    if (x.getPrice() < y.getPrice()) {
+                public int compare(Products o1, Products o2) {
+                    if (o1.getPrice() < o2.getPrice()) {
                         return 1;
                     } else {
                         return -1;
@@ -225,6 +245,7 @@ public class FilterProduct {
 
             });
         }
+
         Products.printTable(proFind);
     }
 }

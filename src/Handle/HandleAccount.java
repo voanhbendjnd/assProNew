@@ -1,8 +1,14 @@
-package projectfinal;
+package Handle;
+
 import java.sql.*;
-import javax.swing.*; 
-import javax.swing.table.DefaultTableModel; 
-import java.awt.*; 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import Model.Accounts;
+import Model.Products;
+import SetupFile.AllFile;
+
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -28,17 +34,14 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.List;
-import projectfinal.Account;
-import projectfinal.Products;
-// Locale.setDefault(Locale.US);
 
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
 public class HandleAccount {
-public List<Account> read(String fileProducts) {
-        List<Account> accountList = new ArrayList<>();
+    public List<Accounts> read(String fileProducts) {
+        List<Accounts> accountList = new ArrayList<>();
         try {
             File myFile = new File(fileProducts);
             Scanner sc = new Scanner(myFile);
@@ -49,21 +52,21 @@ public List<Account> read(String fileProducts) {
                 String username = accounts[1];
                 String password = accounts[2];
                 String email = accounts[3];
-                Long role = Long.parseLong(accounts[4]);             
-                accountList.add(new Account(id, username, password, email, role));
-                
+                Long role = Long.parseLong(accounts[4]);
+                accountList.add(new Accounts(id, username, password, email, role));
+
             }
             sc.close();
-          
+
         } catch (Exception ex) {
             System.out.println("Error reading file: " + ex.getMessage());
         }
         return accountList;
     }
 
-    public void writeFile(String fileName, List<Account> account) {
+    public void writeFile(String fileName, List<Accounts> account) {
         try (FileWriter fw = new FileWriter(fileName)) {
-            for (Account x : account) {
+            for (Accounts x : account) {
                 fw.write(x.toStringFormatted() + "\n");
             }
 
@@ -72,16 +75,17 @@ public List<Account> read(String fileProducts) {
         }
     }
 
-    void addAccount(String fileName, Account account) {
-        List<Account> accountList = read("account.txt");
+    public void addAccount(String fileName, Accounts account) {
+        List<Accounts> accountList = read(new AllFile().fileAccountTxt);
         accountList.add(account);
         writeFile(fileName, accountList);
     }
-     public void deleteAccount(String fileName, String password) {
-        List<Account> accountList = read(fileName);
+
+    public void deleteAccount(String fileName, String password) {
+        List<Accounts> accountList = read(fileName);
         boolean accountFound = false;
-        for (Iterator<Account> iterator = accountList.iterator(); iterator.hasNext();) {
-            Account account = iterator.next();
+        for (Iterator<Accounts> iterator = accountList.iterator(); iterator.hasNext();) {
+            Accounts account = iterator.next();
             if (account.getPassword().equals(password)) {
                 iterator.remove();
                 accountFound = true;

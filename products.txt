@@ -1,13 +1,14 @@
 2?Samsung Galaxy Note 20?samsung?Gaming?20000000?Exynode?32?16/08/2005
-4?Iphone 19?apple?Gaming?23000000?100MP?23?1/23/2320
+4?Iphone 19?Apple?Gaming?23000000?100MP?23?1/23/2320
 5?Xiamomi?Xiaomi?Gaming?12000000?black color?12?12/12/2020
-6?Phone?Phone?Gaming?31000000?Mo ta?12?12/12/1002
-9?Xiaomi 18?Xiaomi?Gaming?7000000?100MP black titanium?1910?10/12/2025
-10?Iphone X?apple?Gaming?9000000?A19?1012?12/1/2004
-11?Iphone 9?apple?Gaming?2500000?A100?99?10/12/2005
-16?iphone 100?apple?Camera?15000000?Camera 10MP?32?10/12/2005
-17?Lumia?Micosof?Camera?43000000?King phone?1?10/10/2023
-18?Asus?Asus?Camera?13000000?Snap 9?12?12/12/2034
-19?Sony Xpria XZ 5 ?Sony?Work, Study?12000000?Mediatek 9992?12?12/12/2023
+6?IPhone 5S?Apple?Gaming?31000000?Mo ta?12?12/12/1002
+10?Iphone X?Apple?Gaming?9000000?A19?1012?12/1/2004
+11?Iphone 9?Apple?Gaming?2500000?A100?99?10/12/2005
+16?iphone 100?Apple?Camera, Video?15000000?Camera 10MP?32?10/12/2005
+18?Asus?Asus?Camera, Video?13000000?Snap 9?12?12/12/2034
 21?Iphone XX?Apple?Work, Study?42000000?A20 Bionic, Camera 100 MP, battery 4000mah?993?12/12/2030
-22?Samsung Galaxy Note 10?Samsung?Camera, Video?23000000?Camera 200MP, Super Rerina, Battery 4000mah?20?22/02/2025
+9?Xiaomi 18?Xiaomi?Gaming?7000000?100MP black titanium?1903?10/12/2025
+24?Realme XZ2?Realme?Thin, Light?19000000?Thin, Camera 48 MP, CPU 4 main and battery 4000mah?89?23/02/2025
+19?Sony Xpria XZ 5 ?Sony?Work, Study?12000000?Mediatek 9992?11?12/12/2023
+22?Samsung Galaxy Note 10?Samsung?Camera, Video?23000000?Camera 200MP, Super Rerina, Battery 4000mah?19?22/02/2025
+23?Samsung Galaxy s25 Ultra?Samsung?Camera?35000000?Camera 200MP, Super AMOLED?1996?23/02/2025

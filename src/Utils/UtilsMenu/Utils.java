@@ -1,8 +1,9 @@
-package projectfinal;
+package Utils.UtilsMenu;
+
 import java.sql.*;
-import javax.swing.*; 
-import javax.swing.table.DefaultTableModel; 
-import java.awt.*; 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.util.stream.Collectors;
@@ -32,15 +33,30 @@ import java.util.List;
  * @author Vo Anh Ben - CE190709
  */
 public class Utils {
-   boolean filterRole(String user, String password) {
+    public boolean filterRole(String user, String password) {
         String Admin = "admin@@";
         if (password.length() >= Admin.length() && user.length() >= Admin.length()) {
-
             String rulePass = password.substring(password.length() - Admin.length());
             String ruleUser = user.substring(user.length() - Admin.length());
-
-            return (rulePass.equals(Admin) && ruleUser.equals(Admin));
+            return rulePass.equals(Admin) && ruleUser.equals(Admin);
         }
         return false;
+    }
+
+    public String formatPrice(Long price) {
+        String s = price.toString();
+        StringBuilder sb = new StringBuilder();
+
+        int count = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            sb.append(s.charAt(i));
+            count++;
+            if (count == 3 && i != 0) {
+                sb.append(".");
+                count = 0;
+            }
+        }
+
+        return sb.reverse().toString() + " vnd";
     }
 }

@@ -4,16 +4,20 @@
  * and open the template in the editor.
  */
 
-package projectfinal;
+package Handle;
 
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
 import java.sql.*;
-import javax.swing.*; 
-import javax.swing.table.DefaultTableModel; 
-import java.awt.*; 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import Model.Orders;
+import SetupFile.AllFile;
+
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -38,8 +42,9 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.List;
+
 public class HandleOrder {
-     public List<Orders> read(String fileOrder) {
+    public List<Orders> read(String fileOrder) {
         List<Orders> orderList = new ArrayList<>();
         try {
             File myFile = new File(fileOrder);
@@ -53,11 +58,11 @@ public class HandleOrder {
                 String name = orders[3];
                 String address = orders[4];
                 String phone = orders[5];
-                orderList.add(new Orders(id, id_user,product_id, name, address, phone));
-                
+                orderList.add(new Orders(id, id_user, product_id, name, address, phone));
+
             }
             sc.close();
-          
+
         } catch (Exception ex) {
             System.out.println("Error reading file: " + ex.getMessage());
         }
@@ -76,11 +81,12 @@ public class HandleOrder {
     }
 
     public void addOrder(String fileName, Orders order) {
-        List<Orders> orderList = read("order.txt");
+        List<Orders> orderList = read(new AllFile().fileOrderTxt);
         orderList.add(order);
         writeFile(fileName, orderList);
     }
-     public void deleteOrder(String fileName, Long id) {
+
+    public void deleteOrder(String fileName, Long id) {
         List<Orders> orderList = read(fileName);
         boolean productFound = false;
         for (Iterator<Orders> iterator = orderList.iterator(); iterator.hasNext();) {
@@ -93,9 +99,9 @@ public class HandleOrder {
         }
         if (productFound) {
             writeFile(fileName, orderList);
-//            System.out.println("Product deleted successfully.");
+            // System.out.println("Product deleted successfully.");
         } else {
-//            System.out.println("Product not found.");
+            // System.out.println("Product not found.");
         }
     }
 }

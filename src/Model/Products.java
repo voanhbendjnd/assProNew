@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package projectfinal;
+package Model;
 
 /**
  *
@@ -13,6 +13,9 @@ package projectfinal;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import Utils.UtilsMenu.Utils;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
@@ -46,6 +49,15 @@ public class Products {
     private Long stock;
     private String dateCreate;
     private String target;
+
+    // color
+    public static final String RESET = "\u001B[0m"; // Reset về mặc định
+    public static final String RED = "\u001B[31m"; // Màu đỏ
+    public static final String GREEN = "\u001B[32m"; // Màu xanh lá
+    public static final String YELLOW = "\u001B[33m";// Màu vàng
+    public static final String BLUE = "\u001B[34m"; // Màu xanh dương
+    public static final String CYAN = "\u001B[36m"; // Màu xanh biển
+    public static final String BOLD = "\u001B[1m"; // In đậm
 
     public Products() {
     }
@@ -134,23 +146,7 @@ public class Products {
         this.dateCreate = dateCreate;
     }
 
-    public String formatPrice() {
-        String s = this.getPrice().toString();
-        StringBuilder sb = new StringBuilder();
-
-        int count = 0;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            sb.append(s.charAt(i));
-            count++;
-            if (count == 3 && i != 0) {
-                sb.append(".");
-                count = 0;
-            }
-        }
-
-        return sb.reverse().toString() + " vnd";
-    }
-
+  
     public String toStringFormatted() {
         return this.code + "?" + this.name + "?" + this.brand + "?" + this.target + "?" + this.price + "?"
                 + this.description + "?"
@@ -159,22 +155,31 @@ public class Products {
 
     @Override
     public String toString() {
-        return String.format("| %-5d | %-23s | %-16s | %-23s | %-15s | %-50s | %-5d |",
-                this.code, this.name, this.brand, this.target, this.formatPrice(), this.description, this.stock);
+        return String.format("| %s%s%-5d%s | %s%-26s%s | %s%-16s%s | %s%-23s%s | %s%-15s%s | %s%-80s%s | %s%-5d%s |",
+                BOLD, YELLOW, this.code, RESET,
+                GREEN, this.name, RESET,
+                BLUE, this.brand, RESET,
+                CYAN, this.target, RESET,
+                RED, new Utils().formatPrice(this.price), RESET,
+                YELLOW, this.description, RESET,
+                GREEN, this.stock, RESET);
     }
 
     public static void printTable(List<Products> productsList) {
         StringBuilder sb = new StringBuilder();
+        sb.append(BOLD + CYAN);
         sb.append(
-                "+-------+-------------------------+------------------+-------------------------+-----------------+----------------------------------------------------+-------+\n");
+                "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n");
         sb.append(
-                "| Code  | Name                    | Brand            | Target                  | Price           | Description                                        | Stock |\n");
+                "| Code  | Name                       | Brand            | Target                  | Price           | Description                                                                      | Stock |\n");
         sb.append(
-                "+-------+-------------------------+------------------+-------------------------+-----------------+----------------------------------------------------+-------+\n");
+                "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n");
+        sb.append(RESET);
         for (Products product : productsList) {
             sb.append(product.toString()).append("\n");
             sb.append(
-                    "+-------+-------------------------+------------------+-------------------------+-----------------+----------------------------------------------------+-------+\n");
+                    CYAN + "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n"
+                            + RESET);
         }
         System.out.println(sb.toString());
     }

@@ -4,27 +4,24 @@
  * and open the template in the editor.
  */
 
-package projectfinal;
+package SetupFile;
 
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class CreateFile {
     public static void main(String[] args) {
-        try{
-            File myFile = new File("carts.txt");
-            if(myFile.createNewFile()){
+        try {
+            File myFile = new File("orderUser.txt");
+            if (myFile.createNewFile()) {
                 System.out.println("File with " + myFile.getName());
-            }
-            else{
+            } else {
                 System.out.println("File already exist");
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }
