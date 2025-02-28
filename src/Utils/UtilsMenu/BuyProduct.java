@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Handle.HandleCart;
 import Handle.HandleOrder;
 import Handle.HandleOrderUser;
 import Handle.HandleProduct;
+import Model.Cart;
 import Model.OrderUser;
 import Model.Orders;
 import Model.Products;
 import SetupFile.AllFile;
+
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 
 public class BuyProduct {
     public static final String RESET = "\u001B[0m";
@@ -48,12 +55,14 @@ public class BuyProduct {
                 date = x.getDateCreate();
                 code = x.getCode();
                 checkProduct = true;
+                break;
             }
         }
 
-        if (stock == 0) {
+        if (stock == 0 || stock == 0) {
             System.out.println(RED + " This product is out of stock! Please choose another product." + RESET);
-            checkProduct = false;
+            // checkProduct = false;
+            return;
         }
 
         if (checkProduct) {
@@ -71,13 +80,15 @@ public class BuyProduct {
             System.out.println(BOLD + " Description: " + desc + RESET);
             System.out.println(BOLD + " Price: " + new Utils().formatPrice(price) + RESET);
             System.out.println(YELLOW + "---------------------------------------" + RESET);
-            System.out.print(BOLD + GREEN + "Do you want to buy? (y/n): " + RESET);
+            // System.out.print(BOLD + GREEN + "Do you want to buy? (y/n): " + RESET);
+            System.out.print(BOLD + GREEN + "===> Add to Cart(y/n): " + RESET);
 
             char question = sc.nextLine().charAt(0);
             if (question == 'y') {
                 Long currentStock = stock - 1L;
                 Products pro = new Products(code, name, brand, target, price, desc, currentStock, date);
                 reader.deleteProduct(new AllFile().fileProductTxt, code);
+                System.out.println("89");
 
                 if (currentStock == 0) {
                     reader.deleteProduct(new AllFile().fileProductTxt, code);
@@ -86,23 +97,50 @@ public class BuyProduct {
                 }
 
                 System.out.println(CYAN + "══════════════════════════════════════" + RESET);
-                System.out.println(BOLD + GREEN + " Please enter order details:" + RESET);
 
-                System.out.print(" Name: ");
-                String nameUser = sc.nextLine();
-                System.out.print(" Address: ");
-                String address = sc.nextLine();
-                System.out.print(" Phone Number: ");
-                String phone = sc.nextLine();
+                // <-
+                // System.out.println(BOLD + GREEN + " Please enter order details:" + RESET);
+                // System.out.print(" Name: ");
+                // String nameUser = sc.nextLine();
+                // System.out.print(" Address: ");
+                // String address = sc.nextLine();
+                // System.out.print(" Phone Number: ");
+                // String phone = sc.nextLine();
 
-                HandleOrder order = new HandleOrder();
-                order.addOrder(new AllFile().fileOrderTxt, new Orders(orderId + 1L, ide, id, nameUser, address, phone));
-                HandleOrderUser orderUser = new HandleOrderUser();
-                orderUser.addOrder(new AllFile().fileOrderUserTxt,
-                        new OrderUser(orderId + 1L, name, nameUser, address, phone, ide));
+                // HandleOrder order = new HandleOrder();
+                // order.addOrder(new AllFile().fileOrderTxt, new Orders(orderId + 1L, ide, id,
+                // nameUser, address, phone));
+                // HandleOrderUser orderUser = new HandleOrderUser();
+                // orderUser.addOrder(new AllFile().fileOrderUserTxt,
+                // new OrderUser(orderId + 1L, name, nameUser, address, phone, ide));
 
-                orderUserList.add(new OrderUser(orderId + 1L, name, nameUser, address, phone, ide));
+                // orderUserList.add(new OrderUser(orderId + 1L, name, nameUser, address, phone,
+                // ide));
 
+                // ->
+                Long qty = null;
+                List<Cart> cartList = new HandleCart().read(new AllFile().fileCartTxt);
+                if (cartList == null) {
+                    qty = 1L;
+                    System.out.println("122");
+
+                } else {
+                    for (Cart x : cartList) {
+                        if (x.getProductId().equals(id)) {
+                            qty = x.getQty() + 1;
+                            System.out.println("128");
+
+                            break;
+                        } else {
+                            qty = 1L;
+                        }
+                    }
+                }
+                System.out.println("----0-0-0-0-0-0-0-----");
+
+                HandleCart cart = new HandleCart();
+                cart.addOrder(new AllFile().fileCartTxt,
+                        new Cart(orderId + 1L, ide, name, price, qty, price * qty, id));
                 System.out.println(BOLD + GREEN + "\n Order placed successfully!" + RESET);
                 System.out.println(BOLD + " Your Order Details:" + RESET);
                 OrderUser.printTableOrderForUser(orderUserList);

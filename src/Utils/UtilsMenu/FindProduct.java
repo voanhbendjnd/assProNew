@@ -9,8 +9,15 @@ import java.util.Scanner;
 import Handle.HandleProduct;
 import Model.Products;
 import SetupFile.AllFile;
+import java.util.Arrays;
+
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 
 public class FindProduct {
+
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -65,7 +72,7 @@ public class FindProduct {
         System.out.println(BOLD + YELLOW + " Sort by Price " + RESET);
         System.out.println("┌──────────────────────────────────────────────┐");
         System.out.println("│ 21. Ascending Order   │ 22. Descending Order │");
-        System.out.println("│ 23. No Sort           │                      │");
+        System.out.println("│                       │                      │");
         System.out.println("└──────────────────────────────────────────────┘");
 
         System.out.print(BOLD + CYAN + " Enter values here: " + RESET);
@@ -161,11 +168,11 @@ public class FindProduct {
                     checkSortDes = true;
                     checkSort = false;
                     break;
-                case "23":
-                    checkSort = true;
-                    checkSortDes = false;
-                    checkSortAs = false;
-                    break;
+                // case "23":
+                // checkSort = true;
+                // checkSortDes = false;
+                // checkSortAs = false;
+                // break;
                 default:
                     System.out.println("Code " + x + " does not exist.");
                     break;
@@ -178,12 +185,18 @@ public class FindProduct {
             return;
         }
         List<Products> proFind = new ArrayList<>();
-        boolean checkFactory = op.stream().anyMatch(x -> List
-                .of("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia", "realme").contains(x));
-        boolean checkTarget = op.stream()
-                .anyMatch(x -> List.of("gaming", "camera, video", "thin, light", "battery", "work, study")
-                        .contains(x));
+        // boolean checkFactory = op.stream().anyMatch(x -> List
+        // .of("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia",
+        // "realme").contains(x));
+        // boolean checkTarget = op.stream()
+        // .anyMatch(x -> List.of("gaming", "camera, video", "thin, light", "battery",
+        // "work, study")
+        // .contains(x));
+        boolean checkFactory = op.stream().anyMatch(x -> Arrays
+                .asList("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia", "realme").contains(x));
 
+        boolean checkTarget = op.stream().anyMatch(
+                x -> Arrays.asList("gaming", "camera, video", "thin, light", "battery", "work, study").contains(x));
         if (!checkPrice) {
             if (checkFactory && !checkTarget) {
                 for (Products x : proList) {
@@ -203,8 +216,8 @@ public class FindProduct {
 
             if (checkFactory && checkTarget) {
                 for (Products x : proList) {
-                    if (op.contains(x.getBrand().toLowerCase()) &&
-                            op.contains(x.getTarget().toLowerCase())) {
+                    if (op.contains(x.getBrand().toLowerCase())
+                            && op.contains(x.getTarget().toLowerCase())) {
                         proFind.add(x);
                     }
                 }
@@ -283,9 +296,6 @@ public class FindProduct {
 
             });
 
-        }
-        if (checkSort) {
-            proFind.addAll(proList);
         }
 
         Products.printTable(proFind);

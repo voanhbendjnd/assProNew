@@ -1,5 +1,9 @@
 package VIew;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -37,10 +41,10 @@ public class CreateAccount {
             int choice;
             try {
                 choice = sc.nextInt();
-                sc.nextLine(); // Xóa bộ nhớ đệm tránh lỗi nhập chuỗi
+                sc.nextLine();
             } catch (Exception e) {
                 System.out.println(RED + " Invalid input! Please enter 1 or 2." + RESET);
-                sc.nextLine(); // Xóa bộ nhớ đệm
+                sc.nextLine();
                 continue;
             }
 
@@ -65,6 +69,25 @@ public class CreateAccount {
                             menu.getMenuUser(userId);
                         }
                         break;
+                    }
+                }
+                for (Accounts acc : auth) {
+                    if (acc.getUsername().equals(user) && acc.getPassword().equals(password)) {
+                        checkLogin = true;
+                        userId = acc.getId();
+                        System.out.println(GREEN + " Login success!" + RESET);
+                        System.out.println(BLUE + "--------------------------------" + RESET);
+                        if (acc.getRole() == 1) {
+                            menu.getMenu(acc.getId());
+                        } else if (acc.getRole() == 2) {
+                            menu.getMenuUser(acc.getId());
+                        }
+                        break;
+                    }
+                }
+                for (Accounts x : auth) {
+                    if (user.equals(x.getUsername()) && password.equals(x.getPassword())) {
+                        checkLogin = true;
                     }
                 }
 
@@ -102,6 +125,7 @@ public class CreateAccount {
 
                     HandleAccount ar = new HandleAccount();
                     Long role = new Utils().filterRole(user, password) ? 1L : 2L;
+                    auth.add(new Accounts(code + 1, user, password, email, role));
                     ar.addAccount(new AllFile().fileAccountTxt, new Accounts(code + 1, user, password, email, role));
                     auth.add(new Accounts(code + 1, user, password, email, role));
                     System.out.println(GREEN + ">>>  Account created successfully! <<<" + RESET);
@@ -112,7 +136,7 @@ public class CreateAccount {
                 }
 
             } else {
-                System.out.println(RED + "⚠ Invalid choice, please enter 1 for Login or 2 for Sign up." + RESET);
+                System.out.println(RED + " Invalid choice, please enter 1 for Login or 2 for Sign up." + RESET);
             }
         }
         sc.close();

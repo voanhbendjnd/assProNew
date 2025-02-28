@@ -7,6 +7,11 @@ import Handle.HandleProduct;
 import Model.Products;
 import SetupFile.AllFile;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
+
 public class DeleteProduct {
     public void deleteProduct() {
         Scanner sc = new Scanner(System.in);

@@ -8,6 +8,12 @@ import Handle.HandleProduct;
 import Model.Products;
 import SetupFile.AllFile;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
+
+// Nhân
 public class AddProduct {
     // Mã ANSI để đổi màu
     public static final String RESET = "\u001B[0m";

@@ -9,7 +9,13 @@ import Model.OrderUser;
 import Model.Orders;
 import SetupFile.AllFile;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
+
 public class ViewOrder {
+    
     public void viewOrderFromAdmin() {
         System.out.println("---List order from user---");
         List<Orders> orderList = new HandleOrder().read(new AllFile().fileOrderTxt);

@@ -1,5 +1,8 @@
 package SetupFile;
-
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 import java.util.Scanner;
 
 public class Test {

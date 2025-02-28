@@ -10,33 +10,9 @@ package Model;
  *
  * @author Vo Anh Ben - CE190709
  */
-import java.sql.*;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import Utils.UtilsMenu.Utils;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.sql.ResultSet;
-import java.io.PrintStream;
-import static java.lang.Character.isDigit;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.List;
 
 public class Products {
@@ -155,8 +131,8 @@ public class Products {
 
     @Override
     public String toString() {
-        return String.format("| %s%s%-5d%s | %s%-26s%s | %s%-16s%s | %s%-23s%s | %s%-15s%s | %s%-80s%s | %s%-5d%s |",
-                BOLD, YELLOW, this.code, RESET,
+        return String.format("| %s%-5d%s | %s%-26s%s | %s%-16s%s | %s%-23s%s | %s%-15s%s | %s%-80s%s | %s%-5d%s |",
+                BOLD, this.code, RESET,
                 GREEN, this.name, RESET,
                 BLUE, this.brand, RESET,
                 CYAN, this.target, RESET,

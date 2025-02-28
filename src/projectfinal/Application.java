@@ -5,6 +5,10 @@
  */
 package projectfinal;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 import Utils.Intro;
 import VIew.CreateAccount;
 import VIew.Menu;
@@ -15,7 +19,9 @@ import VIew.Menu;
  */
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-        new Intro().IntroWelCome();
+        // new Intro().IntroWelCome();
+        // new Intro().IntroTo();
+        // new Intro().IntroGROUP3();
         new Menu().getMenuNotLogin();
 
     }

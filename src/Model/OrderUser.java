@@ -1,5 +1,9 @@
 package Model;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 import java.util.List;
 
 public class OrderUser {
@@ -8,6 +12,7 @@ public class OrderUser {
     private String nameUser;
     private String address;
     private String phone;
+    private Long qty;
     private Long userId;
     // color
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
@@ -27,8 +32,27 @@ public class OrderUser {
         this.userId = userId;
     }
 
+    public OrderUser(Long id, String nameProduct, String nameUser, String address, String phone, Long userId,
+            Long qty) {
+        this.id = id;
+        this.nameProduct = nameProduct;
+        this.nameUser = nameUser;
+        this.address = address;
+        this.phone = phone;
+        this.userId = userId;
+        this.qty = qty;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public Long getQty() {
+        return qty;
+    }
+
+    public void setQty(Long qty) {
+        this.qty = qty;
     }
 
     public void setId(Long id) {
@@ -78,6 +102,11 @@ public class OrderUser {
     public String toStringFormatted() {
         return this.id + "?" + this.nameProduct + "?" + this.nameUser + "?" + this.address + "?"
                 + this.phone + "?" + this.userId;
+    }
+
+    public String toStringFormatted2() {
+        return this.id + "?" + this.nameProduct + "?" + this.nameUser + "?" + this.address + "?"
+                + this.phone + "?" + this.userId + "?" + this.qty;
     }
 
     @Override

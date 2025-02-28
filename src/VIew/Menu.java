@@ -5,44 +5,16 @@
  */
 package VIew;
 
-import java.sql.*;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import Handle.HandleOrder;
-import Handle.HandleProduct;
-import Model.FilterProduct;
-import Model.Orders;
-import Model.Products;
-import SetupFile.AllFile;
 import Utils.Intro;
 import Utils.UtilsMenu.AddProduct;
 import Utils.UtilsMenu.BuyProduct;
+import Utils.UtilsMenu.CartProduct;
 import Utils.UtilsMenu.DeleteProduct;
 import Utils.UtilsMenu.FindProduct;
+import Utils.UtilsMenu.OpenCart;
 import Utils.UtilsMenu.ViewOrder;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.sql.ResultSet;
-import java.io.PrintStream;
-import static java.lang.Character.isDigit;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.List;
 
 /**
  *
@@ -69,9 +41,10 @@ public class Menu {
             System.out.println(CYAN + "╠════════════════════════════════════╣" + RESET);
             System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                ║");
             System.out.println(CYAN + "║ " + GREEN + "2." + RESET + " Find All Products            ║");
-            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Buy Product                  ║");
+            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Add To Cart                  ║");
             System.out.println(CYAN + "║ " + GREEN + "4." + RESET + " View Order                   ║");
-            System.out.println(CYAN + "║ " + GREEN + "5." + RESET + " Logout                       ║");
+            System.out.println(CYAN + "║ " + GREEN + "5." + RESET + " View Cart                    ║");
+            System.out.println(CYAN + "║ " + GREEN + "6." + RESET + " Logout                       ║");
             System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                         ║");
             System.out.println(CYAN + "╚════════════════════════════════════╝" + RESET);
             System.out.print(BOLD + YELLOW + " Select option: " + RESET);
@@ -86,12 +59,15 @@ public class Menu {
                     System.out.println(BLUE + " Displaying all products..." + RESET);
                     new FindProduct().findAll();
                 } else if (q == 3) {
-                    System.out.println(CYAN + " Processing your order..." + RESET);
-                    new BuyProduct().buyProduct(id);
+                    System.out.println(CYAN + " Processing your add to cart..." + RESET);
+                    new CartProduct().cartProduct(id);
                 } else if (q == 4) {
                     System.out.println(YELLOW + " Viewing your orders..." + RESET);
                     new ViewOrder().viewOrderFromUser(id);
                 } else if (q == 5) {
+                    System.out.println(YELLOW + " Viewing your carts..." + RESET);
+                    new OpenCart().openCart(id);
+                } else if (q == 6) {
                     System.out.println(RED + " Logging out..." + RESET);
                     break;
                 } else if (q == 0) {
