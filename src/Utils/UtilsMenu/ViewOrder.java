@@ -2,6 +2,7 @@ package Utils.UtilsMenu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import Handle.HandleOrder;
 import Handle.HandleOrderUser;
@@ -15,11 +16,16 @@ import SetupFile.AllFile;
  */
 
 public class ViewOrder {
-    
+
     public void viewOrderFromAdmin() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("---List order from user---");
         List<Orders> orderList = new HandleOrder().read(new AllFile().fileOrderTxt);
         Orders.printTableOrderForAdmin(orderList);
+
+        System.out.print("Order Confirmation with (y/n): ");
+        
+
     }
 
     public void viewOrderFromUser(Long id) {

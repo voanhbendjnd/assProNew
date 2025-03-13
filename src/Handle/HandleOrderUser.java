@@ -28,7 +28,8 @@ public class HandleOrderUser {
                 String address = orders[3];
                 String phone = orders[4];
                 Long userId = Long.parseLong(orders[5]);
-                orderList.add(new OrderUser(id, nameP, name, address, phone, userId));
+                Long price = Long.parseLong(orders[6]);
+                orderList.add(new OrderUser(id, nameP, name, address, phone, userId, price));
 
             }
 

@@ -1,5 +1,4 @@
 
-
 package Handle;
 
 /**
@@ -32,7 +31,8 @@ public class HandleOrder {
                 String name = orders[3];
                 String address = orders[4];
                 String phone = orders[5];
-                orderList.add(new Orders(id, id_user, product_id, name, address, phone));
+                Long price = Long.parseLong(orders[6]);
+                orderList.add(new Orders(id, id_user, product_id, name, address, phone, price));
 
             }
             sc.close();

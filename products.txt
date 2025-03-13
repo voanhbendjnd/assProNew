@@ -8,6 +8,6 @@
 18?Asus?Asus?Camera, Video?13000000?Snap 9?12?12/12/2034
 21?Iphone XX?Apple?Work, Study?42000000?A20 Bionic, Camera 100 MP, battery 4000mah?993?12/12/2030
 24?Realme XZ2?Realme?Thin, Light?19000000?Thin, Camera 48 MP, CPU 4 main and battery 4000mah?89?23/02/2025
-19?Sony Xpria XZ 5 ?Sony?Work, Study?12000000?Mediatek 9992?11?12/12/2023
-22?Samsung Galaxy Note 10?Samsung?Camera, Video?23000000?Camera 200MP, Super Rerina, Battery 4000mah?19?22/02/2025
 23?Samsung Galaxy s25 Ultra?Samsung?Camera?35000000?Camera 200MP, Super AMOLED?1983?23/02/2025
+19?Sony Xpria XZ 5 ?Sony?Work, Study?12000000?Mediatek 9992?10?12/12/2023
+22?Samsung Galaxy Note 10?Samsung?Camera, Video?23000000?Camera 200MP, Super Rerina, Battery 4000mah?15?22/02/2025

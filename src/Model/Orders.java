@@ -12,6 +12,8 @@ package Model;
  */
 import java.util.List;
 
+import Utils.UtilsMenu.Utils;
+
 public class Orders {
     private Long id;
     private Long user_id;
@@ -19,6 +21,7 @@ public class Orders {
     private String address;
     private Long product_id;
     private String phone;
+    private Long price;
 
     // color
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
@@ -29,13 +32,22 @@ public class Orders {
     public static final String CYAN = "\u001B[36m"; // Màu xanh biển
     public static final String BOLD = "\u001B[1m"; // In đậm
 
-    public Orders(Long id, Long user_id, Long product_id, String name, String address, String phone) {
+    public Orders(Long id, Long user_id, Long product_id, String name, String address, String phone, Long price) {
         this.id = id;
         this.product_id = product_id;
         this.user_id = user_id;
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.price = price;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
     }
 
     public String getPhone() {
@@ -88,33 +100,34 @@ public class Orders {
 
     public String toStringFormatted() {
         return this.id + "?" + this.user_id + "?" + this.product_id + "?" + this.name + "?" + this.address + "?"
-                + this.phone;
+                + this.phone + "?" + this.price;
     }
 
     @Override
     public String toString() {
-        return String.format("| %s%s%-5d%s | %s%-7d%s | %s%-10d%s | %s%-20s%s | %s%-80s%s | %s%-15s%s |",
+        return String.format("| %s%s%-5d%s | %s%-7d%s | %s%-10d%s | %s%-20s%s | %s%-80s%s | %s%-15s%s | %s%-20s%s |",
                 BOLD, YELLOW, this.id, RESET,
                 GREEN, this.user_id, RESET,
                 RED, this.product_id, RESET,
                 BLUE, this.name, RESET,
                 YELLOW, this.address, RESET,
-                CYAN, this.phone, RESET);
+                CYAN, this.phone, RESET,
+                BOLD, new Utils().formatPrice(this.price), RESET);
     }
 
     public static void printTableOrderForAdmin(List<Orders> ordersList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);
         sb.append(
-                "+-------+---------+------------+----------------------+----------------------------------------------------------------------------------+-----------------+\n");
+                "+-------+---------+------------+----------------------+--------------------------------------------------------------+-----------------+----------------------+\n");
         sb.append(
-                "| ID    | UserID  | ProductID  | Name                 | Address                                                                          | Phone           |\n");
+                "| ID    | UserID  | OrderID    | Name                 | Address                                                      | Phone           |    Amount            |\n");
         sb.append(
-                "+-------+---------+------------+----------------------+----------------------------------------------------------------------------------+-----------------+\n");
+                "+-------+---------+------------+----------------------+--------------------------------------------------------------+-----------------+----------------------+\n");
         for (Orders order : ordersList) {
             sb.append(order.toString()).append("\n");
             sb.append(
-                    CYAN + "+-------+---------+------------+----------------------+----------------------------------------------------------------------------------+-----------------+\n"
+                    CYAN + "+-------+---------+------------+----------------------+--------------------------------------------------------------+-----------------+----------------------+\n"
                             + RESET);
         }
         System.out.println(sb.toString());

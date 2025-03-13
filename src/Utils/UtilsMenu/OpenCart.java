@@ -25,13 +25,44 @@ public class OpenCart {
     public static final String CYAN = "\u001B[36m";
     public static final String BOLD = "\033[1m";
 
-    public void openCart(Long id) {
+    public static void inforAndHandleOrder(Long userId, Long cartIdCurrent, String name, Long price) {
+        List<OrderUser> newOrder = new ArrayList<>();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println(BOLD + GREEN + " Please enter order details:" + RESET);
+        System.out.print(" Name: ");
+        String nameUser = sc.nextLine();
+        System.out.print(" Address: ");
+        String address = sc.nextLine();
+        System.out.print(" Phone Number: ");
+        String phone = sc.nextLine();
+        HandleOrder order = new HandleOrder();
+        List<Orders> orderList = new HandleOrder().read(new AllFile().fileOrderTxt);
+        Long orderId = orderList == null || orderList.isEmpty() ? 1L // nếu là lần đầu thêm vô cart
+                // // cho id = 1
+                : orderList.get(orderList.size() - 1).getId() + 1; // lấy id của cart cuói cùng + 1
+        order.addOrder(new AllFile().fileOrderTxt,
+                new Orders(orderId, userId, cartIdCurrent, nameUser, address, phone, price));
+        List<OrderUser> orderUserList = new HandleOrderUser().read(new AllFile().fileOrderUserTxt);
+        Long orderUserId = orderUserList == null || orderUserList.isEmpty() ? 1L
+                : orderUserList.get(orderUserList.size() - 1).getId() + 1;
+        HandleOrderUser orderUser = new HandleOrderUser();
+        orderUser.addOrder(new AllFile().fileOrderUserTxt,
+                new OrderUser(orderUserId, name, nameUser, address, phone, userId, price));
+        System.out.println(BOLD + YELLOW + " Order placed successfully!" + RESET);
+        System.out.println(BOLD + " Your Order Details:" + RESET);
+        newOrder.add(new OrderUser(
+                orderUserId, name, nameUser, address, phone, userId, price));
+        OrderUser.printTableOrderForUser(newOrder);
+    }
+
+    public void openCart(Long userId) {
         Scanner sc = new Scanner(System.in);
         List<OrderUser> newOrder = new ArrayList<>();
         List<Cart> list = new HandleCart().read(new AllFile().fileCartTxt);
         List<Cart> cartList = new ArrayList<>();
         for (Cart x : list) {
-            if (x.getUserId().equals(id)) {
+            if (x.getUserId().equals(userId)) {
                 cartList.add(x);
             }
         }
@@ -50,15 +81,17 @@ public class OpenCart {
                     String name = "";
                     Long price = null;
                     Long qty = null;
+                    Long productId = null;
+                    for (Cart x : cartList) {
+                        if (x.getId().equals(cartIdCurrent)) {
+                            name += x.getName();
+                            price = x.getPrice();
+                            qty = x.getQty();
+                            productId = x.getProductId();
+                        }
+                    }
 
                     if (qq == 'y') {
-                        for (Cart x : cartList) {
-                            if (x.getId().equals(cartIdCurrent)) {
-                                name += x.getName();
-                                price = x.getPrice();
-                                qty = x.getQty();
-                            }
-                        }
 
                         System.out.println(BLUE + " Product selected (ID = " + cartIdCurrent + ")" + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
@@ -80,25 +113,76 @@ public class OpenCart {
                             HandleOrder order = new HandleOrder();
                             List<Orders> orderList = new HandleOrder().read(new AllFile().fileOrderTxt);
                             Long orderId = orderList == null || orderList.isEmpty() ? 1L // nếu là lần đầu thêm vô cart
-                                                                                         // // cho id = 1
+                                    // // cho id = 1
                                     : orderList.get(orderList.size() - 1).getId() + 1; // lấy id của cart cuói cùng + 1
                             order.addOrder(new AllFile().fileOrderTxt,
-                                    new Orders(orderId, id, cartIdCurrent, nameUser, address, phone));
+                                    new Orders(orderId, userId, cartIdCurrent, nameUser, address, phone, price));
                             List<OrderUser> orderUserList = new HandleOrderUser().read(new AllFile().fileOrderUserTxt);
                             Long orderUserId = orderUserList == null || orderUserList.isEmpty() ? 1L
                                     : orderUserList.get(orderUserList.size() - 1).getId() + 1;
                             HandleOrderUser orderUser = new HandleOrderUser();
                             orderUser.addOrder(new AllFile().fileOrderUserTxt,
-                                    new OrderUser(orderUserId, name, nameUser, address, phone, id));
+                                    new OrderUser(orderUserId, name, nameUser, address, phone, userId, price * qty));
                             System.out.println(BOLD + YELLOW + " Order placed successfully!" + RESET);
                             System.out.println(BOLD + " Your Order Details:" + RESET);
                             newOrder.add(new OrderUser(
-                                    orderUserId, name, nameUser, address, phone, id));
+                                    orderUserId, name, nameUser, address, phone, userId, price * qty));
                             OrderUser.printTableOrderForUser(newOrder);
+                        }
+
+                    } else {
+                        System.out.print(BOLD + GREEN + " Please enter quantity: " + RESET);
+                        Long quantity = Long.parseLong(sc.nextLine());
+                        System.out.println(BLUE + " Product selected (ID = " + cartIdCurrent + ")" + RESET);
+                        System.out.println(YELLOW + "---------------------------------------" + RESET);
+                        System.out.println(BOLD + " Name: " + name + RESET);
+                        System.out.println(BOLD + " Price: " + new Utils().formatPrice(price) + RESET);
+                        System.out.println(BOLD + " Quantity: " + quantity + RESET);
+                        System.out.println(BOLD + " Total: " + new Utils().formatPrice(price * quantity) + RESET);
+                        System.out.println(YELLOW + "---------------------------------------" + RESET);
+                        System.out.print(BOLD + YELLOW + "Buy(y/n)?: " + RESET);
+                        char qqq = sc.nextLine().charAt(0);
+                        if (qqq == 'y') {
+
+                            // xử lý quantity trong giỏ
+                            if (qty - quantity <= 0) {
+                                new HandleCart().deleteCart(new AllFile().fileCartTxt, cartIdCurrent);
+                                inforAndHandleOrder(userId, cartIdCurrent, name, price * qty);
+
+                            } else {
+                                new HandleCart().addOrder(new AllFile().fileCartTxt, new Cart(cartIdCurrent, userId,
+                                        name, price, qty - quantity, (qty - quantity) * price, productId));
+                                new HandleCart().deleteCart(new AllFile().fileCartTxt, cartIdCurrent);
+                                inforAndHandleOrder(userId, cartIdCurrent, name, price * qty);
+
+                            }
+
                         }
 
                     }
 
+                } else {
+
+                    // giá toàn giỏ hàng
+                    Long res = 0L;
+                    Long cnt = 0L;
+                    for (Cart x : cartList) {
+                        if (x.getUserId().equals(userId)) {
+                            res += x.getTotalProducts();
+                            ++cnt;
+                        }
+                    }
+                    System.out.println(BLUE + "Buy all product in cart" + RESET);
+                    System.out.println(YELLOW + "---------------------------------------" + RESET);
+                    System.out.println(BOLD + " Quantity product in cart " + cnt + RESET);
+                    System.out.println(BOLD + " Total Price: " + new Utils().formatPrice(res) + RESET);
+                    System.out.println(YELLOW + "---------------------------------------" + RESET);
+                    System.out.print(BOLD + YELLOW + "Buy(y/n)?: " + RESET);
+                    char qqq = sc.nextLine().charAt(0);
+                    if (qqq == 'y') {
+                        new HandleCart().deleteCart(new AllFile().fileCartTxt, userId);
+
+                    }
                 }
 
             } catch (Exception ex) {

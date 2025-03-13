@@ -6,6 +6,8 @@ package Model;
  */
 import java.util.List;
 
+import Utils.UtilsMenu.Utils;
+
 public class OrderUser {
     private Long id;
     private String nameProduct;
@@ -14,6 +16,16 @@ public class OrderUser {
     private String phone;
     private Long qty;
     private Long userId;
+    private Long price;
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public void setPrice(Long price) {
+        this.price = price;
+    }
+
     // color
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
     public static final String RED = "\u001B[31m"; // Màu đỏ
@@ -23,25 +35,28 @@ public class OrderUser {
     public static final String CYAN = "\u001B[36m"; // Màu xanh biển
     public static final String BOLD = "\u001B[1m"; // In đậm
 
-    public OrderUser(Long id, String nameProduct, String nameUser, String address, String phone, Long userId) {
+    public OrderUser(Long id, String nameProduct, String nameUser, String address, String phone, Long userId,
+            Long price) {
         this.id = id;
         this.nameProduct = nameProduct;
         this.nameUser = nameUser;
         this.address = address;
         this.phone = phone;
         this.userId = userId;
+        this.price = price;
     }
 
-    public OrderUser(Long id, String nameProduct, String nameUser, String address, String phone, Long userId,
-            Long qty) {
-        this.id = id;
-        this.nameProduct = nameProduct;
-        this.nameUser = nameUser;
-        this.address = address;
-        this.phone = phone;
-        this.userId = userId;
-        this.qty = qty;
-    }
+    // public OrderUser(Long id, String nameProduct, String nameUser, String
+    // address, String phone, Long userId,
+    // Long qty) {
+    // this.id = id;
+    // this.nameProduct = nameProduct;
+    // this.nameUser = nameUser;
+    // this.address = address;
+    // this.phone = phone;
+    // this.userId = userId;
+    // this.qty = qty;
+    // }
 
     public Long getId() {
         return id;
@@ -106,30 +121,33 @@ public class OrderUser {
 
     public String toStringFormatted2() {
         return this.id + "?" + this.nameProduct + "?" + this.nameUser + "?" + this.address + "?"
-                + this.phone + "?" + this.userId + "?" + this.qty;
+                + this.phone + "?" + this.userId + "?" + this.qty + "?" + this.price;
     }
 
     @Override
     public String toString() {
-        return String.format("| %s%s%-5d%s | %s%-30s%s | %s%-30s%s | %s%-80s%s | %s%-30s%s |",
+        return String.format("| %s%s%-5d%s | %s%-30s%s | %s%-30s%s | %s%-30s%s | %s%-60s%s | %s%-20s%s |",
                 BOLD, YELLOW, this.id, RESET,
-                RED, this.nameProduct, RESET, YELLOW, this.nameUser, RESET, BLUE, this.address, RESET, GREEN,
-                this.phone, RESET);
+                RED, this.nameProduct, RESET,
+                BOLD, new Utils().formatPrice(this.price), RESET,
+                YELLOW, this.nameUser, RESET,
+                BLUE, this.address, RESET,
+                GREEN, this.phone, RESET);
     }
 
     public static void printTableOrderForUser(List<OrderUser> ordersList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);
         sb.append(
-                "+-------+--------------------------------+--------------------------------+----------------------------------------------------------------------------------+--------------------------------+\n");
+                "+-------+--------------------------------+--------------------------------+--------------------------------+--------------------------------------------------------------+----------------------+\n");
         sb.append(
-                "| ID    | Product                        | Name                           | Address                                                                          | Phone                          |\n");
+                "| ID    | Product                        | Price                          | Name                           | Address                                                      | Phone                |\n");
         sb.append(
-                "+-------+--------------------------------+--------------------------------+----------------------------------------------------------------------------------+--------------------------------+\n");
+                "+-------+--------------------------------+--------------------------------+--------------------------------+--------------------------------------------------------------+----------------------+\n");
         for (OrderUser order : ordersList) {
             sb.append(order.toString()).append("\n");
             sb.append(
-                    CYAN + "+-------+--------------------------------+--------------------------------+----------------------------------------------------------------------------------+--------------------------------+\n"
+                    CYAN + "+-------+--------------------------------+--------------------------------+--------------------------------+--------------------------------------------------------------+----------------------+\n"
                             + RESET);
         }
         System.out.println(sb.toString());
