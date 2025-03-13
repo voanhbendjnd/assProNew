@@ -1,4 +1,4 @@
-package Handle;
+package handle;
 
 /**
  *
@@ -9,12 +9,14 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
-import Model.Cart;
-import SetupFile.AllFile;
+import domain.entity.Cart;
+import setupFile.AllFile;
 
-public class HandleCart {
+public class HandleCart implements Handle<Cart> {
+    @Override
     public List<Cart> read(String fileOrder) {
         List<Cart> cartList = new ArrayList<>();
         try {
@@ -43,6 +45,7 @@ public class HandleCart {
         return cartList;
     }
 
+    @Override
     public void writeFile(String fileName, List<Cart> cartList) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Cart x : cartList) {
@@ -54,13 +57,16 @@ public class HandleCart {
         }
     }
 
-    public void addOrder(String fileName, Cart cart) {
+    @Override
+    public void addNew(String fileName, Cart cart) {
         List<Cart> cartList = read(new AllFile().fileCartTxt);
         cartList.add(cart);
         writeFile(fileName, cartList);
     }
 
-    public void deleteCart(String fileName, Long id) {
+    @Override
+    public void deleteIt(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
         List<Cart> cartList = read(fileName);
         boolean productFound = false;
         for (Iterator<Cart> iterator = cartList.iterator(); iterator.hasNext();) {

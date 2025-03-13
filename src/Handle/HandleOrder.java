@@ -1,13 +1,8 @@
 
-package Handle;
+package handle;
 
-/**
- *
- * @author Vo Anh Ben - CE190709
- */
-
-import Model.Orders;
-import SetupFile.AllFile;
+import domain.entity.Orders;
+import setupFile.AllFile;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.List;
+import java.util.Optional;
 
-public class HandleOrder {
+public class HandleOrder implements Handle<Orders> {
+    @Override
     public List<Orders> read(String fileOrder) {
         List<Orders> orderList = new ArrayList<>();
         try {
@@ -32,7 +29,8 @@ public class HandleOrder {
                 String address = orders[4];
                 String phone = orders[5];
                 Long price = Long.parseLong(orders[6]);
-                orderList.add(new Orders(id, id_user, product_id, name, address, phone, price));
+                Long orderId = Long.parseLong(orders[7]);
+                orderList.add(new Orders(id, id_user, product_id, name, address, phone, price, orderId));
 
             }
             sc.close();
@@ -43,6 +41,7 @@ public class HandleOrder {
         return orderList;
     }
 
+    @Override
     public void writeFile(String fileName, List<Orders> orderList) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Orders x : orderList) {
@@ -54,13 +53,16 @@ public class HandleOrder {
         }
     }
 
-    public void addOrder(String fileName, Orders order) {
+    @Override
+    public void addNew(String fileName, Orders order) {
         List<Orders> orderList = read(new AllFile().fileOrderTxt);
         orderList.add(order);
         writeFile(fileName, orderList);
     }
 
-    public void deleteOrder(String fileName, Long id) {
+    @Override
+    public void deleteIt(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
         List<Orders> orderList = read(fileName);
         boolean productFound = false;
         for (Iterator<Orders> iterator = orderList.iterator(); iterator.hasNext();) {

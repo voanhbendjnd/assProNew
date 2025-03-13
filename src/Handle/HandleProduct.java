@@ -1,4 +1,4 @@
-package Handle;
+package handle;
 
 /**
  *
@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
-import Model.Products;
+import domain.entity.Products;
+import utils.constant.TargetEnum;
 
-public class HandleProduct {
+public class HandleProduct implements Handle<Products> {
+    @Override
     public List<Products> read(String fileProducts) {
         List<Products> productsList = new ArrayList<>();
         try {
@@ -27,7 +28,7 @@ public class HandleProduct {
                 Long codePhone = Long.parseLong(products[0]);
                 String name = products[1];
                 String brand = products[2];
-                String target = products[3];
+                TargetEnum target = TargetEnum.valueOf(products[3]);
                 Long price = Long.parseLong(products[4]);
                 String description = products[5];
                 Long stock = Long.parseLong(products[6]);
@@ -43,6 +44,7 @@ public class HandleProduct {
         return productsList;
     }
 
+    @Override
     public void writeFile(String fileName, List<Products> product) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Products x : product) {
@@ -54,13 +56,16 @@ public class HandleProduct {
         }
     }
 
-    public void addProduct(String fileName, Products product) {
+    @Override
+    public void addNew(String fileName, Products product) {
         List<Products> proList = read("products.txt");
         proList.add(product);
         writeFile(fileName, proList);
     }
 
-    public void deleteProduct(String fileName, Long code) {
+    @Override
+    public void deleteIt(String fileName, Optional<?> codeOptional) {
+        Long code = Long.parseLong(codeOptional.get().toString());
         List<Products> proList = read(fileName);
         boolean productFound = false;
         for (Iterator<Products> iterator = proList.iterator(); iterator.hasNext();) {

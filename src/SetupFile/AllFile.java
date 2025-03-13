@@ -1,4 +1,4 @@
-package SetupFile;
+package setupFile;
 
 /**
  *

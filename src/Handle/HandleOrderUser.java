@@ -1,19 +1,22 @@
-package Handle;
+package handle;
+
+import java.io.File;
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
-import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
-import Model.OrderUser;
-import SetupFile.AllFile;
+import domain.entity.OrderUser;
+import setupFile.AllFile;
 
-public class HandleOrderUser {
+public class HandleOrderUser implements Handle<OrderUser> {
+    @Override
     public List<OrderUser> read(String fileOrder) {
         List<OrderUser> orderList = new ArrayList<>();
         try {
@@ -29,7 +32,8 @@ public class HandleOrderUser {
                 String phone = orders[4];
                 Long userId = Long.parseLong(orders[5]);
                 Long price = Long.parseLong(orders[6]);
-                orderList.add(new OrderUser(id, nameP, name, address, phone, userId, price));
+                int status = Integer.parseInt(orders[7]);
+                orderList.add(new OrderUser(id, nameP, name, address, phone, userId, price, status));
 
             }
 
@@ -39,6 +43,7 @@ public class HandleOrderUser {
         return orderList;
     }
 
+    @Override
     public void writeFile(String fileName, List<OrderUser> orderList) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (OrderUser x : orderList) {
@@ -50,13 +55,16 @@ public class HandleOrderUser {
         }
     }
 
-    public void addOrder(String fileName, OrderUser order) {
+    @Override
+    public void addNew(String fileName, OrderUser order) {
         List<OrderUser> orderList = read(new AllFile().fileOrderUserTxt);
         orderList.add(order);
         writeFile(fileName, orderList);
     }
 
-    public void deleteOrder(String fileName, Long id) {
+    @Override
+    public void deleteIt(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
         List<OrderUser> orderList = read(fileName);
         boolean productFound = false;
         for (Iterator<OrderUser> iterator = orderList.iterator(); iterator.hasNext();) {

@@ -1,4 +1,5 @@
-package SetupFile;
+package setupFile;
+
 /**
  *
  * @author Vo Anh Ben - CE190709
@@ -6,8 +7,8 @@ package SetupFile;
 import java.util.Scanner;
 
 public class Test {
+    public static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         Long n = sc.nextLong();
         String s = n + "";
         int cnt = 0;

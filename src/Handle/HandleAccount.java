@@ -1,8 +1,7 @@
-package Handle;
+package handle;
 
-
-import Model.Accounts;
-import SetupFile.AllFile;
+import domain.entity.Accounts;
+import setupFile.AllFile;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,12 +9,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
  * @author Vo Anh Ben - CE190709
  */
-public class HandleAccount {
+public class HandleAccount implements Handle<Accounts> {
+    @Override
     public List<Accounts> read(String fileProducts) {
         List<Accounts> accountList = new ArrayList<>();
         try {
@@ -40,6 +41,7 @@ public class HandleAccount {
         return accountList;
     }
 
+    @Override
     public void writeFile(String fileName, List<Accounts> account) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Accounts x : account) {
@@ -51,13 +53,16 @@ public class HandleAccount {
         }
     }
 
-    public void addAccount(String fileName, Accounts account) {
+    @Override
+    public void addNew(String fileName, Accounts account) {
         List<Accounts> accountList = read(new AllFile().fileAccountTxt);
         accountList.add(account);
         writeFile(fileName, accountList);
     }
 
-    public void deleteAccount(String fileName, String password) {
+    @Override
+    public void deleteIt(String fileName, Optional<?> passwordOptional) {
+        String password = passwordOptional.get().toString();
         List<Accounts> accountList = read(fileName);
         boolean accountFound = false;
         for (Iterator<Accounts> iterator = accountList.iterator(); iterator.hasNext();) {
