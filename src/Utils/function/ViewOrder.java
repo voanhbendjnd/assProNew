@@ -17,6 +17,38 @@ import setupFile.AllFile;
  */
 
 public class ViewOrder {
+    public static void changeStatus(List<Orders> orderList, List<OrderUser> orderUserList, String id, int status) {
+        boolean check = false;
+        Long orderId = null;
+        for (Orders x : orderList) {
+            if (x.getId().equals(Long.parseLong(id))) {
+                check = true;
+                orderId = x.getOrder_id();
+                break;
+            }
+        }
+        if (check) {
+            new HandleOrder().deleteIt(new AllFile().fileOrderTxt, Optional.of(Long.parseLong(id)));
+            for (OrderUser x : orderUserList) {
+                if (x.getId().equals(orderId)) {
+                    new HandleOrderUser().addNew(new AllFile().fileOrderUserTxt,
+                            new OrderUser(x.getId(),
+                                    x.getNameProduct(),
+                                    x.getName(),
+                                    x.getAddress(),
+                                    x.getPhone(),
+                                    x.getUserId(),
+                                    x.getPrice(),
+                                    status));
+                    new HandleOrderUser().deleteIt(new AllFile().fileOrderUserTxt, Optional.of(orderId));
+                    break;
+                }
+            }
+        } else {
+            System.out.println(BOLD + RED + "Order id with " + id + " is incorrect, please re-enter" + RESET);
+        }
+    }
+
     // color
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
     public static final String RED = "\u001B[31m"; // Màu đỏ
@@ -39,36 +71,22 @@ public class ViewOrder {
             if (c.equals("y")) {
                 System.out.print(BOLD + YELLOW + "Please enter the order id you want to confirm: " + RESET);
                 String id = sc.nextLine();
-                boolean check = false;
-                Long orderId = null;
-                for (Orders x : orderList) {
-                    if (x.getId().equals(Long.parseLong(id))) {
-                        check = true;
-                        orderId = x.getOrder_id();
-                        break;
-                    }
-                }
-                if (check) {
-                    new HandleOrder().deleteIt(new AllFile().fileOrderTxt, Optional.of(Long.parseLong(id)));
-                    for (OrderUser x : orderUserList) {
-                        if (x.getId().equals(orderId)) {
-                            new HandleOrderUser().addNew(new AllFile().fileOrderUserTxt,
-                                    new OrderUser(x.getId(),
-                                            x.getNameProduct(),
-                                            x.getName(),
-                                            x.getAddress(),
-                                            x.getPhone(),
-                                            x.getUserId(),
-                                            x.getPrice(),
-                                            1));
-                            new HandleOrderUser().deleteIt(new AllFile().fileOrderUserTxt, Optional.of(orderId));
-                            break;
-                        }
-                    }
-                    break;
+                // System.out.println(BOLD + YELLOW + " Target " + RESET);
+                System.out.println(GREEN + "┌───────────────────┐" + RESET);
+                System.out.println(GREEN + "│ 1. Confirmed      │" + RESET);
+                System.out.println(GREEN + "│ 2. Not Confirmed  │" + RESET);
+                System.out.println(GREEN + "│ 3. Undetermined   │" + RESET);
+                System.out.println(GREEN + "└───────────────────┘" + RESET);
+                System.out.print(BOLD + BLUE + "Please enter status for this order: " + RESET);
+                String c2 = sc.nextLine();
+                if (c2.equals("1")) {
+                    changeStatus(orderList, orderUserList, id, 1);
+                } else if (c2.equals("2")) {
+                    changeStatus(orderList, orderUserList, id, 2);
                 } else {
-                    System.out.println(BOLD + RED + "Order id with " + id + " is incorrect, please re-enter" + RESET);
+                    changeStatus(orderList, orderUserList, id, 3);
                 }
+
             } else {
                 break;
             }

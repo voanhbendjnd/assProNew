@@ -237,7 +237,7 @@ public class FindProduct {
 
             if (checkTarget && !checkFactory) {
                 for (Products x : proList) {
-                    if (op.contains(x.getTarget())) {
+                    if (op.contains(x.getTarget().toString())) {
                         proFind.add(x);
                     }
                 }
@@ -246,7 +246,7 @@ public class FindProduct {
             if (checkFactory && checkTarget) {
                 for (Products x : proList) {
                     if (op.contains(x.getBrand().toLowerCase())
-                            && op.contains(x.getTarget())) {
+                            && op.contains(x.getTarget().toString())) {
                         proFind.add(x);
                     }
                 }
@@ -280,7 +280,7 @@ public class FindProduct {
             } else if (!checkFactory && checkTarget) {
                 for (Products x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
-                        if (op.contains(x.getTarget())) {
+                        if (op.contains(x.getTarget().toString())) {
                             proFind.add(x);
                         }
                     }

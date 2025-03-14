@@ -11,7 +11,7 @@ import java.util.Scanner;
 import domain.entity.Accounts;
 import handle.HandleAccount;
 import setupFile.AllFile;
-import utils.function.Utils;
+import utils.constant.RoleEnum;
 
 public class CreateAccount {
     // Mã ANSI để đổi màu chữ
@@ -63,9 +63,9 @@ public class CreateAccount {
                         userId = acc.getId();
                         System.out.println(GREEN + " Login success!" + RESET);
                         System.out.println(BLUE + "--------------------------------" + RESET);
-                        if (acc.getRole() == 1) {
+                        if (acc.getRole().toString().equals("ADMIN")) {
                             menu.getMenu(userId);
-                        } else if (acc.getRole() == 2) {
+                        } else if (acc.getRole().toString().equals("USER")) {
                             menu.getMenuUser(userId);
                         }
                         break;
@@ -77,9 +77,9 @@ public class CreateAccount {
                         userId = acc.getId();
                         System.out.println(GREEN + " Login success!" + RESET);
                         System.out.println(BLUE + "--------------------------------" + RESET);
-                        if (acc.getRole() == 1) {
+                        if (acc.getRole().toString().equals("ADMIN")) {
                             menu.getMenu(acc.getId());
-                        } else if (acc.getRole() == 2) {
+                        } else if (acc.getRole().toString().equals("USER")) {
                             menu.getMenuUser(acc.getId());
                         }
                         break;
@@ -124,10 +124,11 @@ public class CreateAccount {
                     }
 
                     HandleAccount ar = new HandleAccount();
-                    Long role = new Utils().filterRole(user, password) ? 1L : 2L;
+                    RoleEnum role = RoleEnum.USER;
+                    // Long role = new Utils().filterRole(user, password) ? 1L : 2L;
                     auth.add(new Accounts(code + 1, user, password, email, role));
                     ar.addNew(new AllFile().fileAccountTxt, new Accounts(code + 1, user, password, email, role));
-                    auth.add(new Accounts(code + 1, user, password, email, role));
+                    // auth.add(new Accounts(code + 1, user, password, email, role));
                     System.out.println(GREEN + ">>>  Account created successfully! <<<" + RESET);
                     System.out.println(BLUE + "-----------------------------" + RESET);
                 } else {

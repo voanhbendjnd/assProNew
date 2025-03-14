@@ -14,9 +14,9 @@ import utils.Intro;
  */
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-        new Intro().IntroWelCome();
-        new Intro().IntroTo();
-        new Intro().IntroGROUP3();
+        // new Intro().IntroWelCome();
+        // new Intro().IntroTo();
+        // new Intro().IntroGROUP3();
         new Menu().getMenuNotLogin();
 
     }

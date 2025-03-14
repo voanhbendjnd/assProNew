@@ -143,7 +143,8 @@ public class OrderUser extends InfoOrder {
                 YELLOW, super.getName(), RESET,
                 GREEN, super.getAddress(), RESET,
                 BLUE, super.getPhone(), RESET,
-                this.status == 1 ? GREEN : RED, this.status == 1 ? "confirmed" : "not confirmed", RESET);
+                this.status == 1 ? GREEN : this.status == 2 ? RED : YELLOW,
+                this.status == 1 ? "Confirmed" : this.status == 2 ? "Not Confirmed" : "Undetermined", RESET);
     }
 
     public static void printTableOrderForUser(List<OrderUser> ordersList) {

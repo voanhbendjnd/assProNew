@@ -1,5 +1,6 @@
 package utils.function;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import domain.entity.Products;
 import handle.HandleProduct;
 import setupFile.AllFile;
 import utils.constant.TargetEnum;
+import utils.error.Validation;
 
 /**
  *
@@ -18,7 +20,6 @@ import utils.constant.TargetEnum;
 // Nhân
 public class AddProduct {
     private static Scanner sc = new Scanner(System.in);
-
     // Mã ANSI để đổi màu
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
@@ -28,11 +29,23 @@ public class AddProduct {
     public static final String CYAN = "\u001B[36m";
     public static final String BOLD = "\u001B[1m";
 
-    public void addNewProduct() {
+    public void addNewProduct() throws InterruptedException {
         HandleProduct reader = new HandleProduct();
-        System.out.print(BOLD + CYAN + "Please enter quantity of products to add: " + RESET);
-        int n = sc.nextInt();
-        sc.nextLine();
+        int n = 0;
+        while (true) {
+            try {
+                System.out.print(BOLD + CYAN + "Please enter quantity of products to add: " + RESET);
+                n = Integer.parseInt(sc.nextLine().trim());
+                if (n < 0) {
+                    System.out.println(RED + "Quantity must be a positive number! Please try again." + RESET);
+                } else {
+                    break; // Nếu nhập đúng, thoát khỏi vòng lặp
+                }
+
+            } catch (Exception e) {
+                System.out.println(RED + "Invalid input! Please enter a valid number." + RESET);
+            }
+        }
 
         List<Products> proListed = new ArrayList<>();
 
@@ -41,10 +54,10 @@ public class AddProduct {
             System.out.println(BOLD + BLUE + "      ADD NEW PRODUCT     " + RESET);
             System.out.println(BOLD + BLUE + "═════════════════════════" + RESET);
 
-            System.out.print(YELLOW + "Name: " + RESET);
-            String name = sc.nextLine();
-            System.out.print(YELLOW + "Brand: " + RESET);
-            String brand = sc.nextLine();
+            String name = Validation.getNonEmptyString(YELLOW + "Name: " + RESET,
+                    RED + "Product name cannot be empty !!! Please try again." + RESET);
+            String brand = Validation.getNonEmptyString(YELLOW + "Brand: " + RESET,
+                    RED + "Product brand cannot be empty !!! Please try again." + RESET);
             System.out.println(YELLOW + "Target: " + RESET);
             System.out.println(GREEN + "┌────────────────────────────────────────────┐" + RESET);
             System.out.println(GREEN + "│ 1. Gaming        │ 4. Camera, Video        │" + RESET);
@@ -52,6 +65,7 @@ public class AddProduct {
             System.out.println(GREEN + "│ 3. Work, Study   │                         │" + RESET);
             System.out.println(GREEN + "└────────────────────────────────────────────┘" + RESET);
             System.out.print(BLUE + "Number for target: " + RESET);
+
             int tt = sc.nextInt();
             TargetEnum target = TargetEnum.GAMING;
 
@@ -75,11 +89,10 @@ public class AddProduct {
                     System.out.println(RED + "Invalid target. Using default (GAMING)." + RESET);
                     break;
             }
-            System.out.print(YELLOW + "Price: " + RESET);
-            Long price = sc.nextLong();
-            sc.nextLine();
-            System.out.print(YELLOW + "Description: " + RESET);
-            String ds = sc.nextLine();
+            Long price = Validation.getPositiveLong(YELLOW + "Price: " + RESET,
+                    RED + "Price must be greater than 0! Please enter again." + RESET);
+            String ds = Validation.getNonEmptyString(YELLOW + "Description: " + RESET,
+                    RED + "Product description cannot be empty !!! Please try again." + RESET);
 
             boolean check = false;
             Long maxCode = -1L;
@@ -103,11 +116,13 @@ public class AddProduct {
                         System.out.print(YELLOW + "Enter stock quantity to add: " + RESET);
                         Long stockAdd = sc.nextLong();
                         x.setStock(x.getStock() + stockAdd);
+                        sc.nextLine();
                     } else {
                         System.out.println(GREEN + " Current stock: " + x.getStock() + RESET);
                         System.out.print(YELLOW + "Enter new stock quantity: " + RESET);
                         Long stockChange = sc.nextLong();
                         x.setStock(stockChange);
+                        sc.nextLine();
                     }
 
                     Products pro = new Products(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
@@ -122,16 +137,70 @@ public class AddProduct {
             }
 
             if (!check) {
-                System.out.print(YELLOW + "Stock: " + RESET);
-                Long stock = sc.nextLong();
-                sc.nextLine();
-                System.out.print(YELLOW + "Date Created: " + RESET);
-                String date = sc.nextLine();
+                Long stock = null;
+                while (true) {
+                    try {
+                        System.out.print(YELLOW + "Stock: " + RESET);
+                        stock = Long.parseLong(sc.nextLine().trim());
+                        if (stock < 0) {
+                            System.out.println(RED + "Stock must be greater than 0! Please enter again." + RESET);
+                        } else {
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println(RED + "Invalid input! Price must be a number greater than 0!!" + RESET);
+                    }
+                }
+
+                String date = null;
+                while (true) {
+                    try {
+                        System.out.print(YELLOW + "Date Created (dd/MM/yyyy): " + RESET);
+                        date = sc.nextLine().trim();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        sdf.setLenient(false); // Không cho phép nhập sai định dạng
+                        sdf.parse(date); // Nếu sai format sẽ ném lỗi ParseException
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(RED + "Invalid date format! Please enter in dd/MM/yyyy format." + RESET);
+                    }
+                }
+
                 Products pro = new Products(maxCode + 1, name, brand, target, price, ds, stock, date);
                 reader.addNew(new AllFile().fileProductTxt, pro);
                 proListed.add(pro);
 
                 System.out.println(GREEN + " Product added successfully!" + RESET);
+            }
+
+            while (true) {
+                System.out.println(BOLD + CYAN + "═════════════════════════════════════" + RESET);
+                System.out.println(BOLD + CYAN + " Do you want to continue or go back? " + RESET);
+                System.out.println(BOLD + CYAN + " 1. Add another product" + RESET);
+                System.out.println(BOLD + CYAN + " 2. Return to main menu" + RESET);
+                System.out.println(BOLD + CYAN + "═════════════════════════════════════" + RESET);
+                System.out.print(BOLD + YELLOW + "Your choice: " + RESET);
+
+                int choice;
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    if (choice == 1) {
+                        break;
+                    } else if (choice == 2) {
+                        System.out.print(RED + "The program is returning to menu" + RESET);
+                        for (int i = 0; i < 3; i++) {
+                            System.out.print(RED + "." + RESET);
+                            Thread.sleep(700);
+                        }
+                        System.out.println();
+                        n = 0; // exit while loop
+                        break;
+                    } else {
+                        System.out.println(RED + "Invalid choice! Please enter 1 or 2." + RESET);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(RED + "Invalid input!! Please enter !!!!" + RESET);
+                }
             }
         }
 

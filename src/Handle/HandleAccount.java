@@ -2,6 +2,7 @@ package handle;
 
 import domain.entity.Accounts;
 import setupFile.AllFile;
+import utils.constant.RoleEnum;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -29,7 +30,7 @@ public class HandleAccount implements Handle<Accounts> {
                 String username = accounts[1];
                 String password = accounts[2];
                 String email = accounts[3];
-                Long role = Long.parseLong(accounts[4]);
+                RoleEnum role = RoleEnum.valueOf(accounts[4]);
                 accountList.add(new Accounts(id, username, password, email, role));
 
             }
@@ -61,13 +62,13 @@ public class HandleAccount implements Handle<Accounts> {
     }
 
     @Override
-    public void deleteIt(String fileName, Optional<?> passwordOptional) {
-        String password = passwordOptional.get().toString();
+    public void deleteIt(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
         List<Accounts> accountList = read(fileName);
         boolean accountFound = false;
         for (Iterator<Accounts> iterator = accountList.iterator(); iterator.hasNext();) {
             Accounts account = iterator.next();
-            if (account.getPassword().equals(password)) {
+            if (account.getId().equals(id)) {
                 iterator.remove();
                 accountFound = true;
                 break;
