@@ -59,7 +59,7 @@ public class HandleCart implements Handle<Cart> {
 
     @Override
     public void addNew(String fileName, Cart cart) {
-        List<Cart> cartList = read(new AllFile().fileCartTxt);
+        List<Cart> cartList = read(AllFile.fileCartTxt);
         cartList.add(cart);
         writeFile(fileName, cartList);
     }

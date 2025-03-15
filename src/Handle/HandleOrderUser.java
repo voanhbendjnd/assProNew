@@ -57,7 +57,7 @@ public class HandleOrderUser implements Handle<OrderUser> {
 
     @Override
     public void addNew(String fileName, OrderUser order) {
-        List<OrderUser> orderList = read(new AllFile().fileOrderUserTxt);
+        List<OrderUser> orderList = read(AllFile.fileOrderUserTxt);
         orderList.add(order);
         writeFile(fileName, orderList);
     }

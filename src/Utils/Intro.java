@@ -6,62 +6,49 @@ package utils;
  */
 public class Intro {
     public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
     public static final String CYAN = "\u001B[36m";
+    public static final String BOLD = "\u001B[1m";
 
-    public void IntroWelCome() throws InterruptedException {
-        String welcomeText = "██       ██    ███████   ██        ██████    ██████   ███      ███  ███████\n" +
-                "██       ██    ██           ██        ██           ██    ██  ████    ████  ██\n" +
-                "██  █   ██    █████      ██        ██           ██    ██  ██  ████  ██  █████\n" +
-                "██ ███ ██    ██           ██        ██      █   ██    ██  ██   ██     ██  ██\n" +
-                " ███ ███     ███████   ██████  ██████    ██████  ██   ██     ██  ███████";
-        System.out.println(CYAN); // In màu CYAN
-        for (String line : welcomeText.split("\n")) {
+    public static void MovieOpening() throws InterruptedException {
+
+        String[] endingText = {
+                BOLD + BLUE + " Hi Welcome to Project GROUP 3 MOBILE..." + RESET,
+                BOLD + YELLOW + " Loading data please wait a moment" + RESET,
+                BOLD + " Ready..." + RESET
+
+        };
+
+        for (String line : endingText) {
             System.out.println(line);
-            Thread.sleep(300); // Hiệu ứng xuất hiện từ từ
+            Thread.sleep(1000);
         }
-        System.out.println(RESET); // Reset màu về mặc định
     }
 
-    public void IntroTo() throws InterruptedException {
-        String welcomeText = "██████  " + "█████\n" +
-                "    █      " + "█      █\n" +
-                "    █      " + "█      █\n" +
-                "    █      " + "█      █\n" +
-                "    █      " + "█████";
-        System.out.println(CYAN); // In màu CYAN
-        for (String line : welcomeText.split("\n")) {
+    public static void MovieEnding() throws InterruptedException {
+
+        String[] endingText = {
+                BOLD + BLUE + " Project desinged by group 3" + RESET,
+                BOLD + YELLOW + " Inspired by the website thoigioididong.com" + RESET,
+                BOLD + GREEN + " Thank you everyone for listening to the presentation." + RESET,
+                BOLD + CYAN + " Hello and see you again!" + RESET,
+                BOLD + " Goodbye..." + RESET
+        };
+
+        for (String line : endingText) {
             System.out.println(line);
-            Thread.sleep(300); // Hiệu ứng xuất hiện từ từ
+            Thread.sleep(1000);
         }
-        System.out.println(RESET); // Reset màu về mặc định
+
+        for (int i = 10; i >= 0; i--) {
+            System.out.print("\r" + "*".repeat(i) + " ");
+            Thread.sleep(500);
+        }
+
+        System.out.println(BOLD + "\nThe End.");
     }
 
-    public void IntroGROUP3() throws InterruptedException {
-        String welcomeText = "█████    █████  " + "█████    " + "█      █    " + "█████   " + "██████\n" +
-                "█           █     █  " + "█      █   " + "█      █    " + "█      █   " + "        █\n" +
-                "█     ██  █  █      " + "█      █   " + "█      █   " + "█████   " + "     █\n" +
-                "█      █   █   █    " + "█      █   " + "█      █    " + "█         " + "         █\n" +
-                "█████    █     █  " + "█████    " + "█████     " + "█          " + "██████";
-
-        System.out.println(CYAN); // In màu CYAN
-        for (String line : welcomeText.split("\n")) {
-            System.out.println(line);
-            Thread.sleep(300); // Hiệu ứng xuất hiện từ từ
-        }
-        System.out.println(RESET); // Reset màu về mặc định
-    }
-
-    public void OuttroWelCome() throws InterruptedException {
-        String thanksText = "  ████████ ██   ██     ███      ██     ██  ██   ██  ██████\n" +
-                "       ██      ██   ██     █   █     ██     ██  ██  ██   █     \n" +
-                "       ██      ██████    █████    ██ ██ ██  ██ ██    █████  \n" +
-                "       ██      ██   ██    ██   ██   ██     ██  ██  ██            █  \n" +
-                "       ██      ██   ██    ██   ██   ██     ██  ██   ██  ██████";
-        System.out.println(CYAN); // In màu CYAN
-        for (String line : thanksText.split("\n")) {
-            System.out.println(line);
-            Thread.sleep(300); // Hiệu ứng xuất hiện từ từ
-        }
-        System.out.println(RESET); // Reset màu về mặc định
-    }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import utils.constant.TargetEnum;
 import utils.function.Utils;
 
-public class Products {
+public class Product {
     private Long id;
     private Long code;
     private String name;
@@ -31,10 +31,10 @@ public class Products {
     public static final String CYAN = "\u001B[36m"; // Màu xanh biển
     public static final String BOLD = "\u001B[1m"; // In đậm
 
-    public Products() {
+    public Product() {
     }
 
-    public Products(Long code, String name, String brand, TargetEnum target, Long price, String description, Long stock,
+    public Product(Long code, String name, String brand, TargetEnum target, Long price, String description, Long stock,
             String dateCreate) {
         this.name = name;
         this.code = code;
@@ -136,7 +136,7 @@ public class Products {
                 GREEN, this.stock, RESET);
     }
 
-    public static void printTable(List<Products> productsList) {
+    public static void printTable(List<Product> productsList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);
         sb.append(
@@ -146,7 +146,7 @@ public class Products {
         sb.append(
                 "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n");
         sb.append(RESET);
-        for (Products product : productsList) {
+        for (Product product : productsList) {
             sb.append(product.toString()).append("\n");
             sb.append(
                     CYAN + "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n"

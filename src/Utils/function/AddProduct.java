@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import domain.entity.Products;
+import domain.entity.Product;
 import handle.HandleProduct;
 import setupFile.AllFile;
 import utils.constant.TargetEnum;
@@ -47,7 +47,7 @@ public class AddProduct {
             }
         }
 
-        List<Products> proListed = new ArrayList<>();
+        List<Product> proListed = new ArrayList<>();
 
         while (n-- > 0) {
             System.out.println(BOLD + BLUE + "═════════════════════════" + RESET);
@@ -96,15 +96,15 @@ public class AddProduct {
 
             boolean check = false;
             Long maxCode = -1L;
-            List<Products> data = reader.read(new AllFile().fileProductTxt);
+            List<Product> data = reader.read(AllFile.fileProductTxt);
 
-            for (Products x : data) {
+            for (Product x : data) {
                 if (maxCode < x.getCode()) {
                     maxCode = x.getCode();
                 }
             }
 
-            for (Products x : data) {
+            for (Product x : data) {
                 if (name.equalsIgnoreCase(x.getName()) && brand.equalsIgnoreCase(x.getBrand())
                         && ds.equalsIgnoreCase(x.getDescription()) && x.getPrice().equals(price)) {
                     System.out.print(YELLOW + "One or Many stock? (1/2): " + RESET);
@@ -125,10 +125,10 @@ public class AddProduct {
                         sc.nextLine();
                     }
 
-                    Products pro = new Products(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
+                    Product pro = new Product(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
                             x.getDescription(), x.getStock(), x.getDateCreate());
-                    reader.deleteIt(new AllFile().fileProductTxt, Optional.of(x.getCode()));
-                    reader.addNew(new AllFile().fileProductTxt, pro);
+                    reader.deleteIt(AllFile.fileProductTxt, Optional.of(x.getCode()));
+                    reader.addNew(AllFile.fileProductTxt, pro);
                     proListed.add(x);
                     check = true;
 
@@ -166,8 +166,8 @@ public class AddProduct {
                     }
                 }
 
-                Products pro = new Products(maxCode + 1, name, brand, target, price, ds, stock, date);
-                reader.addNew(new AllFile().fileProductTxt, pro);
+                Product pro = new Product(maxCode + 1, name, brand, target, price, ds, stock, date);
+                reader.addNew(AllFile.fileProductTxt, pro);
                 proListed.add(pro);
 
                 System.out.println(GREEN + " Product added successfully!" + RESET);
@@ -207,6 +207,6 @@ public class AddProduct {
         System.out.println(BOLD + CYAN + "══════════════════════════════" + RESET);
         System.out.println(BOLD + CYAN + "     PRODUCTS ADDED/UPDATED   " + RESET);
         System.out.println(BOLD + CYAN + "══════════════════════════════" + RESET);
-        Products.printTable(proListed);
+        Product.printTable(proListed);
     }
 }

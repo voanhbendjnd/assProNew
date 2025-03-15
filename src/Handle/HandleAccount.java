@@ -1,6 +1,6 @@
 package handle;
 
-import domain.entity.Accounts;
+import domain.entity.Account;
 import setupFile.AllFile;
 import utils.constant.RoleEnum;
 
@@ -16,10 +16,10 @@ import java.util.Optional;
  *
  * @author Vo Anh Ben - CE190709
  */
-public class HandleAccount implements Handle<Accounts> {
+public class HandleAccount implements Handle<Account> {
     @Override
-    public List<Accounts> read(String fileProducts) {
-        List<Accounts> accountList = new ArrayList<>();
+    public List<Account> read(String fileProducts) {
+        List<Account> accountList = new ArrayList<>();
         try {
             File myFile = new File(fileProducts);
             Scanner sc = new Scanner(myFile);
@@ -31,7 +31,7 @@ public class HandleAccount implements Handle<Accounts> {
                 String password = accounts[2];
                 String email = accounts[3];
                 RoleEnum role = RoleEnum.valueOf(accounts[4]);
-                accountList.add(new Accounts(id, username, password, email, role));
+                accountList.add(new Account(id, username, password, email, role));
 
             }
             sc.close();
@@ -43,9 +43,9 @@ public class HandleAccount implements Handle<Accounts> {
     }
 
     @Override
-    public void writeFile(String fileName, List<Accounts> account) {
+    public void writeFile(String fileName, List<Account> account) {
         try (FileWriter fw = new FileWriter(fileName)) {
-            for (Accounts x : account) {
+            for (Account x : account) {
                 fw.write(x.toStringFormatted() + "\n");
             }
 
@@ -55,8 +55,8 @@ public class HandleAccount implements Handle<Accounts> {
     }
 
     @Override
-    public void addNew(String fileName, Accounts account) {
-        List<Accounts> accountList = read(new AllFile().fileAccountTxt);
+    public void addNew(String fileName, Account account) {
+        List<Account> accountList = read(AllFile.fileAccountTxt);
         accountList.add(account);
         writeFile(fileName, accountList);
     }
@@ -64,10 +64,10 @@ public class HandleAccount implements Handle<Accounts> {
     @Override
     public void deleteIt(String fileName, Optional<?> idOptional) {
         Long id = Long.parseLong(idOptional.get().toString());
-        List<Accounts> accountList = read(fileName);
+        List<Account> accountList = read(fileName);
         boolean accountFound = false;
-        for (Iterator<Accounts> iterator = accountList.iterator(); iterator.hasNext();) {
-            Accounts account = iterator.next();
+        for (Iterator<Account> iterator = accountList.iterator(); iterator.hasNext();) {
+            Account account = iterator.next();
             if (account.getId().equals(id)) {
                 iterator.remove();
                 accountFound = true;

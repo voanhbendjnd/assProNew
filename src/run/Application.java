@@ -6,6 +6,7 @@
 package run;
 
 import display.Menu;
+import utils.Initialize;
 import utils.Intro;
 
 /**
@@ -14,9 +15,8 @@ import utils.Intro;
  */
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-        // new Intro().IntroWelCome();
-        // new Intro().IntroTo();
-        // new Intro().IntroGROUP3();
+        Intro.MovieOpening();
+        new Initialize().init();
         new Menu().getMenuNotLogin();
 
     }

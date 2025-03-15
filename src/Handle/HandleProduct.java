@@ -12,13 +12,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import domain.entity.Products;
+import domain.entity.Product;
 import utils.constant.TargetEnum;
 
-public class HandleProduct implements Handle<Products> {
+public class HandleProduct implements Handle<Product> {
     @Override
-    public List<Products> read(String fileProducts) {
-        List<Products> productsList = new ArrayList<>();
+    public List<Product> read(String fileProducts) {
+        List<Product> productsList = new ArrayList<>();
         try {
             File myFile = new File(fileProducts);
             Scanner sc = new Scanner(myFile);
@@ -33,7 +33,7 @@ public class HandleProduct implements Handle<Products> {
                 String description = products[5];
                 Long stock = Long.parseLong(products[6]);
                 String date = products[7];
-                productsList.add(new Products(codePhone, name, brand, target, price, description, stock, date));
+                productsList.add(new Product(codePhone, name, brand, target, price, description, stock, date));
 
             }
             sc.close();
@@ -45,9 +45,9 @@ public class HandleProduct implements Handle<Products> {
     }
 
     @Override
-    public void writeFile(String fileName, List<Products> product) {
+    public void writeFile(String fileName, List<Product> product) {
         try (FileWriter fw = new FileWriter(fileName)) {
-            for (Products x : product) {
+            for (Product x : product) {
                 fw.write(x.toStringFormatted() + "\n");
             }
 
@@ -57,8 +57,8 @@ public class HandleProduct implements Handle<Products> {
     }
 
     @Override
-    public void addNew(String fileName, Products product) {
-        List<Products> proList = read("products.txt");
+    public void addNew(String fileName, Product product) {
+        List<Product> proList = read("products.txt");
         proList.add(product);
         writeFile(fileName, proList);
     }
@@ -66,10 +66,10 @@ public class HandleProduct implements Handle<Products> {
     @Override
     public void deleteIt(String fileName, Optional<?> codeOptional) {
         Long code = Long.parseLong(codeOptional.get().toString());
-        List<Products> proList = read(fileName);
+        List<Product> proList = read(fileName);
         boolean productFound = false;
-        for (Iterator<Products> iterator = proList.iterator(); iterator.hasNext();) {
-            Products product = iterator.next();
+        for (Iterator<Product> iterator = proList.iterator(); iterator.hasNext();) {
+            Product product = iterator.next();
             if (product.getCode().equals(code)) {
                 iterator.remove();
                 productFound = true;

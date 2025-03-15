@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package domain.entity;
 
@@ -15,7 +10,7 @@ import utils.constant.RoleEnum;
  * @author Vo Anh Ben - CE190709
  */
 
-public class Accounts {
+public class Account {
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
     public static final String RED = "\u001B[31m"; // Màu đỏ
     public static final String GREEN = "\u001B[32m"; // Màu xanh lá
@@ -29,10 +24,10 @@ public class Accounts {
     private String email;
     private RoleEnum role;
 
-    public Accounts() {
+    public Account() {
     }
 
-    public Accounts(Long id, String username, String password, String email, RoleEnum role) {
+    public Account(Long id, String username, String password, String email, RoleEnum role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -64,7 +59,7 @@ public class Accounts {
         this.email = email;
     }
 
-    public Accounts(String username, String password) {
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -98,7 +93,7 @@ public class Accounts {
                 YELLOW, this.role, RESET);
     }
 
-    public static void printTable(List<Accounts> accountList) {
+    public static void printTable(List<Account> accountList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);
         sb.append(
@@ -107,7 +102,7 @@ public class Accounts {
                 "| ID    | Name                       | Email                      | Role                       |\n");
         sb.append(
                 "+-------+----------------------------+----------------------------+----------------------------+\n");
-        for (Accounts order : accountList) {
+        for (Account order : accountList) {
             sb.append(order.toString()).append("\n");
             sb.append(
                     CYAN + "+-------+----------------------------+----------------------------+----------------------------+\n"

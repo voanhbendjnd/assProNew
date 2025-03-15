@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import domain.entity.Cart;
-import domain.entity.Products;
+import domain.entity.Product;
 import handle.HandleCart;
 import handle.HandleProduct;
 import setupFile.AllFile;
@@ -35,8 +35,8 @@ public class CartProduct {
         TargetEnum target = TargetEnum.GAMING;
         Long price = null, code = null, stock = null;
 
-        List<Products> proList = new HandleProduct().read(new AllFile().fileProductTxt);
-        for (Products x : proList) {
+        List<Product> proList = new HandleProduct().read(AllFile.fileProductTxt);
+        for (Product x : proList) {
             if (x.getCode().equals(idProduct)) {
                 brand = x.getBrand();
                 target = x.getTarget();
@@ -71,15 +71,15 @@ public class CartProduct {
                 try {
                     // Kiểm tra và cập nhật giỏ hàng
                     HandleCart cartHandler = new HandleCart(); // tạo đối tượng
-                    List<Cart> cartList = cartHandler.read(new AllFile().fileCartTxt); // lất dữ liệu
+                    List<Cart> cartList = cartHandler.read(AllFile.fileCartTxt); // lất dữ liệu
                     Long qty = 1L; // khởi tạo cho qty = 1
 
                     if (cartList != null) { // không có sản phẩm nào
                         for (Cart cart : cartList) {
                             if (cart.getProductId().equals(idProduct)) { // giống sản phẩm
                                 qty = cart.getQty() + 1; // thì lấy cái qty có trong db + 1
-                                cartHandler.deleteIt(new AllFile().fileCartTxt, Optional.of(cart.getId())); // Xóa bản
-                                                                                                            // ghi cũ
+                                cartHandler.deleteIt(AllFile.fileCartTxt, Optional.of(cart.getId())); // Xóa bản
+                                                                                                      // ghi cũ
                                 break;
                             }
                         }
@@ -89,18 +89,18 @@ public class CartProduct {
                     cartId = cartList == null || cartList.isEmpty() ? 1L // nếu là lần đầu thêm vô cart cho id = 1;
                             : cartList.get(cartList.size() - 1).getId() + 1; // lấy id của cart cuói cùng + 1
                     Cart newCart = new Cart(cartId, userId, name, price, qty, price * qty, idProduct); // lưu
-                    cartHandler.addNew(new AllFile().fileCartTxt, newCart);
+                    cartHandler.addNew(AllFile.fileCartTxt, newCart);
 
                     // Giảm stock và cập nhật sản phẩm
                     Long currentStock = stock - 1L;
-                    Products updatedProduct = new Products(code, name, brand, target, price, desc, currentStock, date); // tạo
-                                                                                                                        // mới
-                                                                                                                        // luôn
-                                                                                                                        // cho
-                                                                                                                        // chất
-                    reader.deleteIt(new AllFile().fileProductTxt, Optional.of(code)); // xóa cái cũ
+                    Product updatedProduct = new Product(code, name, brand, target, price, desc, currentStock, date); // tạo
+                                                                                                                      // mới
+                                                                                                                      // luôn
+                                                                                                                      // cho
+                                                                                                                      // chất
+                    reader.deleteIt(AllFile.fileProductTxt, Optional.of(code)); // xóa cái cũ
                     if (currentStock > 0) {
-                        reader.addNew(new AllFile().fileProductTxt, updatedProduct); // thêm cái mới vô db
+                        reader.addNew(AllFile.fileProductTxt, updatedProduct); // thêm cái mới vô db
                     }
 
                     System.out.println(BOLD + BLUE + " Order placed successfully!" + RESET);

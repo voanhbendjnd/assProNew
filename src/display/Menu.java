@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package display;
 
 import java.util.Scanner;
@@ -13,7 +9,6 @@ import utils.function.CartProduct;
 import utils.function.DeleteProduct;
 import utils.function.FindProduct;
 import utils.function.OpenCart;
-import utils.function.ViewAdmin;
 import utils.function.ViewOrder;
 
 /**
@@ -70,7 +65,7 @@ public class Menu {
                     break;
                 } else if (q == 0) {
                     System.out.println(RED + " Exiting... Goodbye!" + RESET);
-                    new Intro().OuttroWelCome();
+                    Intro.MovieEnding();
                     break;
                 } else {
                     System.out.println(RED + " Please enter a valid option (0 - 5)!" + RESET);
@@ -96,8 +91,7 @@ public class Menu {
             System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Delete Products              ║");
             System.out.println(CYAN + "║ " + GREEN + "4." + RESET + " Fetch All Products           ║");
             System.out.println(CYAN + "║ " + GREEN + "5." + RESET + " View Order Customer          ║");
-            System.out.println(CYAN + "║ " + GREEN + "6." + RESET + " Manager Account              ║");
-            System.out.println(CYAN + "║ " + RED + "7." + RESET + " Logout                       ║");
+            System.out.println(CYAN + "║ " + RED + "6." + RESET + " Logout                       ║");
             System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                         ║");
             System.out.println(CYAN + "╚════════════════════════════════════╝" + RESET);
             System.out.print(BOLD + YELLOW + " Select option: " + RESET);
@@ -121,14 +115,11 @@ public class Menu {
                     System.out.println(YELLOW + " Viewing all customer orders..." + RESET);
                     new ViewOrder().viewOrderFromAdmin();
                 } else if (q == 6) {
-                    System.out.println(BOLD + BLUE + " Manager Account..." + RESET);
-                    new ViewAdmin().getMenuManagerAccount();
-                } else if (q == 7) {
                     System.out.println(RED + " Logging out..." + RESET);
                     break;
                 } else if (q == 0) {
                     System.out.println(RED + " Exiting... Goodbye!" + RESET);
-                    new Intro().OuttroWelCome();
+                    Intro.MovieEnding();
                     break;
                 } else {
                     System.out.println(RED + " Please enter a valid option (0 - 6)!" + RESET);
@@ -169,7 +160,8 @@ public class Menu {
                     app.mainMethod();
                 } else if (q == 0) {
                     System.out.println(RED + " Exiting... Goodbye!" + RESET);
-                    new Intro().OuttroWelCome();
+                    Intro.MovieEnding();
+
                     break;
                 } else {
                     System.out.println(RED + " Please enter a valid option!" + RESET);

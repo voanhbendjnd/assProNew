@@ -28,10 +28,10 @@ public class ViewOrder {
             }
         }
         if (check) {
-            new HandleOrder().deleteIt(new AllFile().fileOrderTxt, Optional.of(Long.parseLong(id)));
+            new HandleOrder().deleteIt(AllFile.fileOrderTxt, Optional.of(Long.parseLong(id)));
             for (OrderUser x : orderUserList) {
                 if (x.getId().equals(orderId)) {
-                    new HandleOrderUser().addNew(new AllFile().fileOrderUserTxt,
+                    new HandleOrderUser().addNew(AllFile.fileOrderUserTxt,
                             new OrderUser(x.getId(),
                                     x.getNameProduct(),
                                     x.getName(),
@@ -40,7 +40,7 @@ public class ViewOrder {
                                     x.getUserId(),
                                     x.getPrice(),
                                     status));
-                    new HandleOrderUser().deleteIt(new AllFile().fileOrderUserTxt, Optional.of(orderId));
+                    new HandleOrderUser().deleteIt(AllFile.fileOrderUserTxt, Optional.of(orderId));
                     break;
                 }
             }
@@ -61,10 +61,10 @@ public class ViewOrder {
 
     public void viewOrderFromAdmin() {
         System.out.println(BOLD + GREEN + "---List order from user---" + RESET);
-        List<Orders> orderList = new HandleOrder().read(new AllFile().fileOrderTxt);
+        List<Orders> orderList = new HandleOrder().read(AllFile.fileOrderTxt);
         Orders.printTableOrderForAdmin(orderList);
         // order by user
-        List<OrderUser> orderUserList = new HandleOrderUser().read(new AllFile().fileOrderUserTxt);
+        List<OrderUser> orderUserList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
         while (true) {
             System.out.print(BOLD + BLUE + ">>>Order Confirmation with (y/n): " + RESET);
             String c = sc.nextLine();
@@ -97,7 +97,7 @@ public class ViewOrder {
 
     public void viewOrderFromUser(Long id) {
         System.out.println(BOLD + GREEN + "---List order---" + RESET);
-        List<OrderUser> orderList = new HandleOrderUser().read(new AllFile().fileOrderUserTxt);
+        List<OrderUser> orderList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
         List<OrderUser> orderFind = new ArrayList<>();
         for (OrderUser x : orderList) {
             if (x.getUserId().equals(id)) {

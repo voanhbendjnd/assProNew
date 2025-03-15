@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import domain.entity.Products;
+import domain.entity.Product;
 import handle.HandleProduct;
 import setupFile.AllFile;
 
@@ -29,7 +29,7 @@ public class DeleteProduct {
         String red = "\u001B[31m";
         String blue = "\u001B[34m";
 
-        List<Products> proList = new HandleProduct().read(new AllFile().fileProductTxt);
+        List<Product> proList = new HandleProduct().read(AllFile.fileProductTxt);
 
         while (true) {
             String input;
@@ -49,9 +49,9 @@ public class DeleteProduct {
             // sc.nextLine();
             boolean found = false;
 
-            for (Products x : proList) {
+            for (Product x : proList) {
                 if (x.getCode().equals(id)) {
-                    new HandleProduct().deleteIt(new AllFile().fileProductTxt, Optional.of(id));
+                    new HandleProduct().deleteIt(AllFile.fileProductTxt, Optional.of(id));
                     System.out.println(blue + BOLD + " Delete product success!" + reset);
                     found = true;
                     break;

@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import domain.entity.Accounts;
+import domain.entity.Account;
 import handle.HandleAccount;
 import setupFile.AllFile;
 import utils.constant.RoleEnum;
+import utils.error.ValidationUser;
 
 public class CreateAccount {
-    // Mã ANSI để đổi màu chữ
+
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -28,8 +29,8 @@ public class CreateAccount {
         boolean check = true;
         Menu menu = new Menu();
         HandleAccount reader = new HandleAccount();
-        List<Accounts> accountList = reader.read(new AllFile().fileAccountTxt);
-        List<Accounts> auth = new ArrayList<>();
+        List<Account> accountList = reader.read(AllFile.fileAccountTxt);
+        List<Account> auth = new ArrayList<>();
         Long code = 0L;
 
         while (check) {
@@ -54,11 +55,11 @@ public class CreateAccount {
                 String user = sc.nextLine();
                 System.out.print(YELLOW + ">>>>> Please enter password: " + RESET);
                 String password = sc.nextLine();
-
                 boolean checkLogin = false;
                 Long userId = null;
-                for (Accounts acc : accountList) {
-                    if (acc.getUsername().equals(user) && acc.getPassword().equals(password)) {
+                for (Account acc : accountList) {
+                    if (acc.getEmail().equals(user) && acc.getPassword().equals(password)) {
+
                         checkLogin = true;
                         userId = acc.getId();
                         System.out.println(GREEN + " Login success!" + RESET);
@@ -71,8 +72,9 @@ public class CreateAccount {
                         break;
                     }
                 }
-                for (Accounts acc : auth) {
-                    if (acc.getUsername().equals(user) && acc.getPassword().equals(password)) {
+
+                for (Account acc : auth) {
+                    if (acc.getEmail().equals(user) && acc.getPassword().equals(password)) {
                         checkLogin = true;
                         userId = acc.getId();
                         System.out.println(GREEN + " Login success!" + RESET);
@@ -85,8 +87,8 @@ public class CreateAccount {
                         break;
                     }
                 }
-                for (Accounts x : auth) {
-                    if (user.equals(x.getUsername()) && password.equals(x.getPassword())) {
+                for (Account x : auth) {
+                    if (user.equals(x.getEmail()) && password.equals(x.getPassword())) {
                         checkLogin = true;
                     }
                 }
@@ -103,36 +105,28 @@ public class CreateAccount {
                 String user = sc.nextLine();
                 System.out.print(YELLOW + ">>>>> Please enter password for new account: " + RESET);
                 String password = sc.nextLine();
-
-                boolean uniqueEmail = true;
-                for (Accounts acc : accountList) {
-                    if (acc.getEmail().equals(email) || acc.getUsername().equals(user)) {
-                        uniqueEmail = false;
-                        break;
-                    }
-                }
-
-                if (uniqueEmail) {
+                if (new ValidationUser().validUser(user, email, password).equals("validation")) {
+                    // boolean uniqueEmail = true;
                     if (accountList.isEmpty()) {
                         code = 0L;
                     } else {
-                        for (Accounts x : accountList) {
+                        for (Account x : accountList) {
                             if (x.getId() >= code) {
                                 code = x.getId();
                             }
                         }
                     }
-
                     HandleAccount ar = new HandleAccount();
                     RoleEnum role = RoleEnum.USER;
                     // Long role = new Utils().filterRole(user, password) ? 1L : 2L;
-                    auth.add(new Accounts(code + 1, user, password, email, role));
-                    ar.addNew(new AllFile().fileAccountTxt, new Accounts(code + 1, user, password, email, role));
+                    auth.add(new Account(code + 1, user, password, email, role));
+                    ar.addNew(AllFile.fileAccountTxt, new Account(code + 1, user, password, email, role));
                     // auth.add(new Accounts(code + 1, user, password, email, role));
                     System.out.println(GREEN + ">>>  Account created successfully! <<<" + RESET);
                     System.out.println(BLUE + "-----------------------------" + RESET);
+
                 } else {
-                    System.out.println(RED + " Email or Username already exists!" + RESET);
+                    System.out.println(RED + new ValidationUser().validUser(user, email, password) + RESET);
                     System.out.println(RED + "---------------------------------" + RESET);
                 }
 

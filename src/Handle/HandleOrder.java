@@ -55,7 +55,7 @@ public class HandleOrder implements Handle<Orders> {
 
     @Override
     public void addNew(String fileName, Orders order) {
-        List<Orders> orderList = read(new AllFile().fileOrderTxt);
+        List<Orders> orderList = read(AllFile.fileOrderTxt);
         orderList.add(order);
         writeFile(fileName, orderList);
     }

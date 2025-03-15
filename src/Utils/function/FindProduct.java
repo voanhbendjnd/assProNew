@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import domain.entity.Products;
+import domain.entity.Product;
 import handle.HandleProduct;
 import setupFile.AllFile;
 
@@ -36,11 +36,11 @@ public class FindProduct {
         System.out.println(BOLD + CYAN + "             PRODUCT LIST               " + RESET);
         System.out.println(BOLD + CYAN + "════════════════════════════════════════" + RESET);
 
-        List<Products> proList = reader.read(new AllFile().fileProductTxt);
+        List<Product> proList = reader.read(AllFile.fileProductTxt);
 
         // Hiển thị danh sách sản phẩm với màu xanh
         System.out.println(GREEN);
-        Products.printTable(proList);
+        Product.printTable(proList);
         System.out.println(RESET);
     }
 
@@ -77,8 +77,8 @@ public class FindProduct {
         System.out.println("└──────────────────────────────────────────────┘");
 
         System.out.print(BOLD + CYAN + " Enter values here: " + RESET);
-        List<Products> proList = new HandleProduct().read(new AllFile().fileProductTxt);
-        List<Products> proFind = new ArrayList<>();
+        List<Product> proList = new HandleProduct().read(AllFile.fileProductTxt);
+        List<Product> proFind = new ArrayList<>();
 
         String option = sc.nextLine();
 
@@ -228,7 +228,7 @@ public class FindProduct {
         if (!checkPrice) {
 
             if (checkFactory && !checkTarget) {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (op.contains(x.getBrand().toLowerCase())) {
                         proFind.add(x);
                     }
@@ -236,7 +236,7 @@ public class FindProduct {
             }
 
             if (checkTarget && !checkFactory) {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (op.contains(x.getTarget().toString())) {
                         proFind.add(x);
                     }
@@ -244,7 +244,7 @@ public class FindProduct {
             }
 
             if (checkFactory && checkTarget) {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (op.contains(x.getBrand().toLowerCase())
                             && op.contains(x.getTarget().toString())) {
                         proFind.add(x);
@@ -254,10 +254,10 @@ public class FindProduct {
 
         } else {
             if (checkFactory && checkTarget) {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
                         for (String y : op) {
-                            if (x.getTarget().equals(y)) {
+                            if (x.getTarget().toString().equals(y)) {
                                 for (String z : op) {
                                     if (x.getBrand().equalsIgnoreCase(z)) {
                                         if (!proFind.contains(x)) {
@@ -270,7 +270,7 @@ public class FindProduct {
                     }
                 }
             } else if (checkFactory && !checkTarget) {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
                         if (op.contains(x.getBrand().toLowerCase())) {
                             proFind.add(x);
@@ -278,7 +278,7 @@ public class FindProduct {
                     }
                 }
             } else if (!checkFactory && checkTarget) {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
                         if (op.contains(x.getTarget().toString())) {
                             proFind.add(x);
@@ -286,7 +286,7 @@ public class FindProduct {
                     }
                 }
             } else {
-                for (Products x : proList) {
+                for (Product x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
                         proFind.add(x);
                     }
@@ -300,10 +300,10 @@ public class FindProduct {
                 proFind.addAll(proList);
             }
 
-            Collections.sort(proFind, new Comparator<Products>() {
+            Collections.sort(proFind, new Comparator<Product>() {
 
                 @Override
-                public int compare(Products o1, Products o2) {
+                public int compare(Product o1, Product o2) {
                     if (o1.getPrice() > o2.getPrice()) {
                         return 1;
                     } else {
@@ -318,10 +318,10 @@ public class FindProduct {
                 proFind.addAll(proList);
             }
             // proFind.addAll(proList);
-            Collections.sort(proFind, new Comparator<Products>() {
+            Collections.sort(proFind, new Comparator<Product>() {
 
                 @Override
-                public int compare(Products o1, Products o2) {
+                public int compare(Product o1, Product o2) {
                     if (o1.getPrice() < o2.getPrice()) {
                         return 1;
                     } else {
@@ -334,13 +334,13 @@ public class FindProduct {
         }
         if (checkSortAs && checkSortDes) {
             proFind.addAll(proList);
-            Products.printTable(proFind);
+            Product.printTable(proFind);
             System.out.println(BOLD + RED + " ERROR: " + RESET
                     + "Cannot select both ascending and descending sorting at the same time.\n");
             checkS = false;
         }
         if (checkS) {
-            Products.printTable(proFind);
+            Product.printTable(proFind);
         }
 
     }
