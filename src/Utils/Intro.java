@@ -4,6 +4,8 @@ package utils;
  *
  * @author Vo Anh Ben - CE190709
  */
+
+// class này để mở đầu và kết thúc cho giới thiệu dự án
 public class Intro {
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
@@ -41,11 +43,6 @@ public class Intro {
         for (String line : endingText) {
             System.out.println(line);
             Thread.sleep(1000);
-        }
-
-        for (int i = 10; i >= 0; i--) {
-            System.out.print("\r" + "*".repeat(i) + " ");
-            Thread.sleep(500);
         }
 
         System.out.println(BOLD + "\nThe End.");

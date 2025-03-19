@@ -17,7 +17,6 @@ import utils.error.Validation;
  * @author Vo Anh Ben - CE190709
  */
 
-// Nhân
 public class AddProduct {
     private static Scanner sc = new Scanner(System.in);
     // Mã ANSI để đổi màu

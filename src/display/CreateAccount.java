@@ -35,7 +35,7 @@ public class CreateAccount {
 
         while (check) {
             System.out.println(CYAN + "════════════════════════════════════════" + RESET);
-            System.out.println(CYAN + "       " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN);
+            System.out.println(CYAN + "       " + BOLD + "            WELCOME TO GROUP3 MOBILE" + RESET + CYAN);
             System.out.println(CYAN + "════════════════════════════════════════" + RESET);
             System.out.print(YELLOW + ">>>>> Login or Sign up (1/2): " + RESET);
 

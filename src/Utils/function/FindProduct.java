@@ -33,7 +33,7 @@ public class FindProduct {
 
         // Hiển thị tiêu đề với màu sắc nổi bật
         System.out.println(BOLD + CYAN + "════════════════════════════════════════" + RESET);
-        System.out.println(BOLD + CYAN + "             PRODUCT LIST               " + RESET);
+        System.out.println(BOLD + CYAN + "                           PRODUCT LIST               " + RESET);
         System.out.println(BOLD + CYAN + "════════════════════════════════════════" + RESET);
 
         List<Product> proList = reader.read(AllFile.fileProductTxt);
@@ -46,7 +46,7 @@ public class FindProduct {
 
     public void findProducts() {
         System.out.println(BOLD + CYAN + "══════════════════════════════════════════════" + RESET);
-        System.out.println(BOLD + CYAN + "         SELECT THE PRODUCT TO SEARCH         " + RESET);
+        System.out.println(BOLD + CYAN + "                       SELECT THE PRODUCT TO SEARCH         " + RESET);
         System.out.println(BOLD + CYAN + "══════════════════════════════════════════════" + RESET);
 
         System.out.println(BOLD + YELLOW + " Factory " + RESET);

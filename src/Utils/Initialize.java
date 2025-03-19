@@ -1,5 +1,9 @@
 package utils;
 
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 import java.util.List;
 
 import domain.entity.Account;
@@ -7,6 +11,7 @@ import handle.HandleAccount;
 import setupFile.AllFile;
 import utils.constant.RoleEnum;
 
+// class nay mục đích là để tạo ra super admin, vì không thể tạo người dùng với vai trò admin được
 public class Initialize {
     public void init() {
         Long code = 0L;

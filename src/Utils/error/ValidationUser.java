@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 package utils.error;
 
 import java.util.ArrayList;
@@ -8,6 +12,8 @@ import domain.entity.Account;
 import handle.HandleAccount;
 import setupFile.AllFile;
 
+// check xem người dùng nhập thông tin vào có đúng không, nếu bỏ trống hay không đúng định dạng thì ném ra lỗi
+// đồng thời check luôn cái email có tồn tại trong data chưa
 public class ValidationUser {
     public String validUser(String name, String email, String password) {
         List<String> sb = new ArrayList<>();

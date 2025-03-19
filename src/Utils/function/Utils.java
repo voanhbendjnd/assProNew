@@ -15,6 +15,8 @@ public class Utils {
     // return false;
     // }
 
+
+    // định dạng về dạng chuỗi 000.000.000 vnd
     public String formatPrice(Long price) {
         String s = price.toString();
         StringBuilder sb = new StringBuilder();

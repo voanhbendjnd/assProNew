@@ -17,6 +17,7 @@ import setupFile.AllFile;
  */
 
 public class ViewOrder {
+    // hàm này để thay đổi trạng thái của đơn hàng
     public static void changeStatus(List<Orders> orderList, List<OrderUser> orderUserList, String id, int status) {
         boolean check = false;
         Long orderId = null;
@@ -28,7 +29,9 @@ public class ViewOrder {
             }
         }
         if (check) {
+            // xóa đơn hàng order vì đã đánh dấu
             new HandleOrder().deleteIt(AllFile.fileOrderTxt, Optional.of(Long.parseLong(id)));
+            // thêm đơn mới lấy dữ liệu từ đơn cũ đổi status
             for (OrderUser x : orderUserList) {
                 if (x.getId().equals(orderId)) {
                     new HandleOrderUser().addNew(AllFile.fileOrderUserTxt,
@@ -40,6 +43,7 @@ public class ViewOrder {
                                     x.getUserId(),
                                     x.getPrice(),
                                     status));
+                    // xóa cái đơn hàng cũ
                     new HandleOrderUser().deleteIt(AllFile.fileOrderUserTxt, Optional.of(orderId));
                     break;
                 }
@@ -71,7 +75,6 @@ public class ViewOrder {
             if (c.equals("y")) {
                 System.out.print(BOLD + YELLOW + "Please enter the order id you want to confirm: " + RESET);
                 String id = sc.nextLine();
-                // System.out.println(BOLD + YELLOW + " Target " + RESET);
                 System.out.println(GREEN + "┌───────────────────┐" + RESET);
                 System.out.println(GREEN + "│ 1. Confirmed      │" + RESET);
                 System.out.println(GREEN + "│ 2. Not Confirmed  │" + RESET);

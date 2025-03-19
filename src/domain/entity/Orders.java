@@ -119,12 +119,16 @@ public class Orders extends InfoOrder {
     // this.address = address;
     // }
 
+    
+    // định dạng format để đọc dữ liệu trong file
     public String toStringFormatted() {
         return super.getId() + "?" + this.user_id + "?" + this.product_id + "?" + super.getName() + "?"
                 + super.getAddress() + "?"
                 + super.getPhone() + "?" + super.getPrice() + "?" + this.order_id;
     }
 
+
+    // in ra và điều chỉnh chữ căn lề và khoảng cách dùng để gọi bên các class handle
     @Override
     public String toString() {
         return String.format("| %s%s%-5d%s | %s%-7d%s | %s%-10d%s | %s%-20s%s | %s%-60s%s | %s%-15s%s | %s%-20s%s |",
@@ -136,7 +140,7 @@ public class Orders extends InfoOrder {
                 CYAN, super.getPhone(), RESET,
                 BOLD, new Utils().formatPrice(super.getPrice()), RESET);
     }
-
+    // in ra bảng
     public static void printTableOrderForAdmin(List<Orders> ordersList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);

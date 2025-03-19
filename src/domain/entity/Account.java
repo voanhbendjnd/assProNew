@@ -80,10 +80,13 @@ public class Account {
         this.password = password;
     }
 
+    // định dạng format để đọc dữ liệu trong file
     public String toStringFormatted() {
         return this.id + "?" + this.username + "?" + this.password + "?" + this.email + "?" + this.role;
     }
 
+    // in ra và điều chỉnh chữ căn lề và khoảng cách dùng để gọi bên các class
+    // handle
     @Override
     public String toString() {
         return String.format("| %s%s%-5d%s | %s%-26s%s | %s%-26s%s | %s%-26d%s |",
@@ -93,6 +96,7 @@ public class Account {
                 YELLOW, this.role, RESET);
     }
 
+    // in ra bảng
     public static void printTable(List<Account> accountList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);

@@ -30,15 +30,22 @@ public class Menu {
 
         while (true) {
             System.out.println(CYAN + "╔════════════════════════════════════╗" + RESET);
-            System.out.println(CYAN + "║    " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN + "        ║" + RESET);
+            System.out.println(CYAN + "║    " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN
+                    + "                                  ║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════════╣" + RESET);
-            System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                ║");
-            System.out.println(CYAN + "║ " + GREEN + "2." + RESET + " Find All Products            ║");
-            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Add To Cart                  ║");
-            System.out.println(CYAN + "║ " + GREEN + "4." + RESET + " View Order                   ║");
-            System.out.println(CYAN + "║ " + GREEN + "5." + RESET + " View Cart                    ║");
-            System.out.println(CYAN + "║ " + GREEN + "6." + RESET + " Logout                       ║");
-            System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                         ║");
+            System.out
+                    .println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                                  ║");
+            System.out
+                    .println(CYAN + "║ " + GREEN + "2." + RESET + " Find All Products                              ║");
+            System.out
+                    .println(CYAN + "║ " + GREEN + "3." + RESET + " Add To Cart                                    ║");
+            System.out
+                    .println(CYAN + "║ " + GREEN + "4." + RESET + " View Order                                     ║");
+            System.out
+                    .println(CYAN + "║ " + GREEN + "5." + RESET + " View Cart                                      ║");
+            System.out
+                    .println(CYAN + "║ " + GREEN + "6." + RESET + " Logout                                         ║");
+            System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                                           ║");
             System.out.println(CYAN + "╚════════════════════════════════════╝" + RESET);
             System.out.print(BOLD + YELLOW + " Select option: " + RESET);
 
@@ -84,15 +91,16 @@ public class Menu {
         while (true) {
             System.out.println(CYAN + "╔════════════════════════════════════╗" + RESET);
             System.out.println(
-                    CYAN + "║   " + BOLD + "WELCOME TO GROUP3 MOBILE (ADMIN) " + RESET + CYAN + "║" + RESET);
+                    CYAN + "║   " + BOLD + "    WELCOME TO GROUP3 MOBILE (ADMIN) " + RESET + CYAN
+                            + "                      ║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════════╣" + RESET);
-            System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                ║");
-            System.out.println(CYAN + "║ " + GREEN + "2." + RESET + " Add Products                 ║");
-            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Delete Products              ║");
-            System.out.println(CYAN + "║ " + GREEN + "4." + RESET + " Fetch All Products           ║");
-            System.out.println(CYAN + "║ " + GREEN + "5." + RESET + " View Order Customer          ║");
-            System.out.println(CYAN + "║ " + RED + "6." + RESET + " Logout                       ║");
-            System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                         ║");
+            System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                               ║");
+            System.out.println(CYAN + "║ " + GREEN + "2." + RESET + " Add Products                                ║");
+            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Delete Products                             ║");
+            System.out.println(CYAN + "║ " + GREEN + "4." + RESET + " Fetch All Products                          ║");
+            System.out.println(CYAN + "║ " + GREEN + "5." + RESET + " View Order Customer                         ║");
+            System.out.println(CYAN + "║ " + RED + "6." + RESET + " Logout                                      ║");
+            System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                                        ║");
             System.out.println(CYAN + "╚════════════════════════════════════╝" + RESET);
             System.out.print(BOLD + YELLOW + " Select option: " + RESET);
 
@@ -136,12 +144,13 @@ public class Menu {
 
         while (true) {
             System.out.println(CYAN + "╔════════════════════════════════╗" + RESET);
-            System.out.println(CYAN + "║  " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN + "      ║" + RESET);
+            System.out.println(CYAN + "║  " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN
+                    + "                             ║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════╣" + RESET);
-            System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products            ║");
-            System.out.println(CYAN + "║ " + GREEN + "2." + RESET + " Fetch All Products       ║");
-            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Login or Sign Up         ║");
-            System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                     ║");
+            System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                           ║");
+            System.out.println(CYAN + "║ " + GREEN + "2." + RESET + " Fetch All Products                      ║");
+            System.out.println(CYAN + "║ " + GREEN + "3." + RESET + " Login or Sign Up                        ║");
+            System.out.println(CYAN + "║ " + RED + "0." + RESET + " Exit                                    ║");
             System.out.println(CYAN + "╚════════════════════════════════╝" + RESET);
             System.out.print(BOLD + YELLOW + " Select option: " + RESET);
 

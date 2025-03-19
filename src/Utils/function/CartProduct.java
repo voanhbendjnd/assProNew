@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 package utils.function;
 
 import java.util.List;

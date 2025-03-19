@@ -27,6 +27,7 @@ public class OpenCart {
     public static final String BOLD = "\033[1m";
     private static Scanner sc = new Scanner(System.in);
 
+    // cho người dùng nhập thông tin
     public static void inforAndHandleOrder(Long userId, Long cartIdCurrent, String name, Long price) {
         List<OrderUser> newOrder = new ArrayList<>();
 
@@ -125,11 +126,14 @@ public class OpenCart {
                         char qqq = sc.nextLine().charAt(0);
                         if (qqq == 'y') {
                             // xử lý quantity trong giỏ
+                            // nếu mua hết thì xóa luôn cái sản phẩm đó trong giỏ
                             if (qty - quantity <= 0) {
                                 new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
                                 inforAndHandleOrder(userId, cartIdCurrent, name, price * quantity);
 
                             } else {
+                                // chỉ cần giảm số lượng
+                                // xóa và thêm dữ liệu mới từ dữ liệu cũ cập nhật qty
                                 new HandleCart().addNew(AllFile.fileCartTxt, new Cart(cartIdCurrent, userId,
                                         name, price, qty - quantity, (qty - quantity) * price, productId));
                                 new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
