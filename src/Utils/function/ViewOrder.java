@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import domain.entity.OrderUser;
-import domain.entity.Orders;
+import domain.entity.OrderUserImpl;
+import domain.entity.OrderImpl;
 import handle.HandleOrder;
 import handle.HandleOrderUser;
 import setupFile.AllFile;
@@ -18,12 +18,28 @@ import setupFile.AllFile;
 
 public class ViewOrder {
     // hàm này để thay đổi trạng thái của đơn hàng
-    public static void changeStatus(List<Orders> orderList, List<OrderUser> orderUserList, String id, int status) {
+    public static void changeStatus(List<OrderImpl> orderList, List<OrderUserImpl> orderUserList, String id,
+            int status) {
         boolean check = false;
         Long orderId = null;
-        for (Orders x : orderList) {
+        Long stId = null;
+        Long stUserId = null;
+        Long stProductId = null;
+        String stName = "";
+        String stAddress = "";
+        String stPhone = "";
+        Long stPrice = null;
+
+        for (OrderImpl x : orderList) {
             if (x.getId().equals(Long.parseLong(id))) {
                 check = true;
+                stId = x.getId();
+                stUserId = x.getUser_id();
+                stProductId = x.getProduct_id();
+                stName = x.getName();
+                stAddress = x.getAddress();
+                stPhone = x.getPhone();
+                stPrice = x.getPrice();
                 orderId = x.getOrder_id();
                 break;
             }
@@ -31,11 +47,16 @@ public class ViewOrder {
         if (check) {
             // xóa đơn hàng order vì đã đánh dấu
             new HandleOrder().deleteIt(AllFile.fileOrderTxt, Optional.of(Long.parseLong(id)));
+            // status = 3 thì chưa tính cần xóa đơn hàng này
+            if (status == 3) {
+                new HandleOrder().addNew(AllFile.fileOrderTxt,
+                        new OrderImpl(stId, stUserId, stProductId, stName, stAddress, stPhone, stPrice, orderId));
+            }
             // thêm đơn mới lấy dữ liệu từ đơn cũ đổi status
-            for (OrderUser x : orderUserList) {
+            for (OrderUserImpl x : orderUserList) {
                 if (x.getId().equals(orderId)) {
                     new HandleOrderUser().addNew(AllFile.fileOrderUserTxt,
-                            new OrderUser(x.getId(),
+                            new OrderUserImpl(x.getId(),
                                     x.getNameProduct(),
                                     x.getName(),
                                     x.getAddress(),
@@ -65,22 +86,22 @@ public class ViewOrder {
 
     public void viewOrderFromAdmin() {
         System.out.println(BOLD + GREEN + "---List order from user---" + RESET);
-        List<Orders> orderList = new HandleOrder().read(AllFile.fileOrderTxt);
-        Orders.printTableOrderForAdmin(orderList);
+        List<OrderImpl> orderList = new HandleOrder().read(AllFile.fileOrderTxt);
+        OrderImpl.printTableOrderForAdmin(orderList);
         // order by user
-        List<OrderUser> orderUserList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
+        List<OrderUserImpl> orderUserList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
         while (true) {
-            System.out.print(BOLD + BLUE + ">>>Order Confirmation with (y/n): " + RESET);
+            System.out.print(BOLD + CYAN + ">>> Order Confirmation with (y/n): " + RESET);
             String c = sc.nextLine();
             if (c.equals("y")) {
-                System.out.print(BOLD + YELLOW + "Please enter the order id you want to confirm: " + RESET);
+                System.out.print(BOLD + YELLOW + " Please enter the order id you want to confirm: " + RESET);
                 String id = sc.nextLine();
                 System.out.println(GREEN + "┌───────────────────┐" + RESET);
                 System.out.println(GREEN + "│ 1. Confirmed      │" + RESET);
                 System.out.println(GREEN + "│ 2. Not Confirmed  │" + RESET);
                 System.out.println(GREEN + "│ 3. Undetermined   │" + RESET);
                 System.out.println(GREEN + "└───────────────────┘" + RESET);
-                System.out.print(BOLD + BLUE + "Please enter status for this order: " + RESET);
+                System.out.print(BOLD + BLUE + " Please enter status for this order: " + RESET);
                 String c2 = sc.nextLine();
                 if (c2.equals("1")) {
                     changeStatus(orderList, orderUserList, id, 1);
@@ -94,19 +115,19 @@ public class ViewOrder {
                 break;
             }
         }
-        System.out.println(BOLD + BLUE + "Exiting view order user..." + RESET);
+        System.out.println(BOLD + RED + " Exiting view order user..." + RESET);
 
     }
 
     public void viewOrderFromUser(Long id) {
         System.out.println(BOLD + GREEN + "---List order---" + RESET);
-        List<OrderUser> orderList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
-        List<OrderUser> orderFind = new ArrayList<>();
-        for (OrderUser x : orderList) {
+        List<OrderUserImpl> orderList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
+        List<OrderUserImpl> orderFind = new ArrayList<>();
+        for (OrderUserImpl x : orderList) {
             if (x.getUserId().equals(id)) {
                 orderFind.add(x);
             }
         }
-        OrderUser.printTableOrderForUser(orderFind);
+        OrderUserImpl.printTableOrderForUser(orderFind);
     }
 }

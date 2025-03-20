@@ -4,7 +4,7 @@
  */
 package handle;
 
-import domain.entity.Orders;
+import domain.entity.OrderImpl;
 import setupFile.AllFile;
 
 import java.io.File;
@@ -15,11 +15,12 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.Optional;
 
-public class HandleOrder implements Handle<Orders> {
+public class HandleOrder implements Handle<OrderImpl> {
     @Override
-    public List<Orders> read(String fileOrder) {
-        List<Orders> orderList = new ArrayList<>();
+    public List<OrderImpl> read(String fileOrder) {
+        List<OrderImpl> orderList = new ArrayList<>();
         try {
+            // cú pháp đọc file
             File myFile = new File(fileOrder);
             Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
@@ -33,21 +34,23 @@ public class HandleOrder implements Handle<Orders> {
                 String phone = orders[5];
                 Long price = Long.parseLong(orders[6]);
                 Long orderId = Long.parseLong(orders[7]);
-                orderList.add(new Orders(id, id_user, product_id, name, address, phone, price, orderId));
+                orderList.add(new OrderImpl(id, id_user, product_id, name, address, phone, price, orderId));
 
             }
             sc.close();
 
         } catch (Exception ex) {
+            // đọc không được sẽ quăng ra lỗi
             System.out.println("Error reading file: " + ex.getMessage());
         }
         return orderList;
     }
 
     @Override
-    public void writeFile(String fileName, List<Orders> orderList) {
+    // ghi file xuống hàng và lấy định dạng theo dấu ?
+    public void writeFile(String fileName, List<OrderImpl> orderList) {
         try (FileWriter fw = new FileWriter(fileName)) {
-            for (Orders x : orderList) {
+            for (OrderImpl x : orderList) {
                 fw.write(x.toStringFormatted() + "\n");
             }
 
@@ -57,30 +60,30 @@ public class HandleOrder implements Handle<Orders> {
     }
 
     @Override
-    public void addNew(String fileName, Orders order) {
-        List<Orders> orderList = read(AllFile.fileOrderTxt);
+    // thêm 1 đối tượng bằng cách đọc hết cái file xong thêm rồi ghi nó theo định
+    // dạng
+    public void addNew(String fileName, OrderImpl order) {
+        List<OrderImpl> orderList = read(AllFile.fileOrderTxt);
         orderList.add(order);
         writeFile(fileName, orderList);
     }
 
     @Override
+    // xóa sản phẩm bằng iterator
     public void deleteIt(String fileName, Optional<?> idOptional) {
         Long id = Long.parseLong(idOptional.get().toString());
-        List<Orders> orderList = read(fileName);
-        boolean productFound = false;
-        for (Iterator<Orders> iterator = orderList.iterator(); iterator.hasNext();) {
-            Orders order = iterator.next();
+        List<OrderImpl> orderList = read(fileName);
+        boolean orderFound = false;
+        for (Iterator<OrderImpl> iterator = orderList.iterator(); iterator.hasNext();) {
+            OrderImpl order = iterator.next();
             if (order.getId().equals(id)) {
                 iterator.remove();
-                productFound = true;
+                orderFound = true;
                 break;
             }
         }
-        if (productFound) {
+        if (orderFound) {
             writeFile(fileName, orderList);
-            // System.out.println("Product deleted successfully.");
-        } else {
-            // System.out.println("Product not found.");
         }
     }
 }

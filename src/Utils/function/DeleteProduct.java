@@ -1,4 +1,3 @@
-
 package utils.function;
 
 import java.util.List;
@@ -11,10 +10,11 @@ import setupFile.AllFile;
 
 /**
  *
- * @author Nguyễn Hữu Lập - CE190709
+ * @author Nguyễn Hữu Lập - CE190492
  */
 
 public class DeleteProduct {
+    // Mã màu ANSI dùng để hiển thị màu sắc trong console
     public static final String RESET = "\u001B[0m";
     public static final String GREEN = "\u001B[32m";
     public static final String RED = "\u001B[31m";
@@ -22,63 +22,67 @@ public class DeleteProduct {
     public static final String YELLOW = "\u001B[33m";
     public static final String CYAN = "\u001B[36m";
     public static final String BOLD = "\033[1m";
-    private Scanner sc = new Scanner(System.in);
+
+    private Scanner sc = new Scanner(System.in); // Đối tượng Scanner để nhập dữ liệu từ bàn phím
 
     public void deleteProduct() {
-        // Mã màu ANSI
-        String reset = "\u001B[0m";
+        // Các mã màu ANSI để hiển thị thông báo lỗi hoặc thành công
+        String RESET = "\u001B[0m";
         String red = "\u001B[31m";
-        String blue = "\u001B[34m";
 
+        // Đọc danh sách sản phẩm từ tệp
         List<Product> proList = new HandleProduct().read(AllFile.fileProductTxt);
 
         while (true) {
             String input;
             do {
-                System.out.print(BOLD + BLUE + "Please enter id product you want to delete: " + RESET);
-                input = sc.nextLine().trim();
+                System.out.print(BOLD + CYAN + " Please enter id product you want to delete: " + RESET);
+                input = sc.nextLine().trim(); // Nhập ID sản phẩm và loại bỏ khoảng trắng thừa
+
+                // Kiểm tra nếu người dùng để trống hoặc nhập không phải số
                 if (input.isEmpty()) {
-                    System.out.println(red + " Error: Product ID cannot be empty!" + reset);
+                    System.out.println(red + " Error: Product ID cannot be empty!" + RESET);
                 } else if (!input.matches("\\d+")) {
-                    System.out.println(red + " Error: Please enter a valid number!" + reset);
+                    System.out.println(red + " Error: Please enter a valid number!" + RESET);
                     input = "";
-
                 }
-            } while (input.isEmpty());
+            } while (input.isEmpty()); // Lặp lại nếu nhập không hợp lệ
 
-            Long id = Long.parseLong(input);
-            // sc.nextLine();
-            boolean found = false;
+            Long id = Long.parseLong(input); // Chuyển ID sản phẩm sang kiểu Long
+            boolean found = false; // Biến kiểm tra xem sản phẩm có tồn tại không
 
+            // Duyệt danh sách sản phẩm để tìm sản phẩm có ID cần xóa
             for (Product x : proList) {
                 if (x.getCode().equals(id)) {
-                    new HandleProduct().deleteIt(AllFile.fileProductTxt, Optional.of(id));
-                    System.out.println(blue + BOLD + " Delete product success!" + reset);
+                    new HandleProduct().deleteIt(AllFile.fileProductTxt, Optional.of(id)); // Gọi hàm xóa sản phẩm
+                    System.out.println(GREEN + BOLD + " Delete product success!" + RESET);
                     found = true;
-                    break;
+                    break; // Thoát vòng lặp sau khi xóa thành công
                 }
             }
 
+            // Nếu sản phẩm được tìm thấy và xóa thành công, kết thúc vòng lặp
             if (found) {
-                break; // Thoát nếu xóa thành công
+                break;
             } else {
-                System.out.println(red + " Product does not exist in cart!" + reset);
+                System.out.println(red + " Product does not exist in cart!" + RESET);
 
-                // Lặp lại cho đến khi nhập đúng "Y" hoặc "N"
+                // Yêu cầu người dùng chọn tiếp tục hay thoát
                 String choice;
                 while (true) {
                     System.out.print(BOLD + GREEN + "Would you like to try again? (Y/N): " + RESET);
-                    choice = sc.nextLine().trim().toUpperCase();
+                    choice = sc.nextLine().trim().toUpperCase(); // Chuyển đổi về chữ hoa để so sánh
 
+                    // Chỉ chấp nhận "Y" hoặc "N", nếu không, yêu cầu nhập lại
                     if (choice.equals("Y") || choice.equals("N")) {
-                        break; // Thoát vòng lặp nếu nhập đúng
+                        break;
                     } else {
-                        System.out.println(BOLD + red + " Error! Please select only (Y or N)" + reset);
+                        System.out.println(BOLD + RED + " Error! Please select only (Y or N)" + RESET);
                     }
                 }
 
+                // Nếu người dùng chọn "N", thoát khỏi vòng lặp chính
                 if (choice.equals("N")) {
-                    // System.out.println(" Exiting the program!");
                     break;
                 }
             }

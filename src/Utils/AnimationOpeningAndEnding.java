@@ -6,7 +6,7 @@ package utils;
  */
 
 // class này để mở đầu và kết thúc cho giới thiệu dự án
-public class Intro {
+public class AnimationOpeningAndEnding {
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
@@ -18,8 +18,10 @@ public class Intro {
     public static void MovieOpening() throws InterruptedException {
 
         String[] endingText = {
-                BOLD + BLUE + " Hi Welcome to Project GROUP 3 MOBILE..." + RESET,
+                BOLD + BLUE + " Hi Welcome to Project DienThoaiChat..." + RESET,
+                BOLD + CYAN + " Less but quality" + RESET,
                 BOLD + YELLOW + " Loading data please wait a moment" + RESET,
+
                 BOLD + " Ready..." + RESET
 
         };

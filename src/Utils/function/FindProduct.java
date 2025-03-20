@@ -172,8 +172,8 @@ public class FindProduct {
                     checkSort = false;
                     break;
                 case "18":
-                    max_value = 7000000L;
-                    min_value = 13000000L;
+                    max_value = 13000000L;
+                    min_value = 7000000L;
                     checkPrice = true;
                     checkSort = false;
                     break;
@@ -197,11 +197,7 @@ public class FindProduct {
                     checkSortDes = true;
 
                     break;
-                // case "23":
-                // checkSort = true;
-                // checkSortDes = false;
-                // checkSortAs = false;
-                // break;
+
                 default:
                     // System.out.println("Code " + x + " does not exist.");
                     break;
@@ -222,8 +218,11 @@ public class FindProduct {
         boolean checkFactory = op.stream().anyMatch(x -> Arrays
                 .asList("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia", "realme").contains(x));
 
+        // boolean checkTarget = op.stream().anyMatch(
+        // x -> Arrays.asList("gaming", "camera, video", "thin, light", "battery",
+        // "work, study").contains(x));
         boolean checkTarget = op.stream().anyMatch(
-                x -> Arrays.asList("gaming", "camera, video", "thin, light", "battery", "work, study").contains(x));
+                x -> Arrays.asList("GAMING", "CAMERA_VIDEO", "THIN_LIGHT", "BATTERY", "WORK_STUDY").contains(x));
 
         if (!checkPrice) {
 
@@ -237,7 +236,7 @@ public class FindProduct {
 
             if (checkTarget && !checkFactory) {
                 for (Product x : proList) {
-                    if (op.contains(x.getTarget().toString())) {
+                    if (op.contains(x.getTarget().name())) {
                         proFind.add(x);
                     }
                 }
@@ -246,7 +245,7 @@ public class FindProduct {
             if (checkFactory && checkTarget) {
                 for (Product x : proList) {
                     if (op.contains(x.getBrand().toLowerCase())
-                            && op.contains(x.getTarget().toString())) {
+                            && op.contains(x.getTarget().name())) {
                         proFind.add(x);
                     }
                 }
@@ -257,7 +256,7 @@ public class FindProduct {
                 for (Product x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
                         for (String y : op) {
-                            if (x.getTarget().toString().equals(y)) {
+                            if (x.getTarget().name().equals(y)) {
                                 for (String z : op) {
                                     if (x.getBrand().equalsIgnoreCase(z)) {
                                         if (!proFind.contains(x)) {
@@ -280,7 +279,7 @@ public class FindProduct {
             } else if (!checkFactory && checkTarget) {
                 for (Product x : proList) {
                     if (x.getPrice() >= min_value && x.getPrice() <= max_value) {
-                        if (op.contains(x.getTarget().toString())) {
+                        if (op.contains(x.getTarget().name())) {
                             proFind.add(x);
                         }
                     }

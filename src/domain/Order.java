@@ -4,14 +4,14 @@
  */
 package domain;
 
-public class InfoOrder {
+public class Order {
     private Long id;
     private String name;
     private String address;
     private String phone;
     private Long price;
 
-    public InfoOrder(Long id, String name, String address, String phone, Long price) {
+    public Order(Long id, String name, String address, String phone, Long price) {
         this.id = id;
         this.name = name;
         this.address = address;

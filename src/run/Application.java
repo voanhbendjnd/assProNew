@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package run;
 
-import display.Menu;
-import utils.Initialize;
-import utils.Intro;
+import display.MenuSystem;
+import utils.InitializeSuperAdmin;
+import utils.AnimationOpeningAndEnding;
 
 /**
  *
@@ -15,9 +11,9 @@ import utils.Intro;
  */
 public class Application {
     public static void main(String[] args) throws InterruptedException {
-        Intro.MovieOpening();
-        new Initialize().init();
-        new Menu().getMenuNotLogin();
+        AnimationOpeningAndEnding.MovieOpening();
+        new InitializeSuperAdmin().init();
+        new MenuSystem().getMenuNotLogin();
 
     }
 }

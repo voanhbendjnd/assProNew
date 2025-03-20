@@ -7,6 +7,7 @@ package setupFile;
  */
 import java.io.File;
 
+// nơi tạo file
 public class CreateFile {
     public static void main(String[] args) {
         try {

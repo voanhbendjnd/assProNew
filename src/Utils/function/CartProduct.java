@@ -13,6 +13,7 @@ import domain.entity.Product;
 import handle.HandleCart;
 import handle.HandleProduct;
 import setupFile.AllFile;
+import utils.FormatData;
 import utils.constant.TargetEnum;
 
 public class CartProduct {
@@ -67,7 +68,7 @@ public class CartProduct {
             System.out.println(BOLD + " Name: " + name + RESET);
             System.out.println(BOLD + " Brand: " + brand + RESET);
             System.out.println(BOLD + " Description: " + desc + RESET);
-            System.out.println(BOLD + " Price: " + new Utils().formatPrice(price) + RESET);
+            System.out.println(BOLD + " Price: " + new FormatData().formatPrice(price) + RESET);
             System.out.println(YELLOW + "---------------------------------------" + RESET);
             System.out.print(BOLD + GREEN + "===> Add to Cart(y/n): " + RESET);
             char question = sc.nextLine().charAt(0);

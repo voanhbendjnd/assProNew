@@ -20,6 +20,7 @@ public class HandleProduct implements Handle<Product> {
     public List<Product> read(String fileProducts) {
         List<Product> productsList = new ArrayList<>();
         try {
+            // cú pháp đọc file
             File myFile = new File(fileProducts);
             Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
@@ -39,12 +40,14 @@ public class HandleProduct implements Handle<Product> {
             sc.close();
 
         } catch (Exception ex) {
+            // lỗi trong quá trình đọc
             System.out.println("Error reading file: " + ex.getMessage());
         }
         return productsList;
     }
 
     @Override
+    // ghi file xuống hàng và lấy định dạng theo dấu ?
     public void writeFile(String fileName, List<Product> product) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Product x : product) {
@@ -57,6 +60,8 @@ public class HandleProduct implements Handle<Product> {
     }
 
     @Override
+    // thêm 1 đối tượng bằng cách đọc hết cái file xong thêm rồi ghi nó theo định
+    // dạng
     public void addNew(String fileName, Product product) {
         List<Product> proList = read("products.txt");
         proList.add(product);
@@ -64,12 +69,15 @@ public class HandleProduct implements Handle<Product> {
     }
 
     @Override
+    // xóa sản phẩm bằng iterator
     public void deleteIt(String fileName, Optional<?> codeOptional) {
         Long code = Long.parseLong(codeOptional.get().toString());
         List<Product> proList = read(fileName);
         boolean productFound = false;
+        // interator hasNext xét xem còn phân tử nào duyệt qua không
+        // nếu còn thì tiếp tục
         for (Iterator<Product> iterator = proList.iterator(); iterator.hasNext();) {
-            Product product = iterator.next();
+            Product product = iterator.next(); // lấy phần tử gán vao product
             if (product.getCode().equals(code)) {
                 iterator.remove();
                 productFound = true;

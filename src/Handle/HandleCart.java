@@ -20,6 +20,7 @@ public class HandleCart implements Handle<Cart> {
     public List<Cart> read(String fileOrder) {
         List<Cart> cartList = new ArrayList<>();
         try {
+            // cú pháp đọc file
             File myFile = new File(fileOrder);
             Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
@@ -40,12 +41,14 @@ public class HandleCart implements Handle<Cart> {
             sc.close();
 
         } catch (Exception ex) {
+            // lỗi trong quá trình đọc
             System.out.println("Error reading file: " + ex.getMessage());
         }
         return cartList;
     }
 
     @Override
+    // ghi file xuống hàng và lấy định dạng theo dấu ?
     public void writeFile(String fileName, List<Cart> cartList) {
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Cart x : cartList) {
@@ -58,6 +61,8 @@ public class HandleCart implements Handle<Cart> {
     }
 
     @Override
+    // thêm 1 đối tượng bằng cách đọc hết cái file xong thêm rồi ghi nó theo định
+    // dạng
     public void addNew(String fileName, Cart cart) {
         List<Cart> cartList = read(AllFile.fileCartTxt);
         cartList.add(cart);
@@ -65,6 +70,7 @@ public class HandleCart implements Handle<Cart> {
     }
 
     @Override
+    // xóa sản phẩm bằng iterator
     public void deleteIt(String fileName, Optional<?> idOptional) {
         Long id = Long.parseLong(idOptional.get().toString());
         List<Cart> cartList = read(fileName);
@@ -79,9 +85,6 @@ public class HandleCart implements Handle<Cart> {
         }
         if (productFound) {
             writeFile(fileName, cartList);
-            // System.out.println("Product deleted successfully.");
-        } else {
-            // System.out.println("Product not found.");
         }
     }
 }

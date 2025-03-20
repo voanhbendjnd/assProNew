@@ -4,7 +4,7 @@
  */
 package handle;
 
-import domain.entity.Account;
+import domain.entity.User;
 import setupFile.AllFile;
 import utils.constant.RoleEnum;
 
@@ -20,11 +20,12 @@ import java.util.Optional;
  *
  * @author Vo Anh Ben - CE190709
  */
-public class HandleAccount implements Handle<Account> {
+public class HandleUser implements Handle<User> {
     @Override
-    public List<Account> read(String fileProducts) {
-        List<Account> accountList = new ArrayList<>();
+    public List<User> read(String fileProducts) {
+        List<User> accountList = new ArrayList<>();
         try {
+            // cú pháp đọc file
             File myFile = new File(fileProducts);
             Scanner sc = new Scanner(myFile);
             while (sc.hasNextLine()) {
@@ -35,21 +36,23 @@ public class HandleAccount implements Handle<Account> {
                 String password = accounts[2];
                 String email = accounts[3];
                 RoleEnum role = RoleEnum.valueOf(accounts[4]);
-                accountList.add(new Account(id, username, password, email, role));
+                accountList.add(new User(id, username, password, email, role));
 
             }
             sc.close();
 
         } catch (Exception ex) {
+            // lỗi trong quá trình đọc
             System.out.println("Error reading file: " + ex.getMessage());
         }
         return accountList;
     }
 
     @Override
-    public void writeFile(String fileName, List<Account> account) {
+    // ghi file xuống hàng và lấy định dạng theo dấu ?
+    public void writeFile(String fileName, List<User> account) {
         try (FileWriter fw = new FileWriter(fileName)) {
-            for (Account x : account) {
+            for (User x : account) {
                 fw.write(x.toStringFormatted() + "\n");
             }
 
@@ -59,19 +62,22 @@ public class HandleAccount implements Handle<Account> {
     }
 
     @Override
-    public void addNew(String fileName, Account account) {
-        List<Account> accountList = read(AllFile.fileAccountTxt);
+    // thêm 1 đối tượng bằng cách đọc hết cái file xong thêm rồi ghi nó theo định
+    // dạng
+    public void addNew(String fileName, User account) {
+        List<User> accountList = read(AllFile.fileAccountTxt);
         accountList.add(account);
         writeFile(fileName, accountList);
     }
 
     @Override
+    // xóa sản phẩm bằng iterator
     public void deleteIt(String fileName, Optional<?> idOptional) {
         Long id = Long.parseLong(idOptional.get().toString());
-        List<Account> accountList = read(fileName);
+        List<User> accountList = read(fileName);
         boolean accountFound = false;
-        for (Iterator<Account> iterator = accountList.iterator(); iterator.hasNext();) {
-            Account account = iterator.next();
+        for (Iterator<User> iterator = accountList.iterator(); iterator.hasNext();) {
+            User account = iterator.next();
             if (account.getId().equals(id)) {
                 iterator.remove();
                 accountFound = true;
@@ -80,9 +86,6 @@ public class HandleAccount implements Handle<Account> {
         }
         if (accountFound) {
             writeFile(fileName, accountList);
-            System.out.println("Account deleted successfully.");
-        } else {
-            System.out.println("Account not found.");
         }
     }
 }

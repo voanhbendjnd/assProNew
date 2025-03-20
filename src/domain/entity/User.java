@@ -10,7 +10,7 @@ import utils.constant.RoleEnum;
  * @author Vo Anh Ben - CE190709
  */
 
-public class Account {
+public class User {
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
     public static final String RED = "\u001B[31m"; // Màu đỏ
     public static final String GREEN = "\u001B[32m"; // Màu xanh lá
@@ -24,10 +24,10 @@ public class Account {
     private String email;
     private RoleEnum role;
 
-    public Account() {
+    public User() {
     }
 
-    public Account(Long id, String username, String password, String email, RoleEnum role) {
+    public User(Long id, String username, String password, String email, RoleEnum role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -59,7 +59,7 @@ public class Account {
         this.email = email;
     }
 
-    public Account(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -97,7 +97,7 @@ public class Account {
     }
 
     // in ra bảng
-    public static void printTable(List<Account> accountList) {
+    public static void printTable(List<User> accountList) {
         StringBuilder sb = new StringBuilder();
         sb.append(BOLD + CYAN);
         sb.append(
@@ -106,7 +106,7 @@ public class Account {
                 "| ID    | Name                       | Email                      | Role                       |\n");
         sb.append(
                 "+-------+----------------------------+----------------------------+----------------------------+\n");
-        for (Account order : accountList) {
+        for (User order : accountList) {
             sb.append(order.toString()).append("\n");
             sb.append(
                     CYAN + "+-------+----------------------------+----------------------------+----------------------------+\n"

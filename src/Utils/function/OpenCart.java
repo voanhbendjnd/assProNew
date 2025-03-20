@@ -6,12 +6,13 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import domain.entity.Cart;
-import domain.entity.OrderUser;
-import domain.entity.Orders;
+import domain.entity.OrderUserImpl;
+import domain.entity.OrderImpl;
 import handle.HandleCart;
 import handle.HandleOrder;
 import handle.HandleOrderUser;
 import setupFile.AllFile;
+import utils.FormatData;
 
 /**
  *
@@ -29,7 +30,7 @@ public class OpenCart {
 
     // cho người dùng nhập thông tin
     public static void inforAndHandleOrder(Long userId, Long cartIdCurrent, String name, Long price) {
-        List<OrderUser> newOrder = new ArrayList<>();
+        List<OrderUserImpl> newOrder = new ArrayList<>();
 
         System.out.println(BOLD + GREEN + " Please enter order details:" + RESET);
         System.out.print(" Name: ");
@@ -39,26 +40,26 @@ public class OpenCart {
         System.out.print(" Phone Number: ");
         String phone = sc.nextLine();
         HandleOrder order = new HandleOrder();
-        List<Orders> orderList = new HandleOrder().read(AllFile.fileOrderTxt);
+        List<OrderImpl> orderList = new HandleOrder().read(AllFile.fileOrderTxt);
         Long orderId = orderList == null || orderList.isEmpty() ? 1L // nếu là lần đầu thêm vô cart
                 // // cho id = 1
                 : orderList.get(orderList.size() - 1).getId() + 1; // lấy id của cart cuói cùng + 1
 
-        List<OrderUser> orderUserList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
+        List<OrderUserImpl> orderUserList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
         Long orderUserId = orderUserList == null || orderUserList.isEmpty() ? 1L
                 : orderUserList.get(orderUserList.size() - 1).getId() + 1;
 
         order.addNew(AllFile.fileOrderTxt,
-                new Orders(orderId, userId, cartIdCurrent, nameUser, address, phone, price, orderUserId));
+                new OrderImpl(orderId, userId, cartIdCurrent, nameUser, address, phone, price, orderUserId));
         HandleOrderUser orderUser = new HandleOrderUser();
         orderUser.addNew(AllFile.fileOrderUserTxt,
-                new OrderUser(orderUserId, name, nameUser, address, phone, userId, price, 0));
+                new OrderUserImpl(orderUserId, name, nameUser, address, phone, userId, price, 0));
         System.out.println(BOLD + YELLOW + " Order placed successfully!" + RESET);
         System.out.println(BOLD + " Your Order Details:" + RESET);
-        newOrder.add(new OrderUser(
+        newOrder.add(new OrderUserImpl(
                 orderUserId, name, nameUser, address, phone, userId, price, 0));
 
-        OrderUser.printTableOrderForUser(newOrder);
+        OrderUserImpl.printTableOrderForUser(newOrder);
     }
 
     @SuppressWarnings("static-access")
@@ -100,9 +101,9 @@ public class OpenCart {
                         System.out.println(BLUE + " Product selected (ID = " + cartIdCurrent + ")" + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
                         System.out.println(BOLD + " Name: " + name + RESET);
-                        System.out.println(BOLD + " Price: " + new Utils().formatPrice(price) + RESET);
+                        System.out.println(BOLD + " Price: " + new FormatData().formatPrice(price) + RESET);
                         System.out.println(BOLD + " Quantity: " + qty + RESET);
-                        System.out.println(BOLD + " Total: " + new Utils().formatPrice(price * qty) + RESET);
+                        System.out.println(BOLD + " Total: " + new FormatData().formatPrice(price * qty) + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
                         System.out.print(BOLD + YELLOW + "Buy(y/n)?: " + RESET);
                         char qqq = sc.nextLine().charAt(0);
@@ -118,9 +119,9 @@ public class OpenCart {
                         System.out.println(BLUE + " Product selected (ID = " + cartIdCurrent + ")" + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
                         System.out.println(BOLD + " Name: " + name + RESET);
-                        System.out.println(BOLD + " Price: " + new Utils().formatPrice(price) + RESET);
+                        System.out.println(BOLD + " Price: " + new FormatData().formatPrice(price) + RESET);
                         System.out.println(BOLD + " Quantity: " + quantity + RESET);
-                        System.out.println(BOLD + " Total: " + new Utils().formatPrice(price * quantity) + RESET);
+                        System.out.println(BOLD + " Total: " + new FormatData().formatPrice(price * quantity) + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
                         System.out.print(BOLD + YELLOW + "Buy(y/n)?: " + RESET);
                         char qqq = sc.nextLine().charAt(0);

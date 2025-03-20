@@ -3,7 +3,7 @@ package display;
 
 import java.util.Scanner;
 
-import utils.Intro;
+import utils.AnimationOpeningAndEnding;
 import utils.function.AddProduct;
 import utils.function.CartProduct;
 import utils.function.DeleteProduct;
@@ -15,7 +15,7 @@ import utils.function.ViewOrder;
  *
  * @author Vo Anh Ben - CE190709
  */
-public class Menu {
+public class MenuSystem {
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
     public static final String RED = "\u001B[31m"; // Màu đỏ
     public static final String GREEN = "\u001B[32m"; // Màu xanh lá
@@ -30,7 +30,7 @@ public class Menu {
 
         while (true) {
             System.out.println(CYAN + "╔════════════════════════════════════╗" + RESET);
-            System.out.println(CYAN + "║    " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN
+            System.out.println(CYAN + "║    " + BOLD + "WELCOME TO DienThoaiChat" + RESET + CYAN
                     + "                                  ║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════════╣" + RESET);
             System.out
@@ -71,8 +71,8 @@ public class Menu {
                     System.out.println(RED + " Logging out..." + RESET);
                     break;
                 } else if (q == 0) {
-                    System.out.println(RED + " Exiting... Goodbye!" + RESET);
-                    Intro.MovieEnding();
+                    System.out.println(RED + " Exiting..." + RESET);
+                    AnimationOpeningAndEnding.MovieEnding();
                     break;
                 } else {
                     System.out.println(RED + " Please enter a valid option (0 - 5)!" + RESET);
@@ -91,7 +91,7 @@ public class Menu {
         while (true) {
             System.out.println(CYAN + "╔════════════════════════════════════╗" + RESET);
             System.out.println(
-                    CYAN + "║   " + BOLD + "    WELCOME TO GROUP3 MOBILE (ADMIN) " + RESET + CYAN
+                    CYAN + "║   " + BOLD + "    WELCOME TO DienThoaiChat (ADMIN) " + RESET + CYAN
                             + "                      ║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════════╣" + RESET);
             System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                               ║");
@@ -126,8 +126,8 @@ public class Menu {
                     System.out.println(RED + " Logging out..." + RESET);
                     break;
                 } else if (q == 0) {
-                    System.out.println(RED + " Exiting... Goodbye!" + RESET);
-                    Intro.MovieEnding();
+                    System.out.println(RED + " Exiting..." + RESET);
+                    AnimationOpeningAndEnding.MovieEnding();
                     break;
                 } else {
                     System.out.println(RED + " Please enter a valid option (0 - 6)!" + RESET);
@@ -144,7 +144,7 @@ public class Menu {
 
         while (true) {
             System.out.println(CYAN + "╔════════════════════════════════╗" + RESET);
-            System.out.println(CYAN + "║  " + BOLD + "WELCOME TO GROUP3 MOBILE" + RESET + CYAN
+            System.out.println(CYAN + "║  " + BOLD + "WELCOME TO DienThoaiChat" + RESET + CYAN
                     + "                             ║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════╣" + RESET);
             System.out.println(CYAN + "║ " + GREEN + "1." + RESET + " Find Products                           ║");
@@ -165,11 +165,11 @@ public class Menu {
                     new FindProduct().findAll();
                 } else if (q == 3) {
                     System.out.println(CYAN + " Redirecting to login..." + RESET);
-                    CreateAccount app = new CreateAccount();
+                    RegisterForm app = new RegisterForm();
                     app.mainMethod();
                 } else if (q == 0) {
-                    System.out.println(RED + " Exiting... Goodbye!" + RESET);
-                    Intro.MovieEnding();
+                    System.out.println(RED + " Exiting..." + RESET);
+                    AnimationOpeningAndEnding.MovieEnding();
 
                     break;
                 } else {

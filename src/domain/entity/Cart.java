@@ -2,7 +2,12 @@ package domain.entity;
 
 import java.util.List;
 
-import utils.function.Utils;
+import utils.FormatData;
+
+/**
+ *
+ * @author Vo Anh Ben - CE190709
+ */
 
 public class Cart {
     public static final String RESET = "\u001B[0m"; // Reset về mặc định
@@ -18,7 +23,6 @@ public class Cart {
     private Long qty;
     private String name;
     private Long productId;
-    // private Long totalProducts;
 
     public Long getPrice() {
         return price;
@@ -42,7 +46,6 @@ public class Cart {
         this.qty = qty;
         this.name = name;
         this.productId = productId;
-        // this.totalProducts = totalProducts;
 
     }
 
@@ -97,9 +100,9 @@ public class Cart {
         return String.format("| %s%s%-5d%s | %s%-26s%s | %s%-26s%s | %s%-26d%s | %s%-26s%s |",
                 BOLD, YELLOW, this.id, RESET,
                 GREEN, this.name, RESET,
-                RED, new Utils().formatPrice(this.price), RESET,
+                RED, new FormatData().formatPrice(this.price), RESET,
                 BLUE, this.qty, RESET,
-                YELLOW, new Utils().formatPrice(this.getTotalProducts()), RESET);
+                YELLOW, new FormatData().formatPrice(this.getTotalProducts()), RESET);
     }
 
     public static void printTable(List<Cart> ordersList) {

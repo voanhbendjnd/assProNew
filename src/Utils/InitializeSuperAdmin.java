@@ -6,16 +6,16 @@ package utils;
  */
 import java.util.List;
 
-import domain.entity.Account;
-import handle.HandleAccount;
+import domain.entity.User;
+import handle.HandleUser;
 import setupFile.AllFile;
 import utils.constant.RoleEnum;
 
 // class nay mục đích là để tạo ra super admin, vì không thể tạo người dùng với vai trò admin được
-public class Initialize {
+public class InitializeSuperAdmin {
     public void init() {
         Long code = 0L;
-        List<Account> accList = new HandleAccount().read(AllFile.fileAccountTxt);
+        List<User> accList = new HandleUser().read(AllFile.fileAccountTxt);
         boolean existsByNameAndEmail = accList.stream()
                 .anyMatch(x -> x.getEmail().equals("admin@gmail.com"));
         if (!existsByNameAndEmail) {
@@ -23,14 +23,14 @@ public class Initialize {
             if (accList.isEmpty()) {
                 code = 0L;
             } else {
-                for (Account x : accList) {
+                for (User x : accList) {
                     if (x.getId() >= code) {
                         code = x.getId();
                     }
                 }
             }
-            new HandleAccount().addNew(AllFile.fileAccountTxt,
-                    new Account(code + 1, "admin", "123456", "admin@gmail.com", RoleEnum.ADMIN));
+            new HandleUser().addNew(AllFile.fileAccountTxt,
+                    new User(code + 1, "admin", "123456", "admin@gmail.com", RoleEnum.ADMIN));
         }
     }
 }

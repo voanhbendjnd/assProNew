@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 /**
  *
  * @author Vo Anh Ben - CE190709
@@ -11,8 +7,8 @@ package domain.entity;
 
 import java.util.List;
 
+import utils.FormatData;
 import utils.constant.TargetEnum;
-import utils.function.Utils;
 
 public class Product {
     private Long id;
@@ -134,7 +130,7 @@ public class Product {
                 GREEN, this.name, RESET,
                 BLUE, this.brand, RESET,
                 CYAN, this.target, RESET,
-                RED, new Utils().formatPrice(this.price), RESET,
+                RED, new FormatData().formatPrice(this.price), RESET,
                 YELLOW, this.description, RESET,
                 GREEN, this.stock, RESET);
     }
