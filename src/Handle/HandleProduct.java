@@ -5,6 +5,7 @@ package handle;
  * @author Vo Anh Ben - CE190709
  */
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
@@ -49,6 +50,7 @@ public class HandleProduct implements Handle<Product> {
     @Override
     // ghi file xuống hàng và lấy định dạng theo dấu ?
     public void writeFile(String fileName, List<Product> product) {
+        product.sort(Comparator.comparingLong(Product::getCode));
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Product x : product) {
                 fw.write(x.toStringFormatted() + "\n");

@@ -7,11 +7,13 @@ import java.io.File;
  */
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import domain.entity.OrderImpl;
 import domain.entity.OrderUserImpl;
 import setupFile.AllFile;
 
@@ -48,6 +50,7 @@ public class HandleOrderUser implements Handle<OrderUserImpl> {
     @Override
     // ghi file xuống hàng và lấy định dạng theo dấu ?
     public void writeFile(String fileName, List<OrderUserImpl> orderList) {
+        orderList.sort(Comparator.comparingLong(OrderUserImpl::getId));
         try (FileWriter fw = new FileWriter(fileName)) {
             for (OrderUserImpl x : orderList) {
                 fw.write(x.toStringFormatted() + "\n");
@@ -59,7 +62,8 @@ public class HandleOrderUser implements Handle<OrderUserImpl> {
     }
 
     @Override
-    // thêm 1 đối tượng bằng cách đọc hết cái file xong thêm rồi ghi nó theo định dạng
+    // thêm 1 đối tượng bằng cách đọc hết cái file xong thêm rồi ghi nó theo định
+    // dạng
     public void addNew(String fileName, OrderUserImpl order) {
         List<OrderUserImpl> orderList = read(AllFile.fileOrderUserTxt);
         orderList.add(order);

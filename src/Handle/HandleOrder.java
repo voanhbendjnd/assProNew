@@ -10,6 +10,7 @@ import setupFile.AllFile;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.List;
@@ -49,6 +50,7 @@ public class HandleOrder implements Handle<OrderImpl> {
     @Override
     // ghi file xuống hàng và lấy định dạng theo dấu ?
     public void writeFile(String fileName, List<OrderImpl> orderList) {
+        orderList.sort(Comparator.comparingLong(OrderImpl::getId));
         try (FileWriter fw = new FileWriter(fileName)) {
             for (OrderImpl x : orderList) {
                 fw.write(x.toStringFormatted() + "\n");

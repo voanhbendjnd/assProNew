@@ -1,6 +1,7 @@
 package utils.function;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -45,30 +46,54 @@ public class ViewOrder {
             }
         }
         if (check) {
-            // xóa đơn hàng order vì đã đánh dấu
-            new HandleOrder().deleteIt(AllFile.fileOrderTxt, Optional.of(Long.parseLong(id)));
-            // status = 3 thì chưa tính cần xóa đơn hàng này
             if (status == 3) {
-                new HandleOrder().addNew(AllFile.fileOrderTxt,
-                        new OrderImpl(stId, stUserId, stProductId, stName, stAddress, stPhone, stPrice, orderId));
-            }
-            // thêm đơn mới lấy dữ liệu từ đơn cũ đổi status
-            for (OrderUserImpl x : orderUserList) {
-                if (x.getId().equals(orderId)) {
-                    new HandleOrderUser().addNew(AllFile.fileOrderUserTxt,
-                            new OrderUserImpl(x.getId(),
-                                    x.getNameProduct(),
-                                    x.getName(),
-                                    x.getAddress(),
-                                    x.getPhone(),
-                                    x.getUserId(),
-                                    x.getPrice(),
-                                    status));
-                    // xóa cái đơn hàng cũ
-                    new HandleOrderUser().deleteIt(AllFile.fileOrderUserTxt, Optional.of(orderId));
-                    break;
+                for (OrderUserImpl x : orderUserList) {
+                    if (x.getId().equals(orderId)) {
+                        x.setStatus(status);
+                    }
                 }
+                new HandleOrderUser().writeFile(AllFile.fileOrderUserTxt, orderUserList);
+            } else {
+                for (OrderUserImpl x : orderUserList) {
+                    if (x.getId().equals(orderId)) {
+                        x.setStatus(status);
+                    }
+                }
+                new HandleOrderUser().writeFile(AllFile.fileOrderUserTxt, orderUserList);
+                new HandleOrder().deleteIt(AllFile.fileOrderTxt, Optional.of(stId));
             }
+            // // xóa đơn hàng order vì đã đánh dấu
+            // new HandleOrder().deleteIt(AllFile.fileOrderTxt,
+            // Optional.of(Long.parseLong(id)));
+            // // status = 3 thì chưa tính cần xóa đơn hàng này
+            // if (status == 3) {
+            // // orderList.add(new OrderImpl(stId, stUserId, stProductId, stName,
+            // stAddress,
+            // // stPhone, stPrice, orderId));
+            // orderList.sort(Comparator.comparingLong(OrderImpl::getId));
+            // new HandleOrder().writeFile(AllFile.fileOrderTxt, orderList);
+            // // new HandleOrder().addNew(AllFile.fileOrderTxt,
+            // // new OrderImpl(stId, stUserId, stProductId, stName, stAddress, stPhone,
+            // // stPrice, orderId));
+            // }
+            // // thêm đơn mới lấy dữ liệu từ đơn cũ đổi status
+            // for (OrderUserImpl x : orderUserList) {
+            // if (x.getId().equals(orderId)) {
+            // new HandleOrderUser().addNew(AllFile.fileOrderUserTxt,
+            // new OrderUserImpl(x.getId(),
+            // x.getNameProduct(),
+            // x.getName(),
+            // x.getAddress(),
+            // x.getPhone(),
+            // x.getUserId(),
+            // x.getPrice(),
+            // status));
+            // // xóa cái đơn hàng cũ
+            // new HandleOrderUser().deleteIt(AllFile.fileOrderUserTxt,
+            // Optional.of(orderId));
+            // break;
+            // }
+            // }
         } else {
             System.out.println(BOLD + RED + "Order id with " + id + " is incorrect, please re-enter" + RESET);
         }

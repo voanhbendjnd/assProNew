@@ -81,7 +81,7 @@ public class FindProduct {
         List<Product> proFind = new ArrayList<>();
 
         String option = sc.nextLine();
-
+        // check lựa chọn rỗng
         if (option.isEmpty()) {
             proFind.addAll(proList);
 
@@ -94,6 +94,7 @@ public class FindProduct {
         String[] ss = option.split("\\s+");
         Long max_value = 200000000L;
         Long min_value = 1L;
+        // thêm từ khóa tìm kiếm từ các lựa chọnchọn
         List<String> op = new ArrayList<>();
         for (String x : ss) {
             switch (x) {
@@ -204,28 +205,15 @@ public class FindProduct {
             }
         }
 
-        if (proList == null) {
-            System.out.println("Error: Product list is null.");
-            return;
-        }
-        // boolean checkFactory = op.stream().anyMatch(x -> List
-        // .of("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia",
-        // "realme").contains(x));
-        // boolean checkTarget = op.stream()
-        // .anyMatch(x -> List.of("gaming", "camera, video", "thin, light", "battery",
-        // "work, study")
-        // .contains(x));
+        // check có nhập hiệu
         boolean checkFactory = op.stream().anyMatch(x -> Arrays
                 .asList("apple", "samsung", "xiaomi", "asus", "oppo", "vivo", "honor", "nokia", "realme").contains(x));
-
-        // boolean checkTarget = op.stream().anyMatch(
-        // x -> Arrays.asList("gaming", "camera, video", "thin, light", "battery",
-        // "work, study").contains(x));
+        // check có nhập tính năngnăng
         boolean checkTarget = op.stream().anyMatch(
                 x -> Arrays.asList("GAMING", "CAMERA_VIDEO", "THIN_LIGHT", "BATTERY", "WORK_STUDY").contains(x));
-
+        // không nhập giá
         if (!checkPrice) {
-
+            // có hãng không có tính năng
             if (checkFactory && !checkTarget) {
                 for (Product x : proList) {
                     if (op.contains(x.getBrand().toLowerCase())) {
@@ -233,7 +221,7 @@ public class FindProduct {
                     }
                 }
             }
-
+            // có tính năng và không hãnghãng
             if (checkTarget && !checkFactory) {
                 for (Product x : proList) {
                     if (op.contains(x.getTarget().name())) {
@@ -241,7 +229,7 @@ public class FindProduct {
                     }
                 }
             }
-
+            // có cả 22
             if (checkFactory && checkTarget) {
                 for (Product x : proList) {
                     if (op.contains(x.getBrand().toLowerCase())
@@ -250,7 +238,7 @@ public class FindProduct {
                     }
                 }
             }
-
+            // tìm theo giá
         } else {
             if (checkFactory && checkTarget) {
                 for (Product x : proList) {
@@ -294,6 +282,7 @@ public class FindProduct {
 
         }
         boolean checkS = true;
+        // tìm theo giá tăng dầndần
         if (checkSortAs && !checkSortDes) {
             if (checkSort) {
                 proFind.addAll(proList);
@@ -311,6 +300,7 @@ public class FindProduct {
                 }
 
             });
+            // tìm theo giá giảm dần
 
         } else if (!checkSortAs && checkSortDes) {
             if (checkSort) {
@@ -331,6 +321,7 @@ public class FindProduct {
             });
 
         }
+        // lỗi nhập cả 2 loại sortsort
         if (checkSortAs && checkSortDes) {
             proFind.addAll(proList);
             Product.printTable(proFind);

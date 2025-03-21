@@ -6,10 +6,10 @@ package domain;
 
 public class Order {
     private Long id;
+    private Long price;
     private String name;
     private String address;
     private String phone;
-    private Long price;
 
     public Order(Long id, String name, String address, String phone, Long price) {
         this.id = id;

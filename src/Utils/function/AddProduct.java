@@ -2,6 +2,7 @@ package utils.function;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -129,8 +130,11 @@ public class AddProduct {
 
                 Product pro = new Product(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
                         x.getDescription(), x.getStock(), x.getDateCreate());
-                reader.deleteIt(AllFile.fileProductTxt, Optional.of(x.getCode()));
-                reader.addNew(AllFile.fileProductTxt, pro);
+                data.add(pro);
+                data.sort(Comparator.comparingLong(Product::getId));
+                reader.writeFile(AllFile.fileAccountTxt, data);
+                // reader.deleteIt(AllFile.fileProductTxt, Optional.of(x.getCode()));
+                // reader.addNew(AllFile.fileProductTxt, pro);
                 proListed.add(x);
                 check = true;
 
@@ -159,7 +163,7 @@ public class AddProduct {
             String date = null;
             while (true) {
                 try {
-                    System.out.print(BOLD + BLUE + " Date Created (dd/MM/yyyy): " + RESET);
+                    System.out.print(BOLD + BLUE + " Date Created: " + RESET);
                     date = sc.nextLine().trim();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     sdf.setLenient(false); // Không cho phép nhập sai định dạng
@@ -171,7 +175,10 @@ public class AddProduct {
             }
 
             Product pro = new Product(maxCode + 1, name, brand, target, price, ds, stock, date);
-            reader.addNew(AllFile.fileProductTxt, pro);
+            data.add(pro);
+            data.sort(Comparator.comparingLong(Product::getId));
+            reader.writeFile(AllFile.fileProductTxt, data);
+            // reader.addNew(AllFile.fileProductTxt, pro);
             proListed.add(pro);
 
             System.out.println(GREEN + " Product added successfully!" + RESET);

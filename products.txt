@@ -7,7 +7,7 @@
 31?Realme GT 2 Pro?Realme?GAMING?16000000?Snapdragon 8 Gen 1, 120Hz LTPO Display?100?08/01/2022
 32?Honor Magic 4 Pro?Honor?CAMERA_VIDEO?23000000?Snapdragon 8 Gen 1, 100W charging, 50MP?60?23/05/2022
 33?iPhone 13?Apple?WORK_STUDY?21000000?A15 Bionic, Super Retina XDR, 128GB?90?24/09/2021
-34?Samsung Galaxy Z Fold 4?Samsung?WORK_STUDY?40000000?Foldable Display, Snapdragon 8+ Gen 1?40?10/08/2022
+34?Samsung Galaxy Z Fold 4?Samsung?WORK_STUDY?40000000?Foldable Display, Snapdragon 8+ Gen 1?38?10/08/2022
 35?Xiaomi Redmi Note 11?Xiaomi?THIN_LIGHT?7000000?Snapdragon 680, AMOLED 90Hz, 5000mAh?200?10/01/2022
 36?Asus ROG Phone 6?Asus?GAMING?25000000?Snapdragon 8+ Gen 1, 165Hz, 6000mAh?70?05/07/2022
 37?Samsung Galaxy A73?Samsung?THIN_LIGHT?12000000?Snapdragon 778G, 108MP Camera, 5000mAh?150?23/03/2022
@@ -23,6 +23,7 @@
 47?Vivo Y76 5G?Vivo?THIN_LIGHT?7500000?Dimensity 700, 50MP, 44W Fast Charge?180?11/12/2021
 48?Nokia G50?Nokia?WORK_STUDY?7000000?Snapdragon 480, 5000mAh, 5G?140?22/09/2021
 49?Realme Narzo 50A?Realme?GAMING?5000000?Helio G85, 6000mAh, 50MP?210?03/09/2021
+50?Honor 70?Honor?CAMERA_VIDEO?13000000?Snapdragon 778G+, 54MP Sony IMX800, 66W?90?30/08/2022
 51?Samsung Galaxy M51?Samsung?BATTERY?9000000?Snapdragon 730G, 7000mAh, 25W Fast Charge?180?01/09/2020
 52?Xiaomi Redmi Note 12 Pro?Xiaomi?BATTERY?8500000?Dimensity 1080, 5000mAh, 67W Fast Charge?200?27/10/2022
 53?Realme 10 Pro+?Realme?BATTERY?9500000?Dimensity 920, 5000mAh, 67W Charging?150?23/11/2022
@@ -30,7 +31,5 @@
 55?Vivo Y21T?Vivo?BATTERY?6000000?Snapdragon 680, 5000mAh, 18W Fast Charge?220?03/01/2022
 56?Oppo A77?Oppo?BATTERY?7000000?Dimensity 810, 5000mAh, 33W Fast Charging?190?10/08/2022
 57?Honor Magic 4 Lite?Honor?BATTERY?8500000?Snapdragon 695, 4800mAh, 66W Fast Charging?170?25/03/2022
-58?Nokia G21?Nokia?BATTERY?6500000?Unisoc T606, 5050mAh, 18W Fast Charge?200?15/02/2022
-59?Samsung Galaxy A23?Samsung?BATTERY?7500000?Snapdragon 680, 5000mAh, 25W Fast Charge?180?04/03/2022
-60?Xiaomi Poco M4 Pro?Xiaomi?BATTERY?7200000?Dimensity 810, 5000mAh, 33W Fast Charge?210?09/11/2021
-50?Honor 70?Honor?CAMERA_VIDEO?13000000?Snapdragon 778G+, 54MP Sony IMX800, 66W?90?30/08/2022
+58?Nokia G21?Nokia?BATTERY?6500000?Unisoc T606, 5050mAh, 18W Fast Charge?181?15/02/2022
+60?Xiaomi Poco M4 Pro?Xiaomi?BATTERY?7200000?Dimensity 810, 5000mAh, 33W Fast Charge?1?09/11/2021
