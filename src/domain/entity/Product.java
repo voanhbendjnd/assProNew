@@ -18,7 +18,6 @@ public class Product {
     private Long price;
     private String description;
     private Long stock;
-    private String dateCreate;
     private TargetEnum target;
 
     // color
@@ -33,8 +32,8 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long code, String name, String brand, TargetEnum target, Long price, String description, Long stock,
-            String dateCreate) {
+    public Product(Long code, String name, String brand, TargetEnum target, Long price, String description,
+            Long stock) {
         this.name = name;
         this.code = code;
         this.brand = brand;
@@ -42,7 +41,6 @@ public class Product {
         this.target = target;
         this.description = description;
         this.stock = stock;
-        this.dateCreate = dateCreate;
     }
 
     public String getName() {
@@ -109,18 +107,10 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getDateCreate() {
-        return dateCreate;
-    }
-
-    public void setDateCreate(String dateCreate) {
-        this.dateCreate = dateCreate;
-    }
-
     public String toStringFormatted() {
         return this.code + "?" + this.name + "?" + this.brand + "?" + this.target + "?" + this.price + "?"
                 + this.description + "?"
-                + this.stock + "?" + this.dateCreate;
+                + this.stock;
     }
 
     @Override
@@ -147,10 +137,15 @@ public class Product {
         sb.append(RESET);
         for (Product product : productsList) {
             sb.append(product.toString()).append("\n");
-            sb.append(
-                    CYAN + "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n"
-                            + RESET);
+            // sb.append(
+            // CYAN +
+            // "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n"
+            // + RESET);
         }
+        sb.append(
+                CYAN +
+                        "+-------+----------------------------+------------------+-------------------------+-----------------+----------------------------------------------------------------------------------+-------+\n"
+                        + RESET);
         System.out.println(sb.toString());
     }
 }

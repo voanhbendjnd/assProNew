@@ -7,6 +7,7 @@ package handle;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +51,7 @@ public class HandleCart implements Handle<Cart> {
     @Override
     // ghi file xuống hàng và lấy định dạng theo dấu ?
     public void writeFile(String fileName, List<Cart> cartList) {
+        cartList.sort(Comparator.comparingLong(Cart::getId));
         try (FileWriter fw = new FileWriter(fileName)) {
             for (Cart x : cartList) {
                 fw.write(x.toStringFormatted() + "\n");

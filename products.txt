@@ -1,35 +1,35 @@
-25?iPhone 14 Pro Max?Apple?GAMING?27000000?A16 Bionic, 120Hz, Dynamic Island?120?14/09/2022
-26?Samsung Galaxy S22 Ultra?Samsung?GAMING?26000000?Snapdragon 8 Gen 1, 108MP Camera, 5000mAh?150?25/02/2022
-27?Xiaomi 12 Pro?Xiaomi?GAMING?19000000?Snapdragon 8 Gen 1, 120W fast charge?80?15/03/2022
-28?Oppo Find X5 Pro?Oppo?CAMERA_VIDEO?24000000?50MP Sony Sensor, Hasselblad Optimization?70?10/02/2022
-29?Vivo X80 Pro?Vivo?CAMERA_VIDEO?22000000?Zeiss Lens, Snapdragon 8 Gen 1, 5000mAh?85?20/04/2022
-30?Nokia XR20?Nokia?WORK_STUDY?11000000?Military Grade Durability, 5G?50?30/07/2021
-31?Realme GT 2 Pro?Realme?GAMING?16000000?Snapdragon 8 Gen 1, 120Hz LTPO Display?100?08/01/2022
-32?Honor Magic 4 Pro?Honor?CAMERA_VIDEO?23000000?Snapdragon 8 Gen 1, 100W charging, 50MP?60?23/05/2022
-33?iPhone 13?Apple?WORK_STUDY?21000000?A15 Bionic, Super Retina XDR, 128GB?90?24/09/2021
-34?Samsung Galaxy Z Fold 4?Samsung?WORK_STUDY?40000000?Foldable Display, Snapdragon 8+ Gen 1?38?10/08/2022
-35?Xiaomi Redmi Note 11?Xiaomi?THIN_LIGHT?7000000?Snapdragon 680, AMOLED 90Hz, 5000mAh?200?10/01/2022
-36?Asus ROG Phone 6?Asus?GAMING?25000000?Snapdragon 8+ Gen 1, 165Hz, 6000mAh?70?05/07/2022
-37?Samsung Galaxy A73?Samsung?THIN_LIGHT?12000000?Snapdragon 778G, 108MP Camera, 5000mAh?150?23/03/2022
-38?iPhone SE 2022?Apple?THIN_LIGHT?13000000?A15 Bionic, 4.7-inch, Touch ID?120?18/03/2022
-39?Oppo Reno8 Pro?Oppo?CAMERA_VIDEO?14000000?Dimensity 8100, 80W Charging, 50MP?110?10/06/2022
-40?Vivo V25 Pro?Vivo?CAMERA_VIDEO?11000000?64MP OIS, Dimensity 1300, 66W Charge?130?17/08/2022
-41?Realme 9 Pro+?Realme?THIN_LIGHT?9000000?Dimensity 920, Sony IMX766, 60W Charge?140?16/02/2022
-42?Honor X9?Honor?WORK_STUDY?8000000?Snapdragon 695, 120Hz, 66W Charging?160?29/03/2022
-43?iPhone 12 Pro?Apple?CAMERA_VIDEO?25000000?A14 Bionic, LiDAR, Ceramic Shield?70?23/10/2020
-44?Samsung Galaxy M52?Samsung?WORK_STUDY?8500000?Snapdragon 778G, 5000mAh, 120Hz?190?12/09/2021
-45?Xiaomi Black Shark 5 Pro?Xiaomi?GAMING?21000000?Snapdragon 8 Gen 1, 144Hz OLED, 120W?60?30/03/2022
-46?Oppo A96?Oppo?WORK_STUDY?6000000?Snapdragon 680, 5000mAh, 33W Charge?250?16/03/2022
-47?Vivo Y76 5G?Vivo?THIN_LIGHT?7500000?Dimensity 700, 50MP, 44W Fast Charge?180?11/12/2021
-48?Nokia G50?Nokia?WORK_STUDY?7000000?Snapdragon 480, 5000mAh, 5G?140?22/09/2021
-49?Realme Narzo 50A?Realme?GAMING?5000000?Helio G85, 6000mAh, 50MP?210?03/09/2021
-50?Honor 70?Honor?CAMERA_VIDEO?13000000?Snapdragon 778G+, 54MP Sony IMX800, 66W?90?30/08/2022
-51?Samsung Galaxy M51?Samsung?BATTERY?9000000?Snapdragon 730G, 7000mAh, 25W Fast Charge?180?01/09/2020
-52?Xiaomi Redmi Note 12 Pro?Xiaomi?BATTERY?8500000?Dimensity 1080, 5000mAh, 67W Fast Charge?200?27/10/2022
-53?Realme 10 Pro+?Realme?BATTERY?9500000?Dimensity 920, 5000mAh, 67W Charging?150?23/11/2022
-54?iPhone 13 Pro Max?Apple?BATTERY?31000000?A15 Bionic, 4352mAh, Super Retina XDR?100?24/09/2021
-55?Vivo Y21T?Vivo?BATTERY?6000000?Snapdragon 680, 5000mAh, 18W Fast Charge?220?03/01/2022
-56?Oppo A77?Oppo?BATTERY?7000000?Dimensity 810, 5000mAh, 33W Fast Charging?190?10/08/2022
-57?Honor Magic 4 Lite?Honor?BATTERY?8500000?Snapdragon 695, 4800mAh, 66W Fast Charging?170?25/03/2022
-58?Nokia G21?Nokia?BATTERY?6500000?Unisoc T606, 5050mAh, 18W Fast Charge?181?15/02/2022
-60?Xiaomi Poco M4 Pro?Xiaomi?BATTERY?7200000?Dimensity 810, 5000mAh, 33W Fast Charge?1?09/11/2021
+25?iPhone 14 Pro Max?Apple?GAMING?27000000?A16 Bionic, 120Hz, Dynamic Island?120
+26?Samsung Galaxy S22 Ultra?Samsung?GAMING?26000000?Snapdragon 8 Gen 1, 108MP Camera, 5000mAh?150
+27?Xiaomi 12 Pro?Xiaomi?GAMING?19000000?Snapdragon 8 Gen 1, 120W fast charge?80
+28?Oppo Find X5 Pro?Oppo?CAMERA_VIDEO?24000000?50MP Sony Sensor, Hasselblad Optimization?70
+29?Vivo X80 Pro?Vivo?CAMERA_VIDEO?22000000?Zeiss Lens, Snapdragon 8 Gen 1, 5000mAh?85
+30?Nokia XR20?Nokia?WORK_STUDY?11000000?Military Grade Durability, 5G?50
+31?Realme GT 2 Pro?Realme?GAMING?16000000?Snapdragon 8 Gen 1, 120Hz LTPO Display?100
+32?Honor Magic 4 Pro?Honor?CAMERA_VIDEO?23000000?Snapdragon 8 Gen 1, 100W charging, 50MP?60
+33?iPhone 13?Apple?WORK_STUDY?21000000?A15 Bionic, Super Retina XDR, 128GB?90
+34?Samsung Galaxy Z Fold 4?Samsung?WORK_STUDY?40000000?Foldable Display, Snapdragon 8+ Gen 1?38
+35?Xiaomi Redmi Note 11?Xiaomi?THIN_LIGHT?7000000?Snapdragon 680, AMOLED 90Hz, 5000mAh?200
+36?Asus ROG Phone 6?Asus?GAMING?25000000?Snapdragon 8+ Gen 1, 165Hz, 6000mAh?70
+37?Samsung Galaxy A73?Samsung?THIN_LIGHT?12000000?Snapdragon 778G, 108MP Camera, 5000mAh?150
+38?iPhone SE 2022?Apple?THIN_LIGHT?13000000?A15 Bionic, 4.7-inch, Touch ID?120
+39?Oppo Reno8 Pro?Oppo?CAMERA_VIDEO?14000000?Dimensity 8100, 80W Charging, 50MP?110
+40?Vivo V25 Pro?Vivo?CAMERA_VIDEO?11000000?64MP OIS, Dimensity 1300, 66W Charge?130
+41?Realme 9 Pro+?Realme?THIN_LIGHT?9000000?Dimensity 920, Sony IMX766, 60W Charge?140
+42?Honor X9?Honor?WORK_STUDY?8000000?Snapdragon 695, 120Hz, 66W Charging?160
+43?iPhone 12 Pro?Apple?CAMERA_VIDEO?25000000?A14 Bionic, LiDAR, Ceramic Shield?70
+44?Samsung Galaxy M52?Samsung?WORK_STUDY?8500000?Snapdragon 778G, 5000mAh, 120Hz?190
+45?Xiaomi Black Shark 5 Pro?Xiaomi?GAMING?21000000?Snapdragon 8 Gen 1, 144Hz OLED, 120W?60
+46?Oppo A96?Oppo?WORK_STUDY?6000000?Snapdragon 680, 5000mAh, 33W Charge?250
+47?Vivo Y76 5G?Vivo?THIN_LIGHT?7500000?Dimensity 700, 50MP, 44W Fast Charge?180
+48?Nokia G50?Nokia?WORK_STUDY?7000000?Snapdragon 480, 5000mAh, 5G?140
+49?Realme Narzo 50A?Realme?GAMING?5000000?Helio G85, 6000mAh, 50MP?210
+50?Honor 70?Honor?CAMERA_VIDEO?13000000?Snapdragon 778G+, 54MP Sony IMX800, 66W?90
+51?Samsung Galaxy M51?Samsung?BATTERY?9000000?Snapdragon 730G, 7000mAh, 25W Fast Charge?180
+52?Xiaomi Redmi Note 12 Pro?Xiaomi?BATTERY?8500000?Dimensity 1080, 5000mAh, 67W Fast Charge?200
+53?Realme 10 Pro+?Realme?BATTERY?9500000?Dimensity 920, 5000mAh, 67W Charging?150
+54?iPhone 13 Pro Max?Apple?BATTERY?31000000?A15 Bionic, 4352mAh, Super Retina XDR?100
+55?Vivo Y21T?Vivo?BATTERY?6000000?Snapdragon 680, 5000mAh, 18W Fast Charge?220
+56?Oppo A77?Oppo?BATTERY?7000000?Dimensity 810, 5000mAh, 33W Fast Charging?190
+57?Honor Magic 4 Lite?Honor?BATTERY?8500000?Snapdragon 695, 4800mAh, 66W Fast Charging?170
+58?Nokia G21?Nokia?BATTERY?6500000?Unisoc T606, 5050mAh, 18W Fast Charge?181
+60?Xiaomi Poco M4 Pro?Xiaomi?BATTERY?7200000?Dimensity 810, 5000mAh, 33W Fast Charge?1

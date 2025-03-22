@@ -34,8 +34,7 @@ public class HandleProduct implements Handle<Product> {
                 Long price = Long.parseLong(products[4]);
                 String description = products[5];
                 Long stock = Long.parseLong(products[6]);
-                String date = products[7];
-                productsList.add(new Product(codePhone, name, brand, target, price, description, stock, date));
+                productsList.add(new Product(codePhone, name, brand, target, price, description, stock));
 
             }
             sc.close();

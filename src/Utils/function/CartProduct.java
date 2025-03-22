@@ -29,14 +29,13 @@ public class CartProduct {
 
     public void cartProduct(Long userId) {
         Long cartId = 0L;
-        HandleProduct reader = new HandleProduct();
 
         System.out.println(CYAN + "══════════════════════════════════════" + RESET);
         System.out.print(BOLD + GREEN + "Please enter ID of the product you want add to cart: " + RESET);
         Long idProduct = sc.nextLong();
 
         boolean checkProduct = false;
-        String name = "", brand = "", desc = "", date = "";
+        String name = "", brand = "", desc = "";
         TargetEnum target = TargetEnum.GAMING;
         Long price = null, code = null, stock = null;
 
@@ -49,7 +48,6 @@ public class CartProduct {
                 desc = x.getDescription();
                 price = x.getPrice();
                 stock = x.getStock();
-                date = x.getDateCreate();
                 code = x.getCode();
                 checkProduct = true;
                 break; // Thoát vòng lặp khi tìm thấy sản phẩm

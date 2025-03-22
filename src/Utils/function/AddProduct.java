@@ -1,6 +1,5 @@
 package utils.function;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -108,12 +107,11 @@ public class AddProduct {
         }
 
         for (Product x : data) {
+            // trùng mô tả, tên và brand thì tính sản phẩm đó là 1
             if (name.equalsIgnoreCase(x.getName()) && brand.equalsIgnoreCase(x.getBrand())
                     && ds.equalsIgnoreCase(x.getDescription()) && x.getPrice().equals(price)) {
                 System.out.print(BOLD + BLUE + " One or Many stock? (1/2): " + RESET);
                 int z = sc.nextInt();
-                // Long stock = null;
-
                 if (z == 1) {
                     System.out.println(BOLD + GREEN + " Current stock: " + x.getStock() + RESET);
                     System.out.print(BOLD + BLUE + " Enter stock quantity to add: " + RESET);
@@ -127,14 +125,11 @@ public class AddProduct {
                     x.setStock(stockChange);
                     sc.nextLine();
                 }
-
-                Product pro = new Product(x.getCode(), x.getName(), x.getBrand(), x.getTarget(), x.getPrice(),
-                        x.getDescription(), x.getStock(), x.getDateCreate());
-                data.add(pro);
-                data.sort(Comparator.comparingLong(Product::getId));
+                // Product pro = new Product(x.getCode(), x.getName(), x.getBrand(),
+                // x.getTarget(), x.getPrice(),
+                // x.getDescription(), x.getStock());
+                // data.add(pro);
                 reader.writeFile(AllFile.fileAccountTxt, data);
-                // reader.deleteIt(AllFile.fileProductTxt, Optional.of(x.getCode()));
-                // reader.addNew(AllFile.fileProductTxt, pro);
                 proListed.add(x);
                 check = true;
 
@@ -160,25 +155,24 @@ public class AddProduct {
                 }
             }
 
-            String date = null;
-            while (true) {
-                try {
-                    System.out.print(BOLD + BLUE + " Date Created: " + RESET);
-                    date = sc.nextLine().trim();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    sdf.setLenient(false); // Không cho phép nhập sai định dạng
-                    sdf.parse(date); // Nếu sai format sẽ ném lỗi ParseException
-                    break;
-                } catch (Exception e) {
-                    System.out.println(BOLD + RED + " Invalid date format! Please enter in dd/MM/yyyy format." + RESET);
-                }
-            }
+            // String date = null;
+            // while (true) {
+            // try {
+            // System.out.print(BOLD + BLUE + " Date Created: " + RESET);
+            // date = sc.nextLine().trim();
+            // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            // sdf.setLenient(false); // Không cho phép nhập sai định dạng
+            // sdf.parse(date); // Nếu sai format sẽ ném lỗi ParseException
+            // break;
+            // } catch (Exception e) {
+            // System.out.println(BOLD + RED + " Invalid date format! Please enter in
+            // dd/MM/yyyy format." + RESET);
+            // }
+            // }
 
-            Product pro = new Product(maxCode + 1, name, brand, target, price, ds, stock, date);
+            Product pro = new Product(maxCode + 1, name, brand, target, price, ds, stock);
             data.add(pro);
-            data.sort(Comparator.comparingLong(Product::getId));
             reader.writeFile(AllFile.fileProductTxt, data);
-            // reader.addNew(AllFile.fileProductTxt, pro);
             proListed.add(pro);
 
             System.out.println(GREEN + " Product added successfully!" + RESET);
