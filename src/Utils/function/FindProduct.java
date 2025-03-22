@@ -16,8 +16,8 @@ import java.util.Arrays;
  *
  * @author Vo Anh Ben - CE190709
  */
-
 public class FindProduct {
+
     private static Scanner sc = new Scanner(System.in);
 
     public static final String RESET = "\u001B[0m";
@@ -81,9 +81,11 @@ public class FindProduct {
         List<Product> proFind = new ArrayList<>();
 
         String option = sc.nextLine();
+        boolean checkEmpty = false;
         // check lựa chọn rỗng
         if (option.isEmpty()) {
             proFind.addAll(proList);
+            checkEmpty = true;
 
         }
 
@@ -281,8 +283,8 @@ public class FindProduct {
             }
 
         }
-        boolean checkS = true;
-        // tìm theo giá tăng dầndần
+
+        // tìm theo giá tăng dần
         if (checkSortAs && !checkSortDes) {
             if (checkSort) {
                 proFind.addAll(proList);
@@ -302,7 +304,7 @@ public class FindProduct {
             });
             // tìm theo giá giảm dần
 
-        } else if (!checkSortAs && checkSortDes) {
+        } else if (checkSortDes && !checkSortAs) {
             if (checkSort) {
                 proFind.addAll(proList);
             }
@@ -321,7 +323,8 @@ public class FindProduct {
             });
 
         }
-        // lỗi nhập cả 2 loại sortsort
+        boolean checkS = true;
+        // lỗi nhập cả 2 loại sort
         if (checkSortAs && checkSortDes) {
             proFind.addAll(proList);
             Product.printTable(proFind);
@@ -329,8 +332,18 @@ public class FindProduct {
                     + "Cannot select both ascending and descending sorting at the same time.\n");
             checkS = false;
         }
-        if (checkS) {
-            Product.printTable(proFind);
+        if (checkFactory || checkPrice || checkTarget || checkSortAs || checkSortDes || checkEmpty) {
+            if (proFind.isEmpty()) {
+                // không có sản phẩm nào phù hợp
+                System.out.println(BOLD + GREEN + " There are no suitable products!" + RESET);
+            } else if (checkS) {
+                Product.printTable(proFind);
+                if (checkEmpty) {
+                    // bạn đang tìm kiếm không theo tiêu chí nào
+                    System.out.println(BOLD + RED + " You are searching without any criteria." + RESET);
+                }
+            }
+
         }
 
     }

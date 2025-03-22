@@ -23,6 +23,15 @@ public class Cart {
     private Long qty;
     private String name;
     private Long productId;
+    private Long total;
+
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
 
     public Long getPrice() {
         return price;
@@ -46,6 +55,7 @@ public class Cart {
         this.qty = qty;
         this.name = name;
         this.productId = productId;
+        this.total = totalProducts;
 
     }
 
@@ -91,7 +101,7 @@ public class Cart {
 
     public String toStringFormatted() {
         return this.id + "?" + this.userId + "?" + this.name + "?" + this.price + "?" + this.qty + "?"
-                + this.getTotalProducts() + "?"
+                + this.getTotal() + "?"
                 + this.productId;
     }
 
@@ -102,7 +112,7 @@ public class Cart {
                 GREEN, this.name, RESET,
                 RED, new FormatData().formatPrice(this.price), RESET,
                 BLUE, this.qty, RESET,
-                YELLOW, new FormatData().formatPrice(this.getTotalProducts()), RESET);
+                YELLOW, new FormatData().formatPrice(this.getTotal()), RESET);
     }
 
     public static void printTable(List<Cart> ordersList) {

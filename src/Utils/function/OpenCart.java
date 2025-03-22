@@ -49,15 +49,7 @@ public class OpenCart {
         Long orderUserId = orderUserList == null || orderUserList.isEmpty() ? 1L
                 : orderUserList.get(orderUserList.size() - 1).getId() + 1;
         orderList.add(new OrderImpl(orderId, userId, cartIdCurrent, nameUser, address, phone, price, orderUserId));
-        orderList.sort(Comparator.comparingLong(OrderImpl::getId));
         order.writeFile(AllFile.fileOrderTxt, orderList);
-        // order.addNew(AllFile.fileOrderTxt,
-        // new OrderImpl(orderId, userId, cartIdCurrent, nameUser, address, phone,
-        // price, orderUserId));
-        // HandleOrderUser orderUser = new HandleOrderUser();
-        // orderUser.addNew(AllFile.fileOrderUserTxt,
-        // new OrderUserImpl(orderUserId, name, nameUser, address, phone, userId, price,
-        // 0));
         orderUserList.add(new OrderUserImpl(orderUserId, name, nameUser, address, phone, userId, price, 0));
         orderUserList.sort(Comparator.comparingLong(OrderUserImpl::getId));
         orderUser.writeFile(AllFile.fileOrderUserTxt, orderUserList);
@@ -94,13 +86,13 @@ public class OpenCart {
                     String name = "";
                     Long price = null;
                     Long qty = null;
-                    Long productId = null;
+                    // Long productId = null;
                     for (Cart x : cartList) {
                         if (x.getId().equals(cartIdCurrent)) {
                             name += x.getName();
                             price = x.getPrice();
                             qty = x.getQty();
-                            productId = x.getProductId();
+                            // productId = x.getProductId();
                         }
                     }
 
@@ -144,13 +136,15 @@ public class OpenCart {
                             } else {
                                 // chỉ cần giảm số lượng
                                 // xóa và thêm dữ liệu mới từ dữ liệu cũ cập nhật qty
-                                list.add(new Cart(cartIdCurrent, userId, name, price, qty - quantity,
-                                        (qty - quantity) * price, productId));
-                                list.sort(Comparator.comparingLong(Cart::getId));
+                                for (Cart x : list) {
+                                    if (x.getId().equals(cartIdCurrent)) {
+                                        x.setQty(qty - quantity);
+                                        x.setTotal((qty - quantity) * price);
+                                    }
+                                }
+                                // list.add(new Cart(cartIdCurrent, userId, name, price, qty - quantity,
+                                // (qty - quantity) * price, productId));
                                 handleCart.writeFile(AllFile.fileCartTxt, list);
-                                // new HandleCart().addNew(AllFile.fileCartTxt, new Cart(cartIdCurrent, userId,
-                                // name, price, qty - quantity, (qty - quantity) * price, productId));
-                                // new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
                                 inforAndHandleOrder(userId, cartIdCurrent, name, price * quantity);
 
                             }

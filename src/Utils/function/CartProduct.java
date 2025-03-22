@@ -4,7 +4,6 @@
  */
 package utils.function;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -15,7 +14,6 @@ import handle.HandleCart;
 import handle.HandleProduct;
 import setupFile.AllFile;
 import utils.FormatData;
-import utils.constant.TargetEnum;
 
 public class CartProduct {
     public static final String RESET = "\u001B[0m";
@@ -36,14 +34,14 @@ public class CartProduct {
 
         boolean checkProduct = false;
         String name = "", brand = "", desc = "";
-        TargetEnum target = TargetEnum.GAMING;
+        // TargetEnum target = TargetEnum.GAMING;
         Long price = null, code = null, stock = null;
 
         List<Product> proList = new HandleProduct().read(AllFile.fileProductTxt);
         for (Product x : proList) {
             if (x.getCode().equals(idProduct)) {
                 brand = x.getBrand();
-                target = x.getTarget();
+                // target = x.getTarget();
                 name = x.getName();
                 desc = x.getDescription();
                 price = x.getPrice();
@@ -54,6 +52,7 @@ public class CartProduct {
             }
         }
         if (checkProduct) {
+            System.out.println(BOLD + CYAN + " Current stock product: " + RESET + stock);
             System.out.print(BOLD + BLUE + " Please enter quantiy product for add to cart: " + RESET);
             Long st = sc.nextLong();
             sc.nextLine();
@@ -102,7 +101,6 @@ public class CartProduct {
                                         break;
                                     }
                                 }
-                                proList.sort(Comparator.comparingLong(Product::getCode));
                                 new HandleProduct().writeFile(AllFile.fileProductTxt, proList);
                             }
 

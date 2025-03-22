@@ -1,4 +1,4 @@
-25?iPhone 14 Pro Max?Apple?GAMING?27000000?A16 Bionic, 120Hz, Dynamic Island?120
+25?iPhone 14 Pro Max?Apple?GAMING?27000000?A16 Bionic, 120Hz, Dynamic Island?110
 26?Samsung Galaxy S22 Ultra?Samsung?GAMING?26000000?Snapdragon 8 Gen 1, 108MP Camera, 5000mAh?150
 27?Xiaomi 12 Pro?Xiaomi?GAMING?19000000?Snapdragon 8 Gen 1, 120W fast charge?80
 28?Oppo Find X5 Pro?Oppo?CAMERA_VIDEO?24000000?50MP Sony Sensor, Hasselblad Optimization?70
@@ -16,7 +16,7 @@
 40?Vivo V25 Pro?Vivo?CAMERA_VIDEO?11000000?64MP OIS, Dimensity 1300, 66W Charge?130
 41?Realme 9 Pro+?Realme?THIN_LIGHT?9000000?Dimensity 920, Sony IMX766, 60W Charge?140
 42?Honor X9?Honor?WORK_STUDY?8000000?Snapdragon 695, 120Hz, 66W Charging?160
-43?iPhone 12 Pro?Apple?CAMERA_VIDEO?25000000?A14 Bionic, LiDAR, Ceramic Shield?70
+43?iPhone 12 Pro?Apple?CAMERA_VIDEO?25000000?A14 Bionic, LiDAR, Ceramic Shield?51
 44?Samsung Galaxy M52?Samsung?WORK_STUDY?8500000?Snapdragon 778G, 5000mAh, 120Hz?190
 45?Xiaomi Black Shark 5 Pro?Xiaomi?GAMING?21000000?Snapdragon 8 Gen 1, 144Hz OLED, 120W?60
 46?Oppo A96?Oppo?WORK_STUDY?6000000?Snapdragon 680, 5000mAh, 33W Charge?250

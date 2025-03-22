@@ -38,6 +38,7 @@ public class HandleOrderUser implements Handle<OrderUserImpl> {
                 orderList.add(new OrderUserImpl(id, nameP, name, address, phone, userId, price, status));
 
             }
+            sc.close();
 
         } catch (Exception ex) {
             // đọc không được sẽ quăng ra lỗi
