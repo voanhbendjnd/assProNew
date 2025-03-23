@@ -28,28 +28,7 @@ public class AddProduct {
 
     public void addNewProduct() throws InterruptedException {
         HandleProduct reader = new HandleProduct();
-        // int n = 0;
-        // while (true) {
-        // try {
-        // System.out.print(BOLD + CYAN + "Please enter quantity of products to add: " +
-        // RESET);
-        // n = Integer.parseInt(sc.nextLine().trim());
-        // if (n < 0) {
-        // System.out.println(BOLD + RED + "Quantity must be a positive number! Please
-        // try again." + RESET);
-        // } else {
-        // break; // Nếu nhập đúng, thoát khỏi vòng lặp
-        // }
-
-        // } catch (Exception e) {
-        // System.out.println(BOLD + RED + "Invalid input! Please enter a valid number."
-        // + RESET);
-        // }
-        // }
-
         List<Product> proListed = new ArrayList<>();
-
-        // while (n-- > 0) {
         System.out.println(BOLD + BLUE + "═════════════════════════" + RESET);
         System.out.println(BOLD + BLUE + "      ADD NEW PRODUCT     " + RESET);
         System.out.println(BOLD + BLUE + "═════════════════════════" + RESET);
@@ -123,10 +102,6 @@ public class AddProduct {
                     x.setStock(stockChange);
                     sc.nextLine();
                 }
-                // Product pro = new Product(x.getCode(), x.getName(), x.getBrand(),
-                // x.getTarget(), x.getPrice(),
-                // x.getDescription(), x.getStock());
-                // data.add(pro);
                 reader.writeFile(AllFile.fileAccountTxt, data);
                 proListed.add(x);
                 check = true;
@@ -152,21 +127,6 @@ public class AddProduct {
                     System.out.println(BOLD + RED + " Invalid input! Price must be a number greater than 0!!" + RESET);
                 }
             }
-
-            // String date = null;
-            // while (true) {
-            // try {
-            // System.out.print(BOLD + BLUE + " Date Created: " + RESET);
-            // date = sc.nextLine().trim();
-            // SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            // sdf.setLenient(false); // Không cho phép nhập sai định dạng
-            // sdf.parse(date); // Nếu sai format sẽ ném lỗi ParseException
-            // break;
-            // } catch (Exception e) {
-            // System.out.println(BOLD + RED + " Invalid date format! Please enter in
-            // dd/MM/yyyy format." + RESET);
-            // }
-            // }
 
             Product pro = new Product(maxCode + 1, name, brand, target, price, ds, stock);
             data.add(pro);

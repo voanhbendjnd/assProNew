@@ -340,7 +340,7 @@ public class FindProduct {
                 Product.printTable(proFind);
                 if (checkEmpty) {
                     // bạn đang tìm kiếm không theo tiêu chí nào
-                    System.out.println(BOLD + RED + " You are searching without any criteria." + RESET);
+                    System.out.println(BOLD + CYAN + " You are searching without any criteria." + RESET);
                 }
             }
 

@@ -89,4 +89,13 @@ public class HandleCart implements Handle<Cart> {
             writeFile(fileName, cartList);
         }
     }
+
+    @Override
+    public void delete(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
+        HandleCart handleCart = new HandleCart();
+        List<Cart> cartList = handleCart.read(fileName);
+        cartList.removeIf(x -> x.getId().equals(id));
+        handleCart.writeFile(fileName, cartList);
+    }
 }

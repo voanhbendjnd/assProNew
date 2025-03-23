@@ -53,25 +53,25 @@ public class MenuSystem {
                 int q = sc.nextInt();
 
                 if (q == 1) {
-                    System.out.println(GREEN + " Searching for products..." + RESET);
+                    System.out.println(BOLD + GREEN + " Form Searching for products..." + RESET);
                     new FindProduct().findProducts();
                 } else if (q == 2) {
-                    System.out.println(BLUE + " Displaying all products..." + RESET);
+                    System.out.println(BOLD + BLUE + " Displaying all products..." + RESET);
                     new FindProduct().findAll();
                 } else if (q == 3) {
-                    System.out.println(CYAN + " Processing your add to cart..." + RESET);
+                    System.out.println(BOLD + CYAN + " Processing your add to cart..." + RESET);
                     new CartProduct().cartProduct(id);
                 } else if (q == 4) {
-                    System.out.println(YELLOW + " Viewing your orders..." + RESET);
+                    System.out.println(BOLD + YELLOW + " Viewing your orders..." + RESET);
                     new ViewOrder().viewOrderFromUser(id);
                 } else if (q == 5) {
-                    System.out.println(YELLOW + " Viewing your carts..." + RESET);
+                    System.out.println(BOLD + YELLOW + " Viewing your carts..." + RESET);
                     new OpenCart().openCart(id);
                 } else if (q == 6) {
-                    System.out.println(RED + " Logging out..." + RESET);
+                    System.out.println(BOLD + RED + " Logging out..." + RESET);
                     break;
                 } else if (q == 0) {
-                    System.out.println(RED + " Exiting..." + RESET);
+                    System.out.println(BOLD + RED + " Exiting..." + RESET);
                     AnimationOpeningAndEnding.MovieEnding();
                     break;
                 } else {
@@ -108,25 +108,26 @@ public class MenuSystem {
                 int q = sc.nextInt();
 
                 if (q == 1) {
-                    System.out.println(GREEN + " Searching for products..." + RESET);
+                    System.out.println(BOLD + GREEN + " Form Searching for products..." + RESET);
                     new FindProduct().findProducts();
                 } else if (q == 2) {
-                    System.out.println(BLUE + " Adding a new product..." + RESET);
+                    System.out.println(BOLD + BLUE + " Form Adding a new product..." + RESET);
                     new AddProduct().addNewProduct();
                 } else if (q == 3) {
-                    System.out.println(RED + " Deleting a product..." + RESET);
-                    new DeleteProduct().deleteProduct();
+                    System.out.println(BOLD + RED + " Form Deleting a product..." + RESET);
+                    // new DeleteProduct().deleteProduct();
+                    new DeleteProduct().delete();
                 } else if (q == 4) {
-                    System.out.println(CYAN + " Displaying all products..." + RESET);
+                    System.out.println(BOLD + CYAN + " Displaying all products..." + RESET);
                     new FindProduct().findAll();
                 } else if (q == 5) {
-                    System.out.println(YELLOW + " Viewing all customer orders..." + RESET);
+                    System.out.println(BOLD + YELLOW + " Viewing all customer orders..." + RESET);
                     new ViewOrder().viewOrderFromAdmin();
                 } else if (q == 6) {
-                    System.out.println(RED + " Logging out..." + RESET);
+                    System.out.println(BOLD + RED + " Logging out..." + RESET);
                     break;
                 } else if (q == 0) {
-                    System.out.println(RED + " Exiting..." + RESET);
+                    System.out.println(BOLD + RED + " Exiting..." + RESET);
                     AnimationOpeningAndEnding.MovieEnding();
                     break;
                 } else {
@@ -158,25 +159,25 @@ public class MenuSystem {
                 int q = sc.nextInt();
 
                 if (q == 1) {
-                    System.out.println(GREEN + " Searching for products..." + RESET);
+                    System.out.println(BOLD + GREEN + " Form Searching for products..." + RESET);
                     new FindProduct().findProducts();
                 } else if (q == 2) {
-                    System.out.println(BLUE + " Displaying all products..." + RESET);
+                    System.out.println(BOLD + BLUE + " Displaying all products..." + RESET);
                     new FindProduct().findAll();
                 } else if (q == 3) {
-                    System.out.println(CYAN + " Redirecting to login..." + RESET);
+                    System.out.println(BOLD + CYAN + " Redirecting to login..." + RESET);
                     RegisterForm app = new RegisterForm();
                     app.mainMethod();
                 } else if (q == 0) {
-                    System.out.println(RED + " Exiting..." + RESET);
+                    System.out.println(BOLD + RED + " Exiting..." + RESET);
                     AnimationOpeningAndEnding.MovieEnding();
 
                     break;
                 } else {
-                    System.out.println(RED + " Please enter a valid option!" + RESET);
+                    System.out.println(BOLD + RED + " Please enter a valid option!" + RESET);
                 }
             } catch (Exception ex) {
-                System.out.println(RED + " Invalid input! Please enter a number." + RESET);
+                System.out.println(BOLD + RED + " Invalid input! Please enter a number." + RESET);
                 sc.nextLine();
             }
         }

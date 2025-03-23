@@ -88,4 +88,14 @@ public class HandleOrder implements Handle<OrderImpl> {
             writeFile(fileName, orderList);
         }
     }
+
+    @Override
+    public void delete(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
+        HandleOrder handleOrder = new HandleOrder();
+        List<OrderImpl> orderList = handleOrder.read(fileName);
+        orderList.removeIf(x -> x.getId().equals(id));
+        handleOrder.writeFile(fileName, orderList);
+    }
+
 }

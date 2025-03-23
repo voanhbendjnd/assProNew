@@ -26,4 +26,6 @@ public interface Handle<T> {
 
     // xóa 1 với file
     public void deleteIt(String fileName, Optional<?> kei);
+
+    public void delete(String fileName, Optional<?> kei);
 }

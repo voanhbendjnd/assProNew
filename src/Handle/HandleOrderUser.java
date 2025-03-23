@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import domain.entity.Cart;
 import domain.entity.OrderUserImpl;
 import setupFile.AllFile;
 
@@ -90,5 +91,14 @@ public class HandleOrderUser implements Handle<OrderUserImpl> {
         } else {
             // System.out.println("Product not found.");
         }
+    }
+
+    @Override
+    public void delete(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
+        HandleOrderUser handle = new HandleOrderUser();
+        List<OrderUserImpl> orderUserList = handle.read(fileName);
+        orderUserList.removeIf(x -> x.getId().equals(id));
+        handle.writeFile(fileName, orderUserList);
     }
 }

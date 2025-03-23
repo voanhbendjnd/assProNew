@@ -51,9 +51,9 @@ public class RegisterForm {
 
             if (choice == 1) {
                 // Handle login
-                System.out.print(BOLD + YELLOW + " >>>>> Please enter username(email): " + RESET);
+                System.out.print(BOLD + YELLOW + " <> Please enter username(email): " + RESET);
                 String user = sc.nextLine();
-                System.out.print(BOLD + BLUE + " >>>>> Please enter password: " + RESET);
+                System.out.print(BOLD + BLUE + " <> Please enter password: " + RESET);
                 String password = sc.nextLine();
                 boolean checkLogin = false;
                 Long userId = null;
@@ -99,11 +99,11 @@ public class RegisterForm {
                 }
 
             } else if (choice == 2) {
-                System.out.print(BOLD + YELLOW + ">>>>> Please enter email for new account: " + RESET);
+                System.out.print(BOLD + YELLOW + " <> Please enter email for new account: " + RESET);
                 String email = sc.nextLine();
-                System.out.print(BOLD + GREEN + " >>>>> Please enter full name for new account: " + RESET);
+                System.out.print(BOLD + GREEN + " <> Please enter full name for new account: " + RESET);
                 String user = sc.nextLine();
-                System.out.print(BOLD + BLUE + " >>>>> Please enter password for new account: " + RESET);
+                System.out.print(BOLD + BLUE + " <> Please enter password for new account: " + RESET);
                 String password = sc.nextLine();
                 if (new ValidationUser().validUser(user, email, password).equals("validation")) {
                     // boolean uniqueEmail = true;

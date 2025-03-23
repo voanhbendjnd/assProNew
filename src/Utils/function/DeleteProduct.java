@@ -26,9 +26,6 @@ public class DeleteProduct {
     private Scanner sc = new Scanner(System.in); // Đối tượng Scanner để nhập dữ liệu từ bàn phím
 
     public void deleteProduct() {
-        // Các mã màu ANSI để hiển thị thông báo lỗi hoặc thành công
-        String RESET = "\u001B[0m";
-        String red = "\u001B[31m";
 
         // Đọc danh sách sản phẩm từ tệp
         List<Product> proList = new HandleProduct().read(AllFile.fileProductTxt);
@@ -41,9 +38,9 @@ public class DeleteProduct {
 
                 // Kiểm tra nếu người dùng để trống hoặc nhập không phải số
                 if (input.isEmpty()) {
-                    System.out.println(red + " Error: Product ID cannot be empty!" + RESET);
+                    System.out.println(RED + " Error: Product ID cannot be empty!" + RESET);
                 } else if (!input.matches("\\d+")) {
-                    System.out.println(red + " Error: Please enter a valid number!" + RESET);
+                    System.out.println(RED + " Error: Please enter a valid number!" + RESET);
                     input = "";
                 }
             } while (input.isEmpty()); // Lặp lại nếu nhập không hợp lệ
@@ -65,7 +62,7 @@ public class DeleteProduct {
             if (found) {
                 break;
             } else {
-                System.out.println(red + " Product does not exist in cart!" + RESET);
+                System.out.println(RED + " Product does not exist in cart!" + RESET);
 
                 // Yêu cầu người dùng chọn tiếp tục hay thoát
                 String choice;
@@ -87,5 +84,39 @@ public class DeleteProduct {
                 }
             }
         }
+    }
+
+    public void delete() {
+        HandleProduct handle = new HandleProduct();
+        List<Product> proList = handle.read(AllFile.fileProductTxt);
+        if (proList.isEmpty() || proList.size() == 0) {
+            System.out.println(BOLD + CYAN + " List product empty! " + RESET);
+
+        } else {
+            System.out.print(BOLD + CYAN + " Please enter id product you want to delete: " + RESET);
+            String id = sc.nextLine();
+            boolean check = false;
+            try {
+                Long productId = Long.parseLong(id);
+                for (Product x : proList) {
+                    if (x.getCode().equals(productId)) {
+                        check = true;
+                        break;
+                    }
+                }
+                if (check) {
+                    proList.removeIf(x -> x.getCode().equals(Long.parseLong(id)));
+                    handle.writeFile(AllFile.fileProductTxt, proList);
+                    System.out.print(BOLD + GREEN + " Delete product with " + productId + " successful!" + RESET);
+
+                } else {
+                    System.out.println(RED + " Product with " + productId + " not found!" + RESET);
+                }
+
+            } catch (Exception ex) {
+                System.out.println(RED + BOLD + " Error: Please enter only number!" + RESET);
+            }
+        }
+
     }
 }

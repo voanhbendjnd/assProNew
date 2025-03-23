@@ -88,4 +88,13 @@ public class HandleUser implements Handle<User> {
             writeFile(fileName, accountList);
         }
     }
+
+    @Override
+    public void delete(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
+        HandleUser handleUser = new HandleUser();
+        List<User> userList = handleUser.read(fileName);
+        userList.removeIf(x -> x.getId().equals(id));
+        handleUser.writeFile(fileName, userList);
+    }
 }

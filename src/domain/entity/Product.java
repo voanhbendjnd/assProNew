@@ -6,7 +6,6 @@
 package domain.entity;
 
 import java.util.List;
-
 import utils.FormatData;
 import utils.constant.TargetEnum;
 

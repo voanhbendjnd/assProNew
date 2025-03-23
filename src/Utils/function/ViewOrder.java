@@ -61,9 +61,10 @@ public class ViewOrder {
                     }
                 }
                 handleUser.writeFile(AllFile.fileOrderUserTxt, orderUserList);
-                handle.deleteIt(AllFile.fileOrderTxt, Optional.of(stId));
+                // handle.deleteIt(AllFile.fileOrderTxt, Optional.of(stId));
+                handle.delete(AllFile.fileOrderTxt, Optional.of(stId));
             }
-            System.out.println(BOLD + RED + "Order successful..." + RESET);
+            System.out.println(BOLD + GREEN + " Order successful..." + RESET);
 
         } else {
             System.out.println(BOLD + RED + " Order id with " + id + " is incorrect, please re-enter" + RESET);

@@ -32,6 +32,8 @@ public class OpenCart {
     // cho người dùng nhập thông tin
     public static void inforAndHandleOrder(Long userId, Long cartIdCurrent, String name, Long price) {
         List<OrderUserImpl> newOrder = new ArrayList<>();
+        HandleOrder handleOrder = new HandleOrder();
+        HandleOrderUser handleOrderUser = new HandleOrderUser();
         System.out.println(BOLD + GREEN + " Please enter order details:" + RESET);
         System.out.print(" Name: ");
         String nameUser = sc.nextLine();
@@ -39,35 +41,52 @@ public class OpenCart {
         String address = sc.nextLine();
         System.out.print(" Phone Number: ");
         String phone = sc.nextLine();
-        HandleOrder order = new HandleOrder();
-        HandleOrderUser orderUser = new HandleOrderUser();
-        List<OrderImpl> orderList = new HandleOrder().read(AllFile.fileOrderTxt);
+
+        List<OrderImpl> orderList = handleOrder.read(AllFile.fileOrderTxt);
         Long orderId = orderList == null || orderList.isEmpty() ? 1L // nếu là lần đầu thêm vô cart cho id = 1
                 : orderList.get(orderList.size() - 1).getId() + 1; // lấy id của cart cuói cùng + 1
 
-        List<OrderUserImpl> orderUserList = new HandleOrderUser().read(AllFile.fileOrderUserTxt);
+        List<OrderUserImpl> orderUserList = handleOrderUser.read(AllFile.fileOrderUserTxt);
         Long orderUserId = orderUserList == null || orderUserList.isEmpty() ? 1L
                 : orderUserList.get(orderUserList.size() - 1).getId() + 1;
-        orderList.add(new OrderImpl(orderId, userId, cartIdCurrent, nameUser, address, phone, price, orderUserId));
-        order.writeFile(AllFile.fileOrderTxt, orderList);
-        orderUserList.add(new OrderUserImpl(orderUserId, name, nameUser, address, phone, userId, price, 0));
+        orderList.add(new OrderImpl(orderId,
+                userId,
+                cartIdCurrent,
+                nameUser,
+                address,
+                phone,
+                price,
+                orderUserId));
+        handleOrder.writeFile(AllFile.fileOrderTxt, orderList);
+        orderUserList.add(new OrderUserImpl(orderUserId,
+                name,
+                nameUser,
+                address,
+                phone,
+                userId,
+                price,
+                0));
         orderUserList.sort(Comparator.comparingLong(OrderUserImpl::getId));
-        orderUser.writeFile(AllFile.fileOrderUserTxt, orderUserList);
+        handleOrderUser.writeFile(AllFile.fileOrderUserTxt, orderUserList);
         System.out.println(BOLD + YELLOW + " Order placed successfully!" + RESET);
         System.out.println(BOLD + " Your Order Details:" + RESET);
         newOrder.add(new OrderUserImpl(
-                orderUserId, name, nameUser, address, phone, userId, price, 0));
-
+                orderUserId,
+                name,
+                nameUser,
+                address,
+                phone,
+                userId,
+                price,
+                0));
         OrderUserImpl.printTableOrderForUser(newOrder);
     }
 
     @SuppressWarnings("static-access")
     public void openCart(Long userId) {
-
-        // List<OrderUser> newOrder = new ArrayList<>();
-        List<Cart> list = new HandleCart().read(AllFile.fileCartTxt);
-        List<Cart> cartList = new ArrayList<>();
         HandleCart handleCart = new HandleCart();
+        List<Cart> list = handleCart.read(AllFile.fileCartTxt);
+        List<Cart> cartList = new ArrayList<>();
         for (Cart x : list) {
             if (x.getUserId().equals(userId)) {
                 cartList.add(x);
@@ -75,29 +94,27 @@ public class OpenCart {
         }
         new Cart().printTable(cartList);
         if (!cartList.isEmpty()) {
-            System.out.print(BOLD + GREEN + "Buy product or exit cart(y/n): " + RESET);
+            System.out.print(BOLD + GREEN + " Buy product or exit cart(y/n): " + RESET);
             char q = sc.nextLine().charAt(0);
             if (q == 'y' || q == 'Y') {
                 try {
-                    System.out.print(BOLD + BLUE + "Id of product: " + RESET);
+                    System.out.print(BOLD + BLUE + " Id of product: " + RESET);
                     Long cartIdCurrent = Long.parseLong(sc.nextLine());
-                    System.out.print(BOLD + YELLOW + "Keep the current quantity?(y/n): " + RESET);
-                    char qq = sc.nextLine().charAt(0);
                     String name = "";
                     Long price = null;
                     Long qty = null;
-                    // Long productId = null;
                     for (Cart x : cartList) {
                         if (x.getId().equals(cartIdCurrent)) {
                             name += x.getName();
                             price = x.getPrice();
                             qty = x.getQty();
-                            // productId = x.getProductId();
                         }
                     }
 
+                    System.out.print(BOLD + CYAN + " Current stock product: " + RESET + BOLD + qty);
+                    System.out.print(BOLD + YELLOW + " Keep the current quantity?(y/n): " + RESET);
+                    char qq = sc.nextLine().charAt(0);
                     if (qq == 'y') {
-
                         System.out.println(BLUE + " Product selected (ID = " + cartIdCurrent + ")" + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
                         System.out.println(BOLD + " Name: " + name + RESET);
@@ -108,11 +125,11 @@ public class OpenCart {
                         System.out.print(BOLD + YELLOW + "Buy(y/n)?: " + RESET);
                         char qqq = sc.nextLine().charAt(0);
                         if (qqq == 'y') {
-                            new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
+
+                            // new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
+                            handleCart.delete(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
                             inforAndHandleOrder(userId, cartIdCurrent, name, price * qty);
-
                         }
-
                     } else {
                         System.out.print(BOLD + GREEN + " Please enter quantity: " + RESET);
                         Long quantity = Long.parseLong(sc.nextLine());
@@ -123,14 +140,14 @@ public class OpenCart {
                         System.out.println(BOLD + " Quantity: " + quantity + RESET);
                         System.out.println(BOLD + " Total: " + new FormatData().formatPrice(price * quantity) + RESET);
                         System.out.println(YELLOW + "---------------------------------------" + RESET);
-                        System.out.print(BOLD + YELLOW + "Buy(y/n)?: " + RESET);
+                        System.out.print(BOLD + YELLOW + " Buy(y/n)?: " + RESET);
                         char qqq = sc.nextLine().charAt(0);
                         if (qqq == 'y') {
                             // xử lý quantity trong giỏ
                             // nếu mua hết thì xóa luôn cái sản phẩm đó trong giỏ
                             if (qty - quantity <= 0) {
-
-                                new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
+                                handleCart.delete(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
+                                // new HandleCart().deleteIt(AllFile.fileCartTxt, Optional.of(cartIdCurrent));
                                 inforAndHandleOrder(userId, cartIdCurrent, name, price * quantity);
 
                             } else {
@@ -146,21 +163,16 @@ public class OpenCart {
                                 // (qty - quantity) * price, productId));
                                 handleCart.writeFile(AllFile.fileCartTxt, list);
                                 inforAndHandleOrder(userId, cartIdCurrent, name, price * quantity);
-
                             }
-
                         }
-
                     }
-
                 } catch (Exception ex) {
                     System.out.println(ex);
                 }
             } else {
-                System.out.println(BOLD + BLUE + "Exiting view your cart..." + RESET);
+                System.out.println(BOLD + BLUE + " Exiting view your cart..." + RESET);
             }
 
         }
-
     }
 }

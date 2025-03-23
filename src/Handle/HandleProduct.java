@@ -92,4 +92,13 @@ public class HandleProduct implements Handle<Product> {
         }
     }
 
+    @Override
+    public void delete(String fileName, Optional<?> idOptional) {
+        Long id = Long.parseLong(idOptional.get().toString());
+        HandleProduct handle = new HandleProduct();
+        List<Product> proList = handle.read(fileName);
+        proList.removeIf(x -> x.getCode().equals(id));
+        handle.writeFile(fileName, proList);
+    }
+
 }

@@ -16,7 +16,7 @@
 40?Vivo V25 Pro?Vivo?CAMERA_VIDEO?11000000?64MP OIS, Dimensity 1300, 66W Charge?130
 41?Realme 9 Pro+?Realme?THIN_LIGHT?9000000?Dimensity 920, Sony IMX766, 60W Charge?140
 42?Honor X9?Honor?WORK_STUDY?8000000?Snapdragon 695, 120Hz, 66W Charging?160
-43?iPhone 12 Pro?Apple?CAMERA_VIDEO?25000000?A14 Bionic, LiDAR, Ceramic Shield?51
+43?iPhone 12 Pro?Apple?CAMERA_VIDEO?25000000?A14 Bionic, LiDAR, Ceramic Shield?30
 44?Samsung Galaxy M52?Samsung?WORK_STUDY?8500000?Snapdragon 778G, 5000mAh, 120Hz?190
 45?Xiaomi Black Shark 5 Pro?Xiaomi?GAMING?21000000?Snapdragon 8 Gen 1, 144Hz OLED, 120W?60
 46?Oppo A96?Oppo?WORK_STUDY?6000000?Snapdragon 680, 5000mAh, 33W Charge?250
@@ -30,6 +30,5 @@
 54?iPhone 13 Pro Max?Apple?BATTERY?31000000?A15 Bionic, 4352mAh, Super Retina XDR?100
 55?Vivo Y21T?Vivo?BATTERY?6000000?Snapdragon 680, 5000mAh, 18W Fast Charge?220
 56?Oppo A77?Oppo?BATTERY?7000000?Dimensity 810, 5000mAh, 33W Fast Charging?190
-57?Honor Magic 4 Lite?Honor?BATTERY?8500000?Snapdragon 695, 4800mAh, 66W Fast Charging?170
-58?Nokia G21?Nokia?BATTERY?6500000?Unisoc T606, 5050mAh, 18W Fast Charge?181
-60?Xiaomi Poco M4 Pro?Xiaomi?BATTERY?7200000?Dimensity 810, 5000mAh, 33W Fast Charge?1
+57?Honor Magic 4 Lite?Honor?BATTERY?8500000?Snapdragon 695, 4800mAh, 66W Fast Charging?168
+58?Nokia G21?Nokia?BATTERY?6500000?Unisoc T606, 5050mAh, 18W Fast Charge?160
